@@ -1,0 +1,56 @@
+[
+   {
+      "id": 3,
+      "name": "JS선욱",
+      "age": 25,
+      "gender": "male",
+      "place": "mapogu",
+      "img": "./images/img03.png",
+      "intro": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur recusandae velit dicta natus nostrum laborum enim temporibus officiis explicabo laudantium?"
+   },
+   {
+      "id": 4,
+      "name": "JS현욱",
+      "age": 24,
+      "gender": "male",
+      "place": "mapogu",
+      "img": "./images/img04.png",
+      "intro": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, magnam?"
+   },
+   {
+      "id": 5,
+      "name": "JS영환",
+      "age": 26,
+      "gender": "male",
+      "place": "mapogu",
+      "img": "./images/img05.png",
+      "intro": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic exercitationem eum quis, deserunt animi fugiat?"
+   },
+   {
+      "id": 6,
+      "name": "JS종태",
+      "age": 22,
+      "gender": "male",
+      "place": "mapogu",
+      "img": "./images/img06.png",
+      "intro": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolore rem, vel suscipit reiciendis veniam nisi dignissimos, ipsum, fugiat ut sint facilis?"
+   },
+   {
+      "id": 7,
+      "name": "JS퍼블",
+      "age": 20,
+      "gender": "female",
+      "place": "mapogu",
+      "img": "./images/img07.png",
+      "intro": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam aspernatur ipsa recusandae molestiae quod nesciunt accusantium provident, non similique. Deserunt accusamus magnam ab ipsum iusto nulla eos? Rem, minima voluptas?"
+   },
+   {
+      "id": 8,
+      "name": "JS포로리야",
+      "age": 20,
+      "gender": "female",
+      "place": "mapogu",
+      "img": "./images/img08.png",
+      "intro": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam ex autem quos distinctio?"
+   }
+]

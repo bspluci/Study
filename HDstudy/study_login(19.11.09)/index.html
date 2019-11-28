@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>JS study</title>
+      <link rel="stylesheet" href="./main.css" />
+   </head>
+   <body>
+      <header>
+         <div class="login_bg" onclick="cancel()"></div>
+         <div class="login_wrap login_modal">
+            <div class="logo_box">
+               <img src="./images/logo_js.png" />
+               <h1>로그인</h1>
+            </div>
+            <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
+               <fieldset id="login_fs">
+                  <label for="login_id" class="login_id"></label>
+                  <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                  <label for="login_pw" class="login_pw"></label>
+                  <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+               </fieldset>
+            </form>
+            <div class="button_box">
+               <button type="submit" value="로그인" class="login_btn" onclick="init()">
+                  로그인
+               </button>
+               <button class="signup_btn" onclick="cancel()">
+                  취소
+               </button>
+            </div>
+         </div>
+         <div class="login_wrap signup_modal">
+            <div class="logo_box">
+               <img src="./images/logo_js.png" />
+               <h1>회원가입</h1>
+            </div>
+            <div class="form_signup">
+               <form name="signup" action="./singup.html/" onsubmit="return validate();" method="post">
+                  <table>
+                     <tbody>
+                        <tr>
+                           <td>아이디</td>
+                           <td>
+                              <input type="text" class="id" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>비밀번호</td>
+                           <td>
+                              <input type="password" class="pw" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>비밀번호확인</td>
+                           <td>
+                              <input type="password" class="repw" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>이름</td>
+                           <td>
+                              <input type="text" class="name" />
+                           </td>
+                        </tr>
+                        <tr class="phone">
+                           <td>전화번호</td>
+                           <td>
+                              <select name="" class="phone1">
+                                 <option value="010">010</option>
+                                 <option value="011">011</option>
+                                 <option value="016">016</option>
+                                 <option value="017">017</option>
+                                 <option value="019">019</option>
+                              </select>
+                              -
+                              <input type="text" maxlength="4" class="phone2" />
+                              -
+                              <input type="text" maxlength="4" class="phone3" />
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </form>
+            </div>
+            <div class="button_box">
+               <button type="submit" value="회원가입" class="login_btn" onclick="formChk()">
+                  회원가입
+               </button>
+               <button class="signup_btn" onclick="cancel()">
+                  취소
+               </button>
+            </div>
+         </div>
+      </header>
+      <nav>
+         <div class="main nav">
+            <div class="main_wrap nav_wrap">
+               <a href="javascript:void(0)" onclick="logoHref()" class="nav_logo">
+                  <img src="images/logo_nav_js.png" class="nav_logo_img" />
+                  <p>JS study</p>
+               </a>
+               <ul class="nav_liwrap">
+                  <li class="nav_list">
+                     <a href="javascript:void(0)" class="nav_lista">JS스터디</a>
+                     <ul class="nav_drop_liwrap">
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS소개</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS연혁</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS비젼</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS모임시간</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS모임장소</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="nav_list">
+                     <a href="javascript:void(0)" class="nav_lista">JS회원목록</a>
+                     <ul class="nav_drop_liwrap">
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS정호</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS창섭</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS선욱</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS현욱</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS영환</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS종태</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS퍼블</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS포로리야</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="nav_list">
+                     <a href="javascript:void(0)" class="nav_lista">JS회원안내</a>
+                     <ul class="nav_drop_liwrap">
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS가입하기</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS가입절차</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS회원혜택</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS회원약관</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS회원탈퇴</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <li class="nav_list">
+                     <a href="javascript:void(0)" class="nav_lista">JS고객센터</a>
+                     <ul class="nav_drop_liwrap">
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS공지</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS-FAQ</a>
+                        </li>
+                        <li class="nav_drop_list">
+                           <a href="javascript:void(0)">JS문의하기</a>
+                        </li>
+                     </ul>
+                  </li>
+               </ul>
+               <div class="button_box">
+                  <button class="login_btn main_btn" onclick="login()">
+                     로그인 |
+                  </button>
+                  <button class="signup_btn main_btn" onclick="signSubmit()">
+                     회원가입
+                  </button>
+                  <button class="logout_btn main_btn" onclick="location.href='./index.html'">
+                     로그아웃
+                  </button>
+               </div>
+            </div>
+         </div>
+      </nav>
+      <section>
+         <div class="main slider">
+            <div class="slider_wrap">
+               <div class="slider_box" onmouseover="slideStop()" onmouseout="slideStart()">
+                  <div class="slider_inner">
+                     <div class="slider_imgwrap">
+                        <div class="main_txtwrap slide_up slideUp">
+                           <h2 class="main_txt" style="color: #000;"></h2>
+                        </div>
+                        <img src="./images/main_slide01.jpg" />
+                     </div>
+                     <div class="slider_imgwrap">
+                        <div class="main_txtwrap slide_up">
+                           <h2 class="main_txt" style="color: #c24d51;">자바스크립트 어렵지 않아요~</h2>
+                        </div>
+                        <img src="./images/main_slide02.jpg" />
+                     </div>
+                     <div class="slider_imgwrap">
+                        <div class="main_txtwrap slide_up">
+                           <h2 class="main_txt" style="color: #fff;">자바스크립트의 세계에 빠져보아요!!</h2>
+                        </div>
+                        <img src="./images/main_slide03.jpg" />
+                     </div>
+                  </div>
+                  <div class="slider_dotbox">
+                     <span class="slider_dot active"></span>
+                     <span class="slider_dot"></span>
+                     <span class="slider_dot"></span>
+                  </div>
+                  <div class="slider_np">
+                     <a class="slider_nextbtn" href="javascript:void(0)" onclick="slideNext()"></a>
+                     <a class="slider_prevbtn" href="javascript:void(0)" onclick="slidePrev()"></a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main nb">
+            <div class="main_wrap section_wrap">
+               <ul class="nb_imgwrap">
+                  <li class="nb_nbimg">
+                     <img src="./images/js_sec_nb.png" />
+                  </li>
+                  <li class="nb_nbglimg">
+                     <img src="./images/js_sec_nbgl.png" />
+                  </li>
+               </ul>
+               <div class="nb_textwrap">
+                  <div class="nb_textlogo">
+                     <img src="./images/js_sec_logo.png" />
+                  </div>
+                  <div class="nb_textarea">
+                     <p class="nb_txt01">JavaScript Study Band</p>
+                     <p class="nb_txt02">CREATING AND CLONING ARRAYS</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="main mb">
+            <div class="main_wrap section_wrap">
+               <h2>JS MEMBERS</h2>
+               <ul class="mb_wrap">
+                  <li class="mb_list">
+                     <div class="mb_imgbox">
+                        <img src="./images/img01.png" />
+                     </div>
+                     <div class="mb_txtbox">
+                        <p><span>name :</span> JS정호</p>
+                        <p><span>age :</span> 25</p>
+                        <p><span>gender :</span> male</p>
+                        <p><span>place :</span> eunpyeong gu</p>
+                        <p class="mb_intro">
+                           <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+                           placeat voluptatibus rem!
+                        </p>
+                     </div>
+                  </li>
+                  <li class="mb_list">
+                     <div class="mb_imgbox">
+                        <img src="./images/img02.png" />
+                     </div>
+                     <div class="mb_txtbox">
+                        <p><span>name :</span> JS창섭</p>
+                        <p><span>age :</span> 24</p>
+                        <p><span>gender :</span> male</p>
+                        <p><span>place :</span> eunpyeong gu</p>
+                        <p class="mb_intro"><span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo.</p>
+                     </div>
+                  </li>
+               </ul>
+               <div class="button_box">
+                  <button type="submit" value="로그인" class="login_btn more_btn" onclick="">더보기</button>
+               </div>
+            </div>
+         </div>
+      </section>
+      <footer>
+         <div class="main footer">
+            <div class="main_wrap footer_wrap">
+               <p>Copyright © 2019 PARK JEONGHO All Rights Reserved.</p>
+            </div>
+         </div>
+      </footer>
+      <script>
+         // 메뉴 마우스오버 이벤트
+         var navList = document.querySelectorAll(".nav_list");
+
+         for (let i = 0; i < navList.length; i++) {
+            navList[i].addEventListener("mouseover", function() {
+               navList[i].classList.remove("on");
+               navList[i].classList.add("on");
+            });
+            navList[i].addEventListener("mouseout", function() {
+               navList[i].classList.remove("on");
+            });
+         }
+
+         // 스크롤이벤트
+         document.addEventListener("scroll", windowScroll);
+
+         function windowScroll() {
+            var navWrap = document.querySelector("nav"),
+               logoImg = document.querySelector(".nav_logo_img"),
+               nb = document.querySelector(".nb"),
+               nbImg = document.querySelector(".nb_nbimg"),
+               nbglImg = document.querySelector(".nb_nbglimg"),
+               nblogo = document.querySelector(".nb_textlogo"),
+               nbtxt01 = document.querySelector(".nb_txt01"),
+               nbtxt02 = document.querySelector(".nb_txt02");
+
+            scrollTop = window.scrollY || document.documentElement.scrollTop;
+            windowHeight = document.documentElement.clientHeight;
+
+            // 메뉴 스크롤 이벤트
+            if (scrollTop > 0) {
+               navWrap.classList.add("on");
+            } else {
+               navWrap.classList.remove("on");
+            }
+
+            // 노트북 스크롤 이벤트
+            if (scrollTop >= nb.offsetTop - windowHeight / 2) {
+               nbImg.classList.add("nb_left");
+               nbglImg.classList.add("nb_op");
+               nblogo.classList.add("nb_opimg");
+               nbtxt01.classList.add("nb_txtup01");
+               nbtxt02.classList.add("nb_txtup02");
+            } else if (scrollTop < nb.offsetTop * 0.2) {
+               nbImg.classList.remove("nb_left");
+               nbglImg.classList.remove("nb_op");
+               nblogo.classList.remove("nb_opimg");
+               nbtxt01.classList.remove("nb_txtup01");
+               nbtxt02.classList.remove("nb_txtup02");
+            }
+
+            // 맴버 스크롤 이벤트
+            var mb = document.querySelector(".mb"),
+               mbl = document.querySelectorAll(".mb_list");
+
+            if (scrollTop >= mb.offsetTop - windowHeight / 2) {
+               for (v = 0; v < 2; v++) {
+                  mbl[v].classList.add("mb_slideup");
+               }
+            }
+         }
+
+         // 로그인 모달 이벤트
+         var loginModal = document.querySelector(".login_modal"),
+            loginBg = document.querySelector(".login_bg"),
+            signupModal = document.querySelector(".signup_modal");
+
+         function signSubmit() {
+            signupModal.classList.add("active");
+            loginBg.classList.add("active");
+         }
+
+         function login() {
+            loginModal.classList.add("active");
+            loginBg.classList.add("active");
+         }
+
+         function cancel() {
+            loginModal.classList.remove("active");
+            signupModal.classList.remove("active");
+            loginBg.classList.remove("active");
+         }
+      </script>
+      <script>
+         // 슬라이드 이벤트
+         var dot = document.querySelectorAll(".slider_dot"),
+            sw = document.querySelector(".slider_wrap"),
+            sb = document.querySelector(".slider_box"),
+            si = document.querySelector(".slider_inner"),
+            siw = document.querySelector(".slider_imgwrap"),
+            siws = document.querySelectorAll(".slider_imgwrap"),
+            nextBtn = document.querySelector(".slider_nextbtn"),
+            prevBtn = document.querySelector(".slider_prevbtn");
+
+         // 슬라이드 자동 넓이값
+         sw.style.width = siw.clientWidth * siws.length + "px";
+         sb.style.width = sw.clientWidth / siws.length + "px";
+         si.style.width = sw.clientWidth + "px";
+         var swwl = sw.clientWidth / siws.length;
+
+         var i = 0;
+
+         function slideNext() {
+            i++;
+            if (i >= siws.length) {
+               i = 0;
+            }
+            si.style.marginLeft = i * swwl * -1 + "px";
+            dotActive();
+            textAni();
+         }
+
+         function slidePrev() {
+            i--;
+            if (i < 0) {
+               i = siws.length - 1;
+            }
+            si.style.marginLeft = i * swwl * -1 + "px";
+            dotActive();
+            textAni();
+         }
+
+         function dotActive() {
+            for (let t = 0; t < dot.length; t++) {
+               dot[t].classList.remove("active");
+               dot[i].classList.add("active");
+            }
+         }
+
+         function sliders() {
+            for (let s = 0; s < dot.length; s++) {
+               dot[s].addEventListener("click", function() {
+                  for (let n = 0; n < dot.length; n++) {
+                     dot[n].classList.remove("active");
+                     dot[s].classList.add("active");
+                     su[n].classList.remove(SLUP);
+                     su[s].classList.add(SLUP);
+                  }
+                  var ml = s * swwl * -1;
+                  si.style.marginLeft = ml + "px";
+                  i = s;
+               });
+            }
+         }
+
+         sliders();
+
+         // 슬라이드 텍스트애니메이션
+         var su = document.querySelectorAll(".slide_up"),
+            SLUP = "slideUp";
+
+         function textAni() {
+            for (k = 0; k < su.length; k++) {
+               su[k].classList.remove(SLUP);
+               su[i].classList.add(SLUP);
+            }
+         }
+
+         // 자동 슬라이드
+         function slideStart() {
+            slideRolling = setInterval(slideNext, 4000);
+         }
+
+         function slideStop() {
+            clearInterval(slideRolling);
+         }
+
+         slideStart();
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script>
+         $(document).ready(function() {
+            // 맴버정보 더보기 이벤트
+            $.ajax({
+               url: "./member.json",
+               type: "GET",
+               dataType: "JSON",
+               success: function(data) {
+                  for (i = 0; i < data.length; i++) {
+                     var temp = `<li class="mb_list hidden">
+                        <div class="mb_imgbox">
+                           <img src="${data[i].img}" />
+                        </div>
+                        <div class="mb_txtbox">
+                           <p><span>name :</span> ${data[i].name}</p>
+                           <p><span>age :</span> ${data[i].age}</p>
+                           <p><span>gender :</span> ${data[i].gender}</p>
+                           <p><span>place :</span> ${data[i].place}</p>
+                           <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
+                        </div>
+                     </li>`;
+                     $(".mb_wrap").append(temp);
+                  }
+               },
+               error: function() {
+                  alert("데이터 로드에 실패했습니다.");
+               }
+            });
+
+            $(".more_btn").click(function() {
+               var len = $(".hidden").length;
+               if (!len <= 0) {
+                  $(".hidden")
+                     .eq(1)
+                     .removeClass("hidden")
+                     .addClass("mb_slideup");
+                  $(".hidden")
+                     .eq(0)
+                     .removeClass("hidden")
+                     .addClass("mb_slideup");
+               } else {
+                  alert("더이상 표시할 내용이 없습니다.");
+               }
+            });
+         });
+      </script>
+      <script>
+         // 로그인 체크 이벤트
+         function loginMatch() {
+            const userId = document.getElementById("login_id"),
+               userPw = document.getElementById("login_pw");
+
+            const userIdv = userId.value,
+               userPwv = userPw.value;
+
+            const localDate = localStorage.getItem("user" + userIdv),
+               userDate = JSON.parse(localDate);
+
+            if (userDate == null) {
+               alert("아이디를 확인해 주세요");
+               userId.focus();
+               return false;
+            }
+
+            const localId = userDate["id"],
+               localPw = userDate["pw"],
+               localName = userDate["name"];
+
+            if (userIdv != localId) {
+               alert("아이디를 확인해 주세요.");
+               userId.focus();
+               return false;
+            }
+
+            if (userPwv != localPw) {
+               alert("비밀번호를 확인해 주세요");
+               userPw.focus();
+               return false;
+            }
+
+            const indexUrl = encodeURI("./index.html?" + localName);
+            location.href = indexUrl;
+         }
+
+         function init() {
+            loginMatch();
+         }
+
+         // 로그인 유/무 이름값으로 문구변경
+         const btnHide = document.querySelector(".main"),
+            mainText = document.querySelector(".main_txt");
+
+         const decodeHref = decodeURI(location.href),
+            hrefName = decodeHref.split("?"),
+            userName = hrefName[1];
+
+         function loginText() {
+            if (userName != null) {
+               btnHide.classList.add("on");
+               mainText.innerHTML = userName + "님 즐거운 스터디 되세요!!";
+            } else {
+               mainText.innerHTML = "JS스터디에 오신것을 환영합니다!";
+            }
+         }
+
+         loginText();
+
+         // 로고클릭 홈페이지 로그인유지
+         function logoHref() {
+            if (userName == "" || userName == undefined) {
+               location.href = "./index.html";
+            } else {
+               location.href = "./index.html?" + userName;
+            }
+         }
+
+         // 회원가입 정규식 체크
+         function formChk() {
+            const idchk = /^[a-zA-Z0-9]{4,24}$/,
+               pwchk = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$/,
+               namechk = /^[가-힣]+$/,
+               phonechk = /^[0-9]{4}$/;
+
+            const id = document.querySelector(".id"),
+               pw = document.querySelector(".pw"),
+               repw = document.querySelector(".repw"),
+               name = document.querySelector(".name"),
+               phone1 = document.querySelector(".phone1"),
+               phone2 = document.querySelector(".phone2"),
+               phone3 = document.querySelector(".phone3");
+
+            if (!check(idchk, id, "아이디를 확인해 주세요\n4~12자 / 영문 / 숫자")) {
+               return false;
+            }
+
+            if (!check(pwchk, pw, "비밀번호를 확인해 주세요\n8~24자 / 영문 / 숫자")) {
+               return false;
+            }
+
+            if (pw.value != repw.value) {
+               alert("입력하신 비밀번호가 다릅니다.");
+               pw.value = "";
+               repw.value = "";
+               pw.focus();
+               return false;
+            }
+
+            if (!check(namechk, name, "이름을 확인해 주세요\n한글")) {
+               return false;
+            }
+
+            if (!check(phonechk, phone2, "잘못된 전화번호 입니다.\n4자리 / 숫자")) {
+               phone2.value = "";
+               phone2.focus();
+               return false;
+            }
+
+            if (!check(phonechk, phone3, "잘못된 전화번호 입니다.\n4자리 / 숫자")) {
+               phone3.value = "";
+               phone3.focus();
+               return false;
+            }
+
+            // 회원정보 로컬스토리지 업로드
+            const userInfo = {
+               id: id.value,
+               pw: pw.value,
+               name: name.value,
+               phone1: phone1.value,
+               phone2: phone2.value,
+               phone3: phone3.value
+            };
+
+            const newUserInfo = JSON.stringify(userInfo);
+            localStorage.setItem("user" + id.value, newUserInfo);
+
+            alert("회원가입이 완료됐습니다!!");
+
+            location.href = "./index.html";
+         }
+
+         function check(re, what, message) {
+            if (re.test(what.value)) {
+               return true;
+            }
+            alert(message);
+            what.value = "";
+            what.focus();
+         }
+      </script>
+   </body>
+</html>
