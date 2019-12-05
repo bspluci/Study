@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>JS study</title>
-      <link rel="stylesheet" href="./main.css" />
+      <link rel="stylesheet" href="./css/main.css" />
    </head>
    <body>
       <header>
@@ -21,7 +21,16 @@
                   <label for="login_id" class="login_id"></label>
                   <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
                   <label for="login_pw" class="login_pw"></label>
-                  <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                  <input
+                     type="password"
+                     name="mb_password"
+                     id="login_pw"
+                     placeholder="Password"
+                     class="frm_input"
+                     size="20"
+                     maxlength="20"
+                     focus="placeholder=''"
+                  />
                </fieldset>
             </form>
             <div class="button_box">
@@ -273,8 +282,8 @@
                         <p><span>gender :</span> male</p>
                         <p><span>place :</span> eunpyeong gu</p>
                         <p class="mb_intro">
-                           <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-                           placeat voluptatibus rem!
+                           <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum
+                           dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem!
                         </p>
                      </div>
                   </li>
@@ -479,7 +488,7 @@
          $(document).ready(function() {
             // 맴버정보 더보기 이벤트
             $.ajax({
-               url: "./member.json",
+               url: "./json/member.json",
                type: "GET",
                dataType: "JSON",
                success: function(data) {
@@ -519,6 +528,25 @@
                   alert("더이상 표시할 내용이 없습니다.");
                }
             });
+         });
+      </script>
+      <!-- 슬라이트 터치스와이프 이벤트 -->
+      <script src="./js/jquery.cfTouchSwipe.js"></script>
+      <script>
+         // $('.page_slide_box').cfTouchSwipe({
+         //			minSwipeLength: 50,		// 사용자가 swipe 했다고 판단하는 최소 거리
+         //			minMoveLength: 15,		// 이 거리보다 작게 움직이고 triggerClick = true 이면 click 이벤트 trigger
+         //			triggerClick: true,		// triggerClick false 일 경우 click 이벤트가 발생하지 않음
+         //			preventDefault: true,		// touchstart, touchmove 이벤트에 대해 preventDefault 할지 여부
+         // });
+         $(".slider_box").cfTouchSwipe({
+            triggerClick: false,
+            swipeLeft: function() {
+               $(".slider_nextbtn").trigger("click");
+            },
+            swipeRight: function() {
+               $(".slider_prevbtn").trigger("click");
+            }
          });
       </script>
       <script>
