@@ -8,311 +8,303 @@
       <link rel="stylesheet" href="./css/main.css" />
    </head>
    <body>
-      <header>
-         <div class="login_bg" onclick="cancel()"></div>
-
-         <div class="login_wrap login_modal">
-            <div class="logo_box">
-               <img src="./images/logo_js.png" />
-               <h1>로그인</h1>
-            </div>
-            <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
-               <fieldset id="login_fs">
-                  <label for="login_id" class="login_id"></label>
-                  <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
-                  <label for="login_pw" class="login_pw"></label>
-                  <input
-                     type="password"
-                     name="mb_password"
-                     id="login_pw"
-                     placeholder="Password"
-                     class="frm_input"
-                     size="20"
-                     maxlength="20"
-                     focus="placeholder=''"
-                  />
-               </fieldset>
-            </form>
-            <div class="button_box">
-               <button type="submit" value="로그인" class="login_btn" onclick="init()">
-                  로그인
-               </button>
-               <button class="signup_btn" onclick="cancel()">
-                  취소
-               </button>
-            </div>
-         </div>
-         <div class="login_wrap signup_modal">
-            <div class="logo_box">
-               <img src="./images/logo_js.png" />
-               <h1>회원가입</h1>
-            </div>
-            <div class="form_signup">
-               <form name="signup" action="./singup.html/" onsubmit="return validate();" method="post">
-                  <table>
-                     <tbody>
-                        <tr>
-                           <td>아이디</td>
-                           <td>
-                              <input type="text" class="id" />
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>비밀번호</td>
-                           <td>
-                              <input type="password" class="pw" />
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>비밀번호확인</td>
-                           <td>
-                              <input type="password" class="repw" />
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>이름</td>
-                           <td>
-                              <input type="text" class="name" />
-                           </td>
-                        </tr>
-                        <tr class="phone">
-                           <td>전화번호</td>
-                           <td>
-                              <select name="" class="phone1">
-                                 <option value="010">010</option>
-                                 <option value="011">011</option>
-                                 <option value="016">016</option>
-                                 <option value="017">017</option>
-                                 <option value="019">019</option>
-                              </select>
-                              -
-                              <input type="text" maxlength="4" class="phone2" />
-                              -
-                              <input type="text" maxlength="4" class="phone3" />
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
+      <div id="section">
+         <header>
+            <div class="login_bg" onclick="cancel()"></div>
+            <div class="login_wrap login_modal">
+               <div class="logo_box">
+                  <img src="./images/logo_js.png" />
+                  <h1>로그인</h1>
+               </div>
+               <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
+                  <fieldset id="login_fs">
+                     <label for="login_id" class="login_id"></label>
+                     <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                     <label for="login_pw" class="login_pw"></label>
+                     <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                  </fieldset>
                </form>
-            </div>
-            <div class="button_box">
-               <button type="submit" value="회원가입" class="login_btn" onclick="formChk()">
-                  회원가입
-               </button>
-               <button class="signup_btn" onclick="cancel()">
-                  취소
-               </button>
-            </div>
-         </div>
-      </header>
-      <nav>
-         <div class="main nav">
-            <div class="main_wrap nav_wrap">
-               <a href="javascript:void(0)" onclick="logoHref()" class="nav_logo">
-                  <img src="images/logo_nav_js.png" class="nav_logo_img" />
-                  <p>JS study</p>
-               </a>
-               <ul class="nav_liwrap">
-                  <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS스터디</a>
-                     <ul class="nav_drop_liwrap">
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS소개</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS연혁</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS비젼</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS모임시간</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS모임장소</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS회원목록</a>
-                     <ul class="nav_drop_liwrap">
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS정호</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS창섭</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS선욱</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS현욱</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS영환</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS종태</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS퍼블</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS포로리야</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS회원안내</a>
-                     <ul class="nav_drop_liwrap">
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS가입하기</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS가입절차</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS회원혜택</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS회원약관</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS회원탈퇴</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS고객센터</a>
-                     <ul class="nav_drop_liwrap">
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS공지</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS-FAQ</a>
-                        </li>
-                        <li class="nav_drop_list">
-                           <a href="javascript:void(0)">JS문의하기</a>
-                        </li>
-                     </ul>
-                  </li>
-               </ul>
                <div class="button_box">
-                  <button class="login_btn main_btn" onclick="login()">
-                     로그인 |
+                  <button type="submit" value="로그인" class="login_btn" onclick="init()">
+                     로그인
                   </button>
-                  <button class="signup_btn main_btn" onclick="signSubmit()">
+                  <button class="signup_btn" onclick="cancel()">
+                     취소
+                  </button>
+               </div>
+            </div>
+            <div class="login_wrap signup_modal">
+               <div class="logo_box">
+                  <img src="./images/logo_js.png" />
+                  <h1>회원가입</h1>
+               </div>
+               <div class="form_signup">
+                  <form name="signup" action="./singup.html/" onsubmit="return validate();" method="post">
+                     <table>
+                        <tbody>
+                           <tr>
+                              <td>아이디</td>
+                              <td>
+                                 <input type="text" class="id" />
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>비밀번호</td>
+                              <td>
+                                 <input type="password" class="pw" />
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>비밀번호확인</td>
+                              <td>
+                                 <input type="password" class="repw" />
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>이름</td>
+                              <td>
+                                 <input type="text" class="name" />
+                              </td>
+                           </tr>
+                           <tr class="phone">
+                              <td>전화번호</td>
+                              <td>
+                                 <select name="" class="phone1">
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="016">016</option>
+                                    <option value="017">017</option>
+                                    <option value="019">019</option>
+                                 </select>
+                                 -
+                                 <input type="text" maxlength="4" class="phone2" />
+                                 -
+                                 <input type="text" maxlength="4" class="phone3" />
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </form>
+               </div>
+               <div class="button_box">
+                  <button type="submit" value="회원가입" class="login_btn" onclick="formChk()">
                      회원가입
                   </button>
-                  <button class="logout_btn main_btn" onclick="location.href='./index.html'">
-                     로그아웃
+                  <button class="signup_btn" onclick="cancel()">
+                     취소
                   </button>
                </div>
             </div>
-         </div>
-      </nav>
-      <section>
-         <div class="main slider">
-            <div class="slider_wrap">
-               <div class="slider_box" onmouseover="slideStop()" onmouseout="slideStart()">
-                  <div class="slider_inner">
-                     <div class="slider_imgwrap">
-                        <div class="main_txtwrap slide_up slideUp">
-                           <h2 class="main_txt" style="color: #000;"></h2>
-                        </div>
-                        <img src="./images/main_slide01.jpg" />
-                     </div>
-                     <div class="slider_imgwrap">
-                        <div class="main_txtwrap slide_up">
-                           <h2 class="main_txt" style="color: #c24d51;">자바스크립트 어렵지 않아요~</h2>
-                        </div>
-                        <img src="./images/main_slide02.jpg" />
-                     </div>
-                     <div class="slider_imgwrap">
-                        <div class="main_txtwrap slide_up">
-                           <h2 class="main_txt" style="color: #fff;">자바스크립트의 세계에 빠져보아요!!</h2>
-                        </div>
-                        <img src="./images/main_slide03.jpg" />
-                     </div>
-                  </div>
-                  <div class="slider_dotbox">
-                     <span class="slider_dot active"></span>
-                     <span class="slider_dot"></span>
-                     <span class="slider_dot"></span>
-                  </div>
-                  <div class="slider_np">
-                     <a class="slider_nextbtn" href="javascript:void(0)" onclick="slideNext()"></a>
-                     <a class="slider_prevbtn" href="javascript:void(0)" onclick="slidePrev()"></a>
+         </header>
+         <nav>
+            <div class="main nav">
+               <div class="main_wrap nav_wrap">
+                  <a href="javascript:void(0)" onclick="logoHref()" class="nav_logo">
+                     <img src="images/logo_nav_js.png" class="nav_logo_img" />
+                     <p>JS study</p>
+                  </a>
+                  <ul class="nav_liwrap">
+                     <li class="nav_list">
+                        <a href="javascript:void(0)" class="nav_lista">JS스터디</a>
+                        <ul class="nav_drop_liwrap">
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS소개</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS연혁</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS비젼</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS모임시간</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS모임장소</a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="nav_list">
+                        <a href="javascript:void(0)" class="nav_lista">JS회원목록</a>
+                        <ul class="nav_drop_liwrap">
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS정호</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS창섭</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS선욱</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS현욱</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS영환</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS종태</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS퍼블</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS포로리야</a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="nav_list">
+                        <a href="javascript:void(0)" class="nav_lista">JS회원안내</a>
+                        <ul class="nav_drop_liwrap">
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS가입하기</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS가입절차</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS회원혜택</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS회원약관</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS회원탈퇴</a>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="nav_list">
+                        <a href="javascript:void(0)" class="nav_lista">JS고객센터</a>
+                        <ul class="nav_drop_liwrap">
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS공지</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS-FAQ</a>
+                           </li>
+                           <li class="nav_drop_list">
+                              <a href="javascript:void(0)">JS문의하기</a>
+                           </li>
+                        </ul>
+                     </li>
+                  </ul>
+                  <div class="button_box">
+                     <button class="login_btn main_btn" onclick="login()">
+                        로그인 |
+                     </button>
+                     <button class="signup_btn main_btn" onclick="signSubmit()">
+                        회원가입
+                     </button>
+                     <button class="logout_btn main_btn" onclick="location.href='./index.html'">
+                        로그아웃
+                     </button>
                   </div>
                </div>
             </div>
-         </div>
-         <div class="main nb">
-            <div class="main_wrap section_wrap">
-               <ul class="nb_imgwrap">
-                  <li class="nb_nbimg">
-                     <img src="./images/js_sec_nb.png" />
-                  </li>
-                  <li class="nb_nbglimg">
-                     <img src="./images/js_sec_nbgl.png" />
-                  </li>
-               </ul>
-               <div class="nb_textwrap">
-                  <div class="nb_textlogo">
-                     <img src="./images/js_sec_logo.png" />
-                  </div>
-                  <div class="nb_textarea">
-                     <p class="nb_txt01">JavaScript Study Band</p>
-                     <p class="nb_txt02">CREATING AND CLONING ARRAYS</p>
+         </nav>
+         <section>
+            <div class="main slider">
+               <div class="slider_wrap">
+                  <div class="slider_box" onmouseover="slideStop()" onmouseout="slideStart()">
+                     <div class="slider_inner">
+                        <div class="slider_imgwrap">
+                           <div class="main_txtwrap slide_up slideUp">
+                              <h2 class="main_txt" style="color: #000;"></h2>
+                           </div>
+                           <img src="./images/main_slide01.jpg" />
+                        </div>
+                        <div class="slider_imgwrap">
+                           <div class="main_txtwrap slide_up">
+                              <h2 class="main_txt" style="color: #c24d51;">자바스크립트 어렵지 않아요~</h2>
+                           </div>
+                           <img src="./images/main_slide02.jpg" />
+                        </div>
+                        <div class="slider_imgwrap">
+                           <div class="main_txtwrap slide_up">
+                              <h2 class="main_txt" style="color: #fff;">자바스크립트의 세계에 빠져보아요!!</h2>
+                           </div>
+                           <img src="./images/main_slide03.jpg" />
+                        </div>
+                     </div>
+                     <div class="slider_dotbox">
+                        <span class="slider_dot active"></span>
+                        <span class="slider_dot"></span>
+                        <span class="slider_dot"></span>
+                     </div>
+                     <div class="slider_np">
+                        <a class="slider_nextbtn" href="javascript:void(0)" onclick="slideNext()"></a>
+                        <a class="slider_prevbtn" href="javascript:void(0)" onclick="slidePrev()"></a>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-         <div class="main mb">
-            <div class="main_wrap section_wrap">
-               <h2>JS MEMBERS</h2>
-               <ul class="mb_wrap">
-                  <li class="mb_list">
-                     <div class="mb_imgbox">
-                        <img src="./images/img01.png" />
+            <div class="main nb">
+               <div class="main_wrap section_wrap">
+                  <ul class="nb_imgwrap">
+                     <li class="nb_nbimg">
+                        <img src="./images/js_sec_nb.png" />
+                     </li>
+                     <li class="nb_nbglimg">
+                        <img src="./images/js_sec_nbgl.png" />
+                     </li>
+                  </ul>
+                  <div class="nb_textwrap">
+                     <div class="nb_textlogo">
+                        <img src="./images/js_sec_logo.png" />
                      </div>
-                     <div class="mb_txtbox">
-                        <p><span>name :</span> JS정호</p>
-                        <p><span>age :</span> 25</p>
-                        <p><span>gender :</span> male</p>
-                        <p><span>place :</span> eunpyeong gu</p>
-                        <p class="mb_intro">
-                           <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum
-                           dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem!
-                        </p>
+                     <div class="nb_textarea">
+                        <p class="nb_txt01">JavaScript Study Band</p>
+                        <p class="nb_txt02">CREATING AND CLONING ARRAYS</p>
                      </div>
-                  </li>
-                  <li class="mb_list">
-                     <div class="mb_imgbox">
-                        <img src="./images/img02.png" />
-                     </div>
-                     <div class="mb_txtbox">
-                        <p><span>name :</span> JS창섭</p>
-                        <p><span>age :</span> 24</p>
-                        <p><span>gender :</span> male</p>
-                        <p><span>place :</span> eunpyeong gu</p>
-                        <p class="mb_intro"><span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo.</p>
-                     </div>
-                  </li>
-               </ul>
-               <div class="button_box">
-                  <button type="submit" value="로그인" class="login_btn more_btn" onclick="">더보기</button>
+                  </div>
                </div>
             </div>
-         </div>
-      </section>
-      <footer>
-         <div class="main footer">
-            <div class="main_wrap footer_wrap">
-               <p>Copyright © 2019 PARK JEONGHO All Rights Reserved.</p>
+            <div class="main mb">
+               <div class="main_wrap section_wrap">
+                  <h2>JS MEMBERS</h2>
+                  <ul class="mb_wrap">
+                     <li class="mb_list">
+                        <div class="mb_imgbox">
+                           <img src="./images/img01.png" />
+                        </div>
+                        <div class="mb_txtbox">
+                           <p><span>name :</span> JS정호</p>
+                           <p><span>age :</span> 25</p>
+                           <p><span>gender :</span> male</p>
+                           <p><span>place :</span> eunpyeong gu</p>
+                           <p class="mb_intro">
+                              <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+                              placeat voluptatibus rem!
+                           </p>
+                        </div>
+                     </li>
+                     <li class="mb_list">
+                        <div class="mb_imgbox">
+                           <img src="./images/img02.png" />
+                        </div>
+                        <div class="mb_txtbox">
+                           <p><span>name :</span> JS창섭</p>
+                           <p><span>age :</span> 24</p>
+                           <p><span>gender :</span> male</p>
+                           <p><span>place :</span> eunpyeong gu</p>
+                           <p class="mb_intro"><span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo.</p>
+                        </div>
+                     </li>
+                  </ul>
+                  <div class="button_box">
+                     <button type="submit" value="로그인" class="login_btn more_btn" onclick="">더보기</button>
+                  </div>
+               </div>
             </div>
-         </div>
-      </footer>
+         </section>
+         <footer>
+            <div class="main footer">
+               <div class="main_wrap footer_wrap">
+                  <p>Copyright © 2019 PARK JEONGHO All Rights Reserved.</p>
+               </div>
+            </div>
+         </footer>
+      </div>
       <script>
          // 메뉴 마우스오버 이벤트
          var navList = document.querySelectorAll(".nav_list");
@@ -692,34 +684,36 @@
             what.value = "";
             what.focus();
          }
-         $(document).scroll(function() {
-            var aa = $("section").height(),
-               bb = $(window).offsetTop();
-            console.log(bb);
-         });
       </script>
       <!-- <script>
-         $("html, body").bind("mousewheel", function(e) {
+         // 스무스 스크롤 이벤트
+         $("body, html").bind("mousewheel", function(e) {
             if (!(e.originalEvent.wheelDelta == 120)) {
-               var top = parseInt($("section").css("top"));
+               var top = $("#section").offset().top;
+               $("#section").css("top", top - 300 + "px");
 
-               $("section").css("top", top - 150 + "px");
-               top = parseInt($("section").css("top"));
+               // if (500 > $(".select").offset().top) {
+               //    $(".select").addClass("on");
+               // }
 
-               if (top <= -1500) {
+               var secHeight = $("#section").height();
+               var winHeight = $(window).height();
+               console.log(secHeight);
+               myHeight = winHeight - secHeight;
+
+               if (top <= myHeight + 300) {
                   setTimeout(function() {
-                     $("section").css("top", "-1500px");
+                     $("#section").css("top", myHeight);
                   }, 100);
                }
             } else {
-               var top = parseInt($("section").css("top"));
+               var top = $("#section").offset().top;
 
-               $("section").css("top", top + 150 + "px");
-               top = parseInt($("section").css("top"));
+               $("#section").css("top", top + 300 + "px");
 
-               if (top >= 0) {
+               if (top >= -300) {
                   setTimeout(function() {
-                     $("section").css("top", "0");
+                     $("#section").css("top", "0");
                   }, 100);
                }
             }
