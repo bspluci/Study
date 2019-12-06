@@ -530,9 +530,9 @@
             });
          });
       </script>
-      <!-- 슬라이트 터치스와이프 이벤트 -->
       <script src="./js/jquery.cfTouchSwipe.js"></script>
       <script>
+         // 슬라이트 터치스와이프 이벤트
          // $('.page_slide_box').cfTouchSwipe({
          //			minSwipeLength: 50,		// 사용자가 swipe 했다고 판단하는 최소 거리
          //			minMoveLength: 15,		// 이 거리보다 작게 움직이고 triggerClick = true 이면 click 이벤트 trigger
@@ -692,6 +692,38 @@
             what.value = "";
             what.focus();
          }
+         $(document).scroll(function() {
+            var aa = $("section").height(),
+               bb = $(window).offsetTop();
+            console.log(bb);
+         });
       </script>
+      <!-- <script>
+         $("html, body").bind("mousewheel", function(e) {
+            if (!(e.originalEvent.wheelDelta == 120)) {
+               var top = parseInt($("section").css("top"));
+
+               $("section").css("top", top - 150 + "px");
+               top = parseInt($("section").css("top"));
+
+               if (top <= -1500) {
+                  setTimeout(function() {
+                     $("section").css("top", "-1500px");
+                  }, 100);
+               }
+            } else {
+               var top = parseInt($("section").css("top"));
+
+               $("section").css("top", top + 150 + "px");
+               top = parseInt($("section").css("top"));
+
+               if (top >= 0) {
+                  setTimeout(function() {
+                     $("section").css("top", "0");
+                  }, 100);
+               }
+            }
+         });
+      </script> -->
    </body>
 </html>
