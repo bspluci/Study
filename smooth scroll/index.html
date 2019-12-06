@@ -153,7 +153,7 @@
       </section>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script>
-         $("body, html").bind("mousewheel", function(e) {
+         $("body, html").on("mousewheel DOMMouseScroll", function(e) {
             if (!(e.originalEvent.wheelDelta == 120)) {
                var top = $("section").offset().top;
                $("section").css("top", top - 300 + "px");
