@@ -8,6 +8,8 @@ html {
    position: relative;
    width: 100%;
    height: auto;
+   /* overflow: hidden; */
+   margin: auto auto;
 }
 body {
    font-size: 14px;
@@ -29,6 +31,15 @@ a {
 ul,
 li {
    list-style: none;
+}
+#section {
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   background: #fff;
+   margin: auto auto;
+   transition: all 0.3s ease;
 }
 section,
 nav,
@@ -241,7 +252,7 @@ nav.on .nav_wrap .nav_drop_list > a {
 .button_box .signup_btn.main_btn {
    width: auto;
    line-height: initial;
-   background: rgba(48, 50, 70, 1);
+   background: initial;
    border-radius: 0;
    font-size: 16px;
    margin: 0;
@@ -368,7 +379,7 @@ section {
    position: relative;
 }
 .slider .slider_wrap .slider_imgwrap > img {
-   width: 1903px;
+   width: 1920px;
    height: 940px;
 }
 .slider .slider_wrap .slider_dotbox {
@@ -621,7 +632,7 @@ section {
    }
 }
 /**********************
-    section_members
+        footer
 **********************/
 .footer {
    background: #1b2326;
