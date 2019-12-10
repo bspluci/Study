@@ -6,6 +6,9 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>JS study</title>
       <link rel="stylesheet" href="./css/main.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="./js/jquery.cfTouchSwipe.js"></script>
+      <script src="./js/custom.js"></script>
    </head>
    <body>
       <div id="section">
@@ -19,9 +22,27 @@
                <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
                   <fieldset id="login_fs">
                      <label for="login_id" class="login_id"></label>
-                     <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                     <input
+                        type="text"
+                        name="mb_id"
+                        id="login_id"
+                        placeholder="ID"
+                        class="frm_input"
+                        size="20"
+                        maxlength="20"
+                        focus="placeholder=''"
+                     />
                      <label for="login_pw" class="login_pw"></label>
-                     <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                     <input
+                        type="password"
+                        name="mb_password"
+                        id="login_pw"
+                        placeholder="Password"
+                        class="frm_input"
+                        size="20"
+                        maxlength="20"
+                        focus="placeholder=''"
+                     />
                   </fieldset>
                </form>
                <div class="button_box">
@@ -273,8 +294,8 @@
                            <p><span>gender :</span> male</p>
                            <p><span>place :</span> eunpyeong gu</p>
                            <p class="mb_intro">
-                              <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
-                              placeat voluptatibus rem!
+                              <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum
+                              dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem!
                            </p>
                         </div>
                      </li>
@@ -342,8 +363,25 @@
                navWrap.classList.remove("on");
             }
 
-            // 노트북 스크롤 이벤트
-            if (scrollTop >= nb.offsetTop - windowHeight / 2) {
+            // 노트북 스크롤 이벤트 일반용
+            // if (scrollTop >= nb.offsetTop - windowHeight / 2) {
+            //    nbImg.classList.add("nb_left");
+            //    nbglImg.classList.add("nb_op");
+            //    nblogo.classList.add("nb_opimg");
+            //    nbtxt01.classList.add("nb_txtup01");
+            //    nbtxt02.classList.add("nb_txtup02");
+            // } else if (scrollTop < nb.offsetTop * 0.2) {
+            //    nbImg.classList.remove("nb_left");
+            //    nbglImg.classList.remove("nb_op");
+            //    nblogo.classList.remove("nb_opimg");
+            //    nbtxt01.classList.remove("nb_txtup01");
+            //    nbtxt02.classList.remove("nb_txtup02");
+            // }
+
+            // 노트북 스크롤 이벤트 스무스 스크롤용
+            var top = parseInt($("#section").offset().top);
+
+            if (Math.abs(top) > nb.offsetTop - windowHeight * 0.9) {
                nbImg.classList.add("nb_left");
                nbglImg.classList.add("nb_op");
                nblogo.classList.add("nb_opimg");
@@ -361,7 +399,13 @@
             var mb = document.querySelector(".mb"),
                mbl = document.querySelectorAll(".mb_list");
 
-            if (scrollTop >= mb.offsetTop - windowHeight / 2) {
+            // if (scrollTop > mb.offsetTop - windowHeight * 0.5) {
+            //    for (v = 0; v < 2; v++) {
+            //       mbl[v].classList.add("mb_slideup");
+            //    }
+            // }
+
+            if (Math.abs(top) > mb.offsetTop - windowHeight * 0.9) {
                for (v = 0; v < 2; v++) {
                   mbl[v].classList.add("mb_slideup");
                }
@@ -475,72 +519,7 @@
 
          slideStart();
       </script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script>
-         $(document).ready(function() {
-            // 맴버정보 더보기 이벤트
-            $.ajax({
-               url: "./json/member.json",
-               type: "GET",
-               dataType: "JSON",
-               success: function(data) {
-                  for (i = 0; i < data.length; i++) {
-                     var temp = `<li class="mb_list hidden">
-                        <div class="mb_imgbox">
-                           <img src="${data[i].img}" />
-                        </div>
-                        <div class="mb_txtbox">
-                           <p><span>name :</span> ${data[i].name}</p>
-                           <p><span>age :</span> ${data[i].age}</p>
-                           <p><span>gender :</span> ${data[i].gender}</p>
-                           <p><span>place :</span> ${data[i].place}</p>
-                           <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
-                        </div>
-                     </li>`;
-                     $(".mb_wrap").append(temp);
-                  }
-               },
-               error: function() {
-                  alert("데이터 로드에 실패했습니다.");
-               }
-            });
 
-            $(".more_btn").click(function() {
-               var len = $(".hidden").length;
-               if (!len <= 0) {
-                  $(".hidden")
-                     .eq(1)
-                     .removeClass("hidden")
-                     .addClass("mb_slideup");
-                  $(".hidden")
-                     .eq(0)
-                     .removeClass("hidden")
-                     .addClass("mb_slideup");
-               } else {
-                  alert("더이상 표시할 내용이 없습니다.");
-               }
-            });
-         });
-      </script>
-      <script src="./js/jquery.cfTouchSwipe.js"></script>
-      <script>
-         // 슬라이트 터치스와이프 이벤트
-         // $('.page_slide_box').cfTouchSwipe({
-         //			minSwipeLength: 50,		// 사용자가 swipe 했다고 판단하는 최소 거리
-         //			minMoveLength: 15,		// 이 거리보다 작게 움직이고 triggerClick = true 이면 click 이벤트 trigger
-         //			triggerClick: true,		// triggerClick false 일 경우 click 이벤트가 발생하지 않음
-         //			preventDefault: true,		// touchstart, touchmove 이벤트에 대해 preventDefault 할지 여부
-         // });
-         $(".slider_box").cfTouchSwipe({
-            triggerClick: false,
-            swipeLeft: function() {
-               $(".slider_nextbtn").trigger("click");
-            },
-            swipeRight: function() {
-               $(".slider_prevbtn").trigger("click");
-            }
-         });
-      </script>
       <script>
          // 로그인 체크 이벤트
          function loginMatch() {
@@ -685,39 +664,5 @@
             what.focus();
          }
       </script>
-      <!-- <script>
-         // 스무스 스크롤 이벤트
-         $("body, html").bind("mousewheel", function(e) {
-            if (!(e.originalEvent.wheelDelta == 120)) {
-               var top = $("#section").offset().top;
-               $("#section").css("top", top - 300 + "px");
-
-               // if (500 > $(".select").offset().top) {
-               //    $(".select").addClass("on");
-               // }
-
-               var secHeight = $("#section").height();
-               var winHeight = $(window).height();
-               console.log(secHeight);
-               myHeight = winHeight - secHeight;
-
-               if (top <= myHeight + 300) {
-                  setTimeout(function() {
-                     $("#section").css("top", myHeight);
-                  }, 100);
-               }
-            } else {
-               var top = $("#section").offset().top;
-
-               $("#section").css("top", top + 300 + "px");
-
-               if (top >= -300) {
-                  setTimeout(function() {
-                     $("#section").css("top", "0");
-                  }, 100);
-               }
-            }
-         });
-      </script> -->
    </body>
 </html>
