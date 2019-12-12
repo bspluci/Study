@@ -71,6 +71,14 @@ function handleCM(event) {
    event.preventDefault();
 }
 
+function handleSaveClick() {
+   const image = canvas.toDataURL();
+   const link = document.createElement("a");
+   link.href = image;
+   link.download = "image.png";
+   link.click();
+}
+
 if (canvas) {
    canvas.addEventListener("mousemove", onMouseMove);
    canvas.addEventListener("mousedown", startPainting);
@@ -91,4 +99,7 @@ if (range) {
 
 if (mode) {
    mode.addEventListener("click", handleModeClick);
+}
+if (saveBtn) {
+   saveBtn.addEventListener("click", handleSaveClick);
 }

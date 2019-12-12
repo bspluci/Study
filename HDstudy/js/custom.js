@@ -7,17 +7,17 @@ $(document).ready(function() {
       success: function(data) {
          for (i = 0; i < data.length; i++) {
             var temp = `<li class="mb_list hidden">
-                        <div class="mb_imgbox">
-                           <img src="${data[i].img}" />
-                        </div>
-                        <div class="mb_txtbox">
-                           <p><span>name :</span> ${data[i].name}</p>
-                           <p><span>age :</span> ${data[i].age}</p>
-                           <p><span>gender :</span> ${data[i].gender}</p>
-                           <p><span>place :</span> ${data[i].place}</p>
-                           <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
-                        </div>
-                     </li>`;
+               <div class="mb_imgbox">
+                  <img src="${data[i].img}" />
+               </div>
+               <div class="mb_txtbox">
+                  <p><span>name :</span> ${data[i].name}</p>
+                  <p><span>age :</span> ${data[i].age}</p>
+                  <p><span>gender :</span> ${data[i].gender}</p>
+                  <p><span>place :</span> ${data[i].place}</p>
+                  <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
+               </div>
+            </li>`;
             $(".mb_wrap").append(temp);
          }
       },
