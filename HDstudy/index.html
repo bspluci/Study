@@ -664,5 +664,26 @@
             what.focus();
          }
       </script>
+      <!-- <script>
+         // 마우스 움직임에따라 움직이는 이미지
+         function motion() {
+            var obj = $(".modal_charactor .charactor .c_pho");
+            var layer = $(".modal_charactor .charactor");
+            layer.mousemove(function(e) {
+               var valueX = (e.pageX * -1) / 50;
+               var valueY = (e.pageY * -1) / 50;
+
+               obj.css({
+                  transform: "translate3d(" + valueX + "px," + valueY + "px,0)"
+               });
+            });
+            layer.mouseleave(function(e) {
+               obj.css({
+                  transform: "translate3d(0,0,0)"
+               });
+            });
+         }
+         motion();
+      </script> -->
    </body>
 </html>
