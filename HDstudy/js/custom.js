@@ -60,32 +60,32 @@ $(document).ready(function() {
    });
 
    // 스무스 스크롤 이벤트
-   $("body, html").bind("mousewheel", function(e) {
-      var top = parseInt($("#section").offset().top),
-         SCTOP = 350;
-      if (!(e.originalEvent.wheelDelta == 120)) {
-         $("#section").css("top", top - SCTOP + "px");
+   // $("body, html").bind("mousewheel", function(e) {
+   //    var top = parseInt($("#section").offset().top),
+   //       SCTOP = 350;
+   //    if (!(e.originalEvent.wheelDelta == 120)) {
+   //       $("#section").css("top", top - SCTOP + "px");
 
-         var secHeight = $("#section").height();
-         var winHeight = $(window).height();
+   //       var secHeight = $("#section").height();
+   //       var winHeight = $(window).height();
 
-         myHeight = winHeight - secHeight;
+   //       myHeight = winHeight - secHeight;
 
-         if (top <= myHeight + SCTOP) {
-            // setTimeout(function() {
-            $("#section").css("top", myHeight);
-            // }, 100);
-         }
+   //       if (top <= myHeight + SCTOP) {
+   //          // setTimeout(function() {
+   //          $("#section").css("top", myHeight);
+   //          // }, 100);
+   //       }
 
-         windowScroll();
-      } else {
-         $("#section").css("top", top + SCTOP + "px");
+   //       windowScroll();
+   //    } else {
+   //       $("#section").css("top", top + SCTOP + "px");
 
-         if (top >= -SCTOP) {
-            // setTimeout(function() {
-            $("#section").css("top", "0");
-            // }, 100);
-         }
-      }
-   });
+   //       if (top >= -SCTOP) {
+   //          // setTimeout(function() {
+   //          $("#section").css("top", "0");
+   //          // }, 100);
+   //       }
+   //    }
+   // });
 });

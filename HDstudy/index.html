@@ -364,24 +364,7 @@
             }
 
             // 노트북 스크롤 이벤트 일반용
-            // if (scrollTop >= nb.offsetTop - windowHeight / 2) {
-            //    nbImg.classList.add("nb_left");
-            //    nbglImg.classList.add("nb_op");
-            //    nblogo.classList.add("nb_opimg");
-            //    nbtxt01.classList.add("nb_txtup01");
-            //    nbtxt02.classList.add("nb_txtup02");
-            // } else if (scrollTop < nb.offsetTop * 0.2) {
-            //    nbImg.classList.remove("nb_left");
-            //    nbglImg.classList.remove("nb_op");
-            //    nblogo.classList.remove("nb_opimg");
-            //    nbtxt01.classList.remove("nb_txtup01");
-            //    nbtxt02.classList.remove("nb_txtup02");
-            // }
-
-            // 노트북 스크롤 이벤트 스무스 스크롤용
-            var top = parseInt($("#section").offset().top);
-
-            if (Math.abs(top) > nb.offsetTop - windowHeight * 0.9) {
+            if (scrollTop >= nb.offsetTop - windowHeight / 2) {
                nbImg.classList.add("nb_left");
                nbglImg.classList.add("nb_op");
                nblogo.classList.add("nb_opimg");
@@ -395,21 +378,38 @@
                nbtxt02.classList.remove("nb_txtup02");
             }
 
+            // 노트북 스크롤 이벤트 스무스 스크롤용
+            // var top = parseInt($("#section").offset().top);
+
+            // if (Math.abs(top) > nb.offsetTop - windowHeight * 0.9) {
+            //    nbImg.classList.add("nb_left");
+            //    nbglImg.classList.add("nb_op");
+            //    nblogo.classList.add("nb_opimg");
+            //    nbtxt01.classList.add("nb_txtup01");
+            //    nbtxt02.classList.add("nb_txtup02");
+            // } else if (scrollTop < nb.offsetTop * 0.2) {
+            //    nbImg.classList.remove("nb_left");
+            //    nbglImg.classList.remove("nb_op");
+            //    nblogo.classList.remove("nb_opimg");
+            //    nbtxt01.classList.remove("nb_txtup01");
+            //    nbtxt02.classList.remove("nb_txtup02");
+            // }
+
             // 맴버 스크롤 이벤트
             var mb = document.querySelector(".mb"),
                mbl = document.querySelectorAll(".mb_list");
 
-            // if (scrollTop > mb.offsetTop - windowHeight * 0.5) {
-            //    for (v = 0; v < 2; v++) {
-            //       mbl[v].classList.add("mb_slideup");
-            //    }
-            // }
-
-            if (Math.abs(top) > mb.offsetTop - windowHeight * 0.9) {
+            if (scrollTop > mb.offsetTop - windowHeight * 0.5) {
                for (v = 0; v < 2; v++) {
                   mbl[v].classList.add("mb_slideup");
                }
             }
+
+            // if (Math.abs(top) > mb.offsetTop - windowHeight * 0.9) {
+            //    for (v = 0; v < 2; v++) {
+            //       mbl[v].classList.add("mb_slideup");
+            //    }
+            // }
          }
 
          // 로그인 모달 이벤트
