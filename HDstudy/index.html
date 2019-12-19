@@ -322,35 +322,51 @@
                   <div class="kakao_imgwrap">
                      <ul class="kakao_imginner">
                         <li class="kakao_box">
-                           <img src="./images/kakao_01.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_01.png" />
+                           </div>
                            <p>피치</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_02.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_02.png" />
+                           </div>
                            <p>콘</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_03.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_03.png" />
+                           </div>
                            <p>프로도</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_04.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_04.png" />
+                           </div>
                            <p>제이지</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_05.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_05.png" />
+                           </div>
                            <p>무지</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_06.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_06.png" />
+                           </div>
                            <p>네오</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_07.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_07.png" />
+                           </div>
                            <p>라이언</p>
                         </li>
                         <li class="kakao_box">
-                           <img src="./images/kakao_08.png" />
+                           <div class="kakao_character">
+                              <img src="./images/kakao_08.png" />
+                           </div>
                            <p>튜브</p>
                         </li>
                      </ul>
@@ -385,7 +401,7 @@
 
          var ranDelay = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
          var kabox = document.querySelectorAll(".kakao_box"),
-            kaboximg = document.querySelectorAll(".kakao_box > img");
+            kaboximg = document.querySelectorAll(".kakao_character > img");
 
          ranDelay.sort(function() {
             return Math.random() - Math.random();
@@ -730,16 +746,21 @@
             what.focus();
          }
       </script>
-      <!-- <script>
-         // 마우스 움직임에따라 움직이는 이미지
+      <script>
+         // 카카오 캐릭터 무브
          function motion() {
-            var obj = $(".modal_charactor .charactor .c_pho");
-            var layer = $(".modal_charactor .charactor");
-            layer.mousemove(function(e) {
-               var valueX = (e.pageX * -1) / 50;
-               var valueY = (e.pageY * -1) / 50;
+            var obj = $(".kakao_character");
+            var layer = $(".kakao_box");
 
-               obj.css({
+            layer.mousemove(function(e) {
+               var idx = $(this).index();
+               var layerLeft = layer.eq(idx).offset().left + layer.width() / 2;
+               var layerTop = layer.eq(idx).offset().top + layer.height() / 2;
+
+               var valueX = ((e.pageX - layerLeft) * -1) / 10;
+               var valueY = ((e.pageY - layerTop) * -1) / 10;
+
+               obj.eq(idx).css({
                   transform: "translate3d(" + valueX + "px," + valueY + "px,0)"
                });
             });
@@ -749,10 +770,8 @@
                });
             });
          }
+
          motion();
-      </script> -->
-      <script>
-         var ranDelay = [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4];
       </script>
    </body>
 </html>

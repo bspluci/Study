@@ -693,7 +693,7 @@ section {
       opacity: 1;
    }
 }
-.kakao_box.kafadein > img {
+.kakao_box.kafadein .kakao_character > img {
    animation: kaimgro 1s ease-out;
    animation-fill-mode: forwards;
 }
