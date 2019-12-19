@@ -43,12 +43,6 @@ $(document).ready(function() {
    });
 
    // 슬라이트 터치스와이프 이벤트
-   // $('.page_slide_box').cfTouchSwipe({
-   //			minSwipeLength: 50,		// 사용자가 swipe 했다고 판단하는 최소 거리
-   //			minMoveLength: 15,		// 이 거리보다 작게 움직이고 triggerClick = true 이면 click 이벤트 trigger
-   //			triggerClick: true,		// triggerClick false 일 경우 click 이벤트가 발생하지 않음
-   //			preventDefault: true,		// touchstart, touchmove 이벤트에 대해 preventDefault 할지 여부
-   // });
    $(".slider_box").cfTouchSwipe({
       triggerClick: false,
       swipeLeft: function() {
