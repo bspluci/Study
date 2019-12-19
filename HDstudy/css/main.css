@@ -439,6 +439,7 @@ section {
       opacity: 1;
    }
 }
+
 /**********************
     section_notebook
 **********************/
@@ -486,6 +487,7 @@ section {
    font-size: 20px;
    opacity: 0;
 }
+
 /**********************
       notebook_ani
 **********************/
@@ -549,10 +551,12 @@ section {
       opacity: 1;
    }
 }
+
 /**********************
     section_members
 **********************/
-.mb .section_wrap {
+.mb .section_wrap,
+.ka .section_wrap {
    position: relative;
    width: 1100px;
    margin: 0 auto;
@@ -632,6 +636,7 @@ section {
       opacity: 1;
    }
 }
+
 /**********************
         footer
 **********************/
@@ -647,6 +652,58 @@ section {
    padding: 30px 0;
    font-size: 14px;
    color: #ffffff;
+}
+
+/**********************
+      kakao img
+**********************/
+.kakao_imgwrap .kakao_imginner {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+.kakao_imgwrap .kakao_box {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 25%;
+   padding: 30px 0;
+   opacity: 0;
+}
+.kakao_imgwrap .kakao_box > p {
+   padding-top: 15px;
+   font-size: 30px;
+   font-weight: bold;
+}
+.kakao_box.kafadein {
+   animation: kafadein 1s ease-in-out;
+   animation-fill-mode: forwards;
+}
+@keyframes kafadein {
+   0% {
+      transform: translateY(30px);
+      opacity: 0;
+   }
+   50% {
+      transform: translateY(0);
+      opacity: 1;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+.kakao_box.kafadein > img {
+   animation: kaimgro 1s ease-out;
+   animation-fill-mode: forwards;
+}
+@keyframes kaimgro {
+   0% {
+      transform: perspective(120px) rotateX(0);
+   }
+   100% {
+      transform: perspective(120px) rotateX(1080deg);
+   }
 }
 
 /**********************

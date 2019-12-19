@@ -226,7 +226,7 @@
          <section>
             <div class="main slider">
                <div class="slider_wrap">
-                  <div class="slider_box" onmouseover="slideStop()" onmouseout="slideStart()">
+                  <div class="slider_box">
                      <div class="slider_inner">
                         <div class="slider_imgwrap">
                            <div class="main_txtwrap slide_up slideUp">
@@ -317,6 +317,46 @@
                   </div>
                </div>
             </div>
+            <div class="main ka">
+               <div class="main_wrap section_wrap">
+                  <div class="kakao_imgwrap">
+                     <ul class="kakao_imginner">
+                        <li class="kakao_box">
+                           <img src="./images/kakao_01.png" />
+                           <p>피치</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_02.png" />
+                           <p>콘</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_03.png" />
+                           <p>프로도</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_04.png" />
+                           <p>제이지</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_05.png" />
+                           <p>무지</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_06.png" />
+                           <p>네오</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_07.png" />
+                           <p>라이언</p>
+                        </li>
+                        <li class="kakao_box">
+                           <img src="./images/kakao_08.png" />
+                           <p>튜브</p>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
          </section>
          <footer>
             <div class="main footer">
@@ -342,6 +382,19 @@
 
          // 스크롤이벤트
          document.addEventListener("scroll", windowScroll);
+
+         var ranDelay = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+         var kabox = document.querySelectorAll(".kakao_box"),
+            kaboximg = document.querySelectorAll(".kakao_box > img");
+
+         ranDelay.sort(function() {
+            return Math.random() - Math.random();
+         });
+
+         for (v = 0; v < kabox.length; v++) {
+            kaboximg[v].style.animationDelay = ranDelay[v] + "s";
+            kabox[v].style.animationDelay = ranDelay[v] + "s";
+         }
 
          function windowScroll() {
             var navWrap = document.querySelector("nav"),
@@ -410,6 +463,14 @@
             //       mbl[v].classList.add("mb_slideup");
             //    }
             // }
+
+            var ka = document.querySelector(".ka");
+
+            if (scrollTop >= ka.offsetTop - windowHeight / 2) {
+               for (r = 0; r < kabox.length; r++) {
+                  kabox[r].classList.add("kafadein");
+               }
+            }
          }
 
          // 로그인 모달 이벤트
@@ -509,15 +570,20 @@
          }
 
          // 자동 슬라이드
+         var slBox = document.querySelector(".slider_box");
+
+         slBox.addEventListener("mouseover", slideStop);
+         slBox.addEventListener("mouseout", slideStart);
+
          function slideStart() {
             slideRolling = setInterval(slideNext, 4000);
          }
 
+         slideStart();
+
          function slideStop() {
             clearInterval(slideRolling);
          }
-
-         slideStart();
       </script>
 
       <script>
@@ -685,5 +751,8 @@
          }
          motion();
       </script> -->
+      <script>
+         var ranDelay = [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4];
+      </script>
    </body>
 </html>
