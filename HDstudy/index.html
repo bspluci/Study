@@ -497,12 +497,13 @@
          var loginModal = document.querySelector(".login_modal"),
             loginBg = document.querySelector(".login_bg"),
             signupModal = document.querySelector(".signup_modal"),
-            myjs = document.getElementById("myjs");
+            body = document.getElementsByTagName("body");
 
-         console.log(myjs);
+         console.log(body);
+         console.log(loginModal);
          function signSubmit() {
             signupModal.style.display = "block";
-            myjs.style.overflow = "hidden";
+            body[0].style.overflow = "hidden";
             setTimeout(function() {
                signupModal.classList.add("active");
                loginBg.classList.add("active");
@@ -511,7 +512,7 @@
 
          function login() {
             loginModal.style.display = "block";
-            myjs.style.overflow = "hidden";
+            body[0].style.overflow = "hidden";
             setTimeout(function() {
                loginModal.classList.add("active");
                loginBg.classList.add("active");
@@ -522,7 +523,7 @@
             loginModal.classList.remove("active");
             signupModal.classList.remove("active");
             loginBg.classList.remove("active");
-            myjs.style.overflow = "inherit";
+            body[0].style.overflow = "visible";
             loginDisplay();
          }
 
