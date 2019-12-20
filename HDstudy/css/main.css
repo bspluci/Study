@@ -260,6 +260,11 @@ nav.on .nav_wrap .nav_drop_list > a {
    margin: 0;
    transition: all 0.2s ease;
 }
+.nav_wrap .button_box .login_btn.main_btn,
+.nav_wrap .button_box .logout_btn.main_btn,
+.nav_wrap .button_box .signup_btn.main_btn {
+   background: none;
+}
 nav.on .button_box .login_btn.main_btn,
 nav.on .button_box .logout_btn.main_btn,
 nav.on .button_box .signup_btn.main_btn {
