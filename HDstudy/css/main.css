@@ -85,14 +85,12 @@ nav {
    transition: all 0.2s ease;
    height: 57px;
 }
-.nav_wrap .nav_logo > p {
-   transition: all 0.2s ease;
-}
-.nav_wrap .nav_logo > p {
+.nav_wrap .nav_logo > h1 {
    color: #ffffff;
    font-size: 30px;
    font-weight: bold;
    padding-left: 10px;
+   transition: all 0.2s ease;
 }
 .nav_wrap .nav_liwrap {
    display: flex;
@@ -156,11 +154,10 @@ nav {
 nav.on {
    background: rgba(48, 50, 70, 0.8);
 }
-
 nav.on .nav_logo > img {
    height: 37px;
 }
-nav.on .nav_logo > p {
+nav.on .nav_logo > h1 {
    font-size: 16px;
 }
 nav.on .nav_list > a {
@@ -425,13 +422,13 @@ section {
      slide_text_ani
 **********************/
 .slideUp {
-   animation: textani 0.5s ease;
+   animation: textani 0.5s ease-in-out;
    animation-fill-mode: forwards;
    animation-delay: 0.3s;
 }
 @keyframes textani {
    0% {
-      transform: translate(-50%, -200px);
+      transform: translate(-50%, -100px);
       opacity: 0;
    }
    100% {

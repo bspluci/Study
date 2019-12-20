@@ -5,10 +5,11 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>JS study</title>
+
       <link rel="stylesheet" href="./css/main.css" />
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="./js/jquery.cfTouchSwipe.js"></script>
-      <script src="./js/custom.js"></script>
    </head>
    <body>
       <div id="section">
@@ -122,7 +123,7 @@
                <div class="main_wrap nav_wrap">
                   <a href="javascript:void(0)" onclick="logoHref()" class="nav_logo">
                      <img src="images/logo_nav_js.png" class="nav_logo_img" />
-                     <p>JS study</p>
+                     <h1>JS study</h1>
                   </a>
                   <ul class="nav_liwrap">
                      <li class="nav_list">
@@ -399,19 +400,6 @@
          // 스크롤이벤트
          document.addEventListener("scroll", windowScroll);
 
-         var ranDelay = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
-         var kabox = document.querySelectorAll(".kakao_box"),
-            kaboximg = document.querySelectorAll(".kakao_character > img");
-
-         ranDelay.sort(function() {
-            return Math.random() - Math.random();
-         });
-
-         for (v = 0; v < kabox.length; v++) {
-            kaboximg[v].style.animationDelay = ranDelay[v] + "s";
-            kabox[v].style.animationDelay = ranDelay[v] + "s";
-         }
-
          function windowScroll() {
             var navWrap = document.querySelector("nav"),
                logoImg = document.querySelector(".nav_logo_img"),
@@ -480,7 +468,21 @@
             //    }
             // }
 
-            var ka = document.querySelector(".ka");
+            // 카카오 캐릭터 랜덤 애니메이션
+            var ka = document.querySelector(".ka"),
+               kabox = document.querySelectorAll(".kakao_box"),
+               kaboximg = document.querySelectorAll(".kakao_character > img");
+
+            var ranDelay = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7];
+
+            ranDelay.sort(function() {
+               return Math.random() - Math.random();
+            });
+
+            for (z = 0; z < kabox.length; z++) {
+               kaboximg[z].style.animationDelay = ranDelay[z] + "s";
+               kabox[z].style.animationDelay = ranDelay[z] + "s";
+            }
 
             if (scrollTop >= ka.offsetTop - windowHeight / 2) {
                for (r = 0; r < kabox.length; r++) {
@@ -527,24 +529,24 @@
          si.style.width = sw.clientWidth + "px";
          var swwl = sw.clientWidth / siws.length;
 
-         var i = 0;
+         var num = 0;
 
          function slideNext() {
-            i++;
-            if (i >= siws.length) {
-               i = 0;
+            num++;
+            if (num >= siws.length) {
+               num = 0;
             }
-            si.style.marginLeft = i * swwl * -1 + "px";
+            si.style.marginLeft = num * swwl * -1 + "px";
             dotActive();
             textAni();
          }
 
          function slidePrev() {
-            i--;
-            if (i < 0) {
-               i = siws.length - 1;
+            num--;
+            if (num < 0) {
+               num = siws.length - 1;
             }
-            si.style.marginLeft = i * swwl * -1 + "px";
+            si.style.marginLeft = num * swwl * -1 + "px";
             dotActive();
             textAni();
          }
@@ -552,7 +554,7 @@
          function dotActive() {
             for (let t = 0; t < dot.length; t++) {
                dot[t].classList.remove("active");
-               dot[i].classList.add("active");
+               dot[num].classList.add("active");
             }
          }
 
@@ -567,7 +569,7 @@
                   }
                   var ml = s * swwl * -1;
                   si.style.marginLeft = ml + "px";
-                  i = s;
+                  num = s;
                });
             }
          }
@@ -581,27 +583,26 @@
          function textAni() {
             for (k = 0; k < su.length; k++) {
                su[k].classList.remove(SLUP);
-               su[i].classList.add(SLUP);
+               su[num].classList.add(SLUP);
             }
          }
 
          // 자동 슬라이드
          var slBox = document.querySelector(".slider_box");
 
-         slBox.addEventListener("mouseover", slideStop);
-         slBox.addEventListener("mouseout", slideStart);
-
          function slideStart() {
             slideRolling = setInterval(slideNext, 4000);
          }
 
-         slideStart();
-
          function slideStop() {
             clearInterval(slideRolling);
          }
-      </script>
 
+         slBox.addEventListener("mouseover", slideStop);
+         slBox.addEventListener("mouseout", slideStart);
+
+         slideStart();
+      </script>
       <script>
          // 로그인 체크 이벤트
          function loginMatch() {
@@ -749,8 +750,8 @@
       <script>
          // 카카오 캐릭터 무브
          function kakaoMotion() {
-            var obj = $(".kakao_character");
-            var layer = $(".kakao_box");
+            var obj = $(".kakao_character"),
+               layer = $(".kakao_box");
 
             layer.mousemove(function(e) {
                var idx = $(this).index();
@@ -772,6 +773,97 @@
          }
 
          kakaoMotion();
+      </script>
+
+      <!------------------------------------------------------- jQuery ------------------------------------------------------->
+      <script>
+         $(document).ready(function() {
+            // 맴버 ajax
+            $.ajax({
+               url: "https://bspluci.github.io/Study/HDstudy/json/member.json",
+               type: "GET",
+               dataType: "JSON",
+               success: function(data) {
+                  for (i = 0; i < data.length; i++) {
+                     var temp = `<li class="mb_list hidden">
+                        <div class="mb_imgbox">
+                           <img src="${data[i].img}" />
+                        </div>
+                        <div class="mb_txtbox">
+                           <p><span>name :</span> ${data[i].name}</p>
+                           <p><span>age :</span> ${data[i].age}</p>
+                           <p><span>gender :</span> ${data[i].gender}</p>
+                           <p><span>place :</span> ${data[i].place}</p>
+                           <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
+                        </div>
+                     </li>`;
+                     $(".mb_wrap").append(temp);
+                  }
+               },
+               error: function() {
+                  alert("데이터 로드에 실패했습니다.");
+               }
+            });
+
+            // 맴버정보 더보기 이벤트
+            $(".more_btn").click(function() {
+               var len = $(".hidden").length;
+               
+               if (!len <= 0) {
+                  $(".hidden")
+                     .eq(1)
+                     .removeClass("hidden")
+                     .addClass("mb_slideup");
+                  $(".hidden")
+                     .eq(0)
+                     .removeClass("hidden")
+                     .addClass("mb_slideup");
+               } else {
+                  alert("더이상 표시할 내용이 없습니다.");
+               }
+            });
+
+            // 슬라이트 터치스와이프 이벤트
+            $(".slider_box").cfTouchSwipe({
+               triggerClick: false,
+               swipeLeft: function() {
+                  $(".slider_nextbtn").trigger("click");
+               },
+               swipeRight: function() {
+                  $(".slider_prevbtn").trigger("click");
+               }
+            });
+
+            // 스무스 스크롤 이벤트
+            // $("body, html").bind("mousewheel", function(e) {
+            //    var top = parseInt($("#section").offset().top),
+            //       SCTOP = 350;
+            //    if (!(e.originalEvent.wheelDelta == 120)) {
+            //       $("#section").css("top", top - SCTOP + "px");
+
+            //       var secHeight = $("#section").height();
+            //       var winHeight = $(window).height();
+
+            //       myHeight = winHeight - secHeight;
+
+            //       if (top <= myHeight + SCTOP) {
+            //          // setTimeout(function() {
+            //          $("#section").css("top", myHeight);
+            //          // }, 100);
+            //       }
+
+            //       windowScroll();
+            //    } else {
+            //       $("#section").css("top", top + SCTOP + "px");
+
+            //       if (top >= -SCTOP) {
+            //          // setTimeout(function() {
+            //          $("#section").css("top", "0");
+            //          // }, 100);
+            //       }
+            //    }
+            // });
+         });
       </script>
    </body>
 </html>

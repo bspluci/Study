@@ -1,7 +1,7 @@
 $(document).ready(function() {
    // 맴버정보 더보기 이벤트
    $.ajax({
-      url: "./json/member.json",
+      url: "https://bspluci.github.io/Study/HDstudy/json/member.json",
       type: "GET",
       dataType: "JSON",
       success: function(data) {
