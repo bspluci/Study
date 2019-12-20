@@ -183,6 +183,7 @@ nav.on .nav_wrap .nav_drop_list > a {
 **********************/
 .login_wrap.login_modal,
 .login_wrap.signup_modal {
+   display: none;
    position: fixed;
    top: 0;
    left: 50%;

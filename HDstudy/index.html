@@ -496,10 +496,13 @@
          // 로그인 모달 이벤트
          var loginModal = document.querySelector(".login_modal"),
             loginBg = document.querySelector(".login_bg"),
-            signupModal = document.querySelector(".signup_modal");
+            signupModal = document.querySelector(".signup_modal"),
+            myjs = document.getElementById("myjs");
 
+         console.log(myjs);
          function signSubmit() {
-            signupModal.style.removeProperty("display");
+            signupModal.style.display = "block";
+            myjs.style.overflow = "hidden";
             setTimeout(function() {
                signupModal.classList.add("active");
                loginBg.classList.add("active");
@@ -507,7 +510,8 @@
          }
 
          function login() {
-            loginModal.style.removeProperty("display");
+            loginModal.style.display = "block";
+            myjs.style.overflow = "hidden";
             setTimeout(function() {
                loginModal.classList.add("active");
                loginBg.classList.add("active");
@@ -518,6 +522,7 @@
             loginModal.classList.remove("active");
             signupModal.classList.remove("active");
             loginBg.classList.remove("active");
+            myjs.style.overflow = "inherit";
             loginDisplay();
          }
 
