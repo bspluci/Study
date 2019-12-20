@@ -499,24 +499,32 @@
             signupModal = document.querySelector(".signup_modal");
 
          function signSubmit() {
-            signupModal.classList.add("active");
-            loginBg.classList.add("active");
+            signupModal.style.removeProperty("display");
+            setTimeout(function() {
+               signupModal.classList.add("active");
+               loginBg.classList.add("active");
+            }, 10);
          }
 
          function login() {
-            loginModal.classList.add("active");
-            loginBg.classList.add("active");
+            loginModal.style.removeProperty("display");
+            setTimeout(function() {
+               loginModal.classList.add("active");
+               loginBg.classList.add("active");
+            }, 10);
          }
 
          function cancel() {
             loginModal.classList.remove("active");
             signupModal.classList.remove("active");
             loginBg.classList.remove("active");
+            loginDisplay();
          }
 
          function loginDisplay() {
             setTimeout(function() {
                loginModal.style.display = "none";
+               signupModal.style.display = "none";
             }, 300);
          }
       </script>
