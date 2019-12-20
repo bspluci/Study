@@ -13,7 +13,7 @@
       <script src="./js/jquery.cfTouchSwipe.js"></script>
    </head>
    <body>
-      <div id="section">
+      <div id="myjs">
          <header>
             <div class="login_bg" onclick="cancel()"></div>
             <div class="login_wrap login_modal">
@@ -321,8 +321,9 @@
             </div>
             <div class="main ka">
                <div class="main_wrap section_wrap">
-                  <div class="kakao_imgwrap">
-                     <ul class="kakao_imginner">
+                  <h2>KAKAO CHARACTER</h2>
+                  <div class="kakao_wrap">
+                     <ul class="kakao_inner">
                         <li class="kakao_box">
                            <div class="kakao_character">
                               <img src="./images/kakao_01.png" />
@@ -511,6 +512,12 @@
             loginModal.classList.remove("active");
             signupModal.classList.remove("active");
             loginBg.classList.remove("active");
+         }
+
+         function loginDisplay() {
+            setTimeout(function() {
+               loginModal.style.display = "none";
+            }, 300);
          }
       </script>
       <script>

@@ -32,7 +32,7 @@ ul,
 li {
    list-style: none;
 }
-#section {
+#myjs {
    position: relative;
    width: 100%;
    height: auto;
@@ -184,7 +184,7 @@ nav.on .nav_wrap .nav_drop_list > a {
 .login_wrap.login_modal,
 .login_wrap.signup_modal {
    position: fixed;
-   top: 0;
+   top: -100%;
    left: 50%;
    transform: translateX(-50%);
    width: 388px;
@@ -559,7 +559,8 @@ section {
    margin: 0 auto;
    padding: 100px 0;
 }
-.mb .section_wrap > h2 {
+.mb .section_wrap > h2,
+.ka .section_wrap > h2 {
    font-size: 40px;
    font-weight: bold;
 }
@@ -567,7 +568,7 @@ section {
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
-   padding: 100px 0;
+   padding: 80px 0;
 }
 .mb .section_wrap .mb_wrap .mb_list {
    display: flex;
@@ -654,12 +655,15 @@ section {
 /**********************
       kakao img
 **********************/
-.kakao_imgwrap .kakao_imginner {
+.ka .section_wrap .kakao_wrap {
+   padding: 80px 0;
+}
+.ka .section_wrap .kakao_inner {
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
 }
-.kakao_imgwrap .kakao_box {
+.ka .section_wrap .kakao_box {
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -668,12 +672,12 @@ section {
    padding: 30px 0;
    opacity: 0;
 }
-.kakao_imgwrap .kakao_box > p {
+.ka .section_wrap .kakao_box > p {
    padding-top: 15px;
    font-size: 30px;
    font-weight: bold;
 }
-.kakao_box.kafadein {
+.ka .section_wrap .kakao_box.kafadein {
    animation: kafadein 1s ease-in-out;
    animation-fill-mode: forwards;
 }
@@ -690,7 +694,7 @@ section {
       opacity: 1;
    }
 }
-.kakao_box.kafadein .kakao_character > img {
+.ka .section_wrap .kakao_box.kafadein .kakao_character > img {
    animation: kaimgro 1s ease-out;
    animation-fill-mode: forwards;
 }
