@@ -24,27 +24,9 @@
                <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
                   <fieldset id="login_fs">
                      <label for="login_id" class="login_id"></label>
-                     <input
-                        type="text"
-                        name="mb_id"
-                        id="login_id"
-                        placeholder="ID"
-                        class="frm_input"
-                        size="20"
-                        maxlength="20"
-                        focus="placeholder=''"
-                     />
+                     <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
                      <label for="login_pw" class="login_pw"></label>
-                     <input
-                        type="password"
-                        name="mb_password"
-                        id="login_pw"
-                        placeholder="Password"
-                        class="frm_input"
-                        size="20"
-                        maxlength="20"
-                        focus="placeholder=''"
-                     />
+                     <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
                   </fieldset>
                </form>
                <div class="button_box">
@@ -296,8 +278,8 @@
                            <p><span>gender :</span> male</p>
                            <p><span>place :</span> eunpyeong gu</p>
                            <p class="mb_intro">
-                              <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum
-                              dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem!
+                              <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+                              placeat voluptatibus rem!
                            </p>
                         </div>
                      </li>
@@ -388,7 +370,7 @@
       <script>
          // 메뉴 마우스오버 이벤트
          var navList = document.querySelectorAll(".nav_list");
-         console.log(navList);
+
          for (let i = 0; i < navList.length; i++) {
             navList[i].addEventListener("mouseover", function() {
                navList[i].classList.remove("on");
@@ -805,18 +787,18 @@
                cache: false,
                success: function(data) {
                   for (i = 0; i < data.length; i++) {
-                     var temp = `<li class="mb_list hidden">
-                        <div class="mb_imgbox">
-                           <img src="${data[i].img}" />
-                        </div>
-                        <div class="mb_txtbox">
-                           <p><span>name :</span> ${data[i].name}</p>
-                           <p><span>age :</span> ${data[i].age}</p>
-                           <p><span>gender :</span> ${data[i].gender}</p>
-                           <p><span>place :</span> ${data[i].place}</p>
-                           <p class="mb_intro"><span>intro :</span> ${data[i].intro}</p>
-                        </div>
-                     </li>`;
+                     var temp = "";
+                     temp += "<li class='mb_list hidden'>";
+                     temp += "<div class='mb_imgbox'>";
+                     temp += "<img src='" + data[i].img + "' /></div>";
+                     temp += "<div class='mb_txtbox'>";
+                     temp += "<p><span>name :</span> " + data[i].name + "</p>";
+                     temp += "<p><span>age :</span> " + data[i].age + "</p>";
+                     temp += "<p><span>gender :</span> " + data[i].gender + "</p>";
+                     temp += "<p><span>place :</span> " + data[i].place + "</p>";
+                     temp += "<p class='mb_intro'><span>intro :</span> " + data[i].intro + "</p>";
+                     temp += "</div>";
+                     temp += "</li>";
                      $(".mb_wrap").append(temp);
                   }
                },
