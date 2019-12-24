@@ -678,7 +678,7 @@ section {
    justify-content: center;
    align-items: center;
    width: 25%;
-   padding: 30px 0;
+   padding: 50px 0 30px;
    opacity: 0;
 }
 .ka .section_wrap .kakao_box > p {
