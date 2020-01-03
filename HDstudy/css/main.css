@@ -42,8 +42,11 @@ li {
    top: 0;
    background: #fff;
    margin: auto auto;
-   overflow: auto;
+   /* overflow: auto; */
    transition: all 0.7s cubic-bezier(0.11, 0.78, 0.34, 0.87);
+}
+#section {
+   transition: all 1s cubic-bezier(0.11, 0.78, 0.34, 0.87);
 }
 section,
 nav,
