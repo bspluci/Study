@@ -13,6 +13,7 @@ function deleteTodo(event) {
    const cleadTodos = todos.filter(function(toDo) {
       return toDo.id !== parseInt(li.id);
    });
+   console.log(cleadTodos);
    todos = cleadTodos;
    saveTodo();
 }
