@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <title>Document</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+      <style>
+         html,
+         body {
+            width: 100%;
+            height: 100%;
+         }
+         .bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -2;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+         }
+         .todo {
+            position: relative;
+            width: 40%;
+            margin: 200px auto;
+            text-align: center;
+            background: #fff;
+         }
+         .popup {
+            position: absolute;
+            background: #fff;
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s ease-in-out;
+         }
+         .popup.on {
+            opacity: 1;
+            z-index: 2;
+         }
+         .bg.on {
+            opacity: 1;
+            z-index: 1;
+         }
+         .form-inline {
+            padding: 30px;
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.1);
+         }
+         .form_txtwrap {
+            margin-bottom: 20px;
+         }
+         .show_todo {
+            display: block;
+            width: 100px;
+            margin: 0 auto;
+         }
+         .todo_list {
+            display: inline-block;
+            text-align: right;
+         }
+         .todo_list > li {
+            margin: 20px 0;
+         }
+         .todo_list > li > button {
+            margin-left: 10px;
+         }
+         li {
+            list-style: none;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="bg"></div>
+      <div class="todo">
+         <div class="form-inline popup">
+            <div class="form_txtwrap">
+               <h1>javascript popup</h1>
+               <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea quia aliquid unde, pariatur aperiam nisi similique esse voluptatem
+                  itaque, officia dolores vel ullam corporis, facere odio perferendis nesciunt nam blanditiis!
+               </p>
+            </div>
+            <div class="form-group">
+               <label class="sr-only" for="todoinput">TODO</label>
+               <div class="input-group">
+                  <input type="text" class="form-control" id="todoinput" placeholder="TODO" />
+               </div>
+            </div>
+            <button type="submit" class="btn btn-primary todo_submit" onclick="submitTodo()">submit</button>
+            <button type="submit" class="btn btn-danger" onclick="cancel()">cancel</button>
+         </div>
+         <div class="form-inline section">
+            <div class="form_txtwrap">
+               <h1>javascript todo</h1>
+            </div>
+            <div class="todo_list"></div>
+            <button type="submit" class="btn btn-primary show_todo">show todo</button>
+         </div>
+      </div>
+
+      <script>
+         const showTodo = document.querySelector(".show_todo"),
+            todoPopup = document.querySelector(".popup"),
+            bg = document.querySelector(".bg"),
+            todoSubmit = document.querySelector(".todo_submit"),
+            todoWrap = document.querySelector(".todo_list"),
+            todoInput = document.getElementById("todoinput");
+
+         showTodo.addEventListener("click", function() {
+            todoPopup.classList.add("on");
+            bg.classList.add("on");
+         });
+
+         function cancel(e) {
+            todoPopup.classList.remove("on");
+            bg.classList.remove("on");
+            todoInput.value = "";
+         }
+
+         bg.addEventListener("click", cancel);
+      </script>
+
+      <script>
+         var todoList = [];
+
+         function localSetTodo() {
+            localStorage.setItem("todo", JSON.stringify(todoList));
+         }
+
+         function upTodo(content) {
+            const li = document.createElement("li");
+            const delBtn = document.createElement("button");
+            const span = document.createElement("span");
+            const todoNum = todoList.length + 1;
+
+            const todos = {
+               content: content, //qwdqwdqwd
+               id: todoNum
+            };
+            todoList.push(todos);
+
+            delBtn.innerHTML = "delete";
+            span.innerHTML = todos.content;
+
+            li.appendChild(span);
+            li.appendChild(delBtn);
+            li.id = todoNum;
+            todoWrap.appendChild(li);
+
+            delBtn.addEventListener("click", delTodo);
+
+            localSetTodo();
+         }
+
+         function delTodo(e) {
+            const btn = e.target;
+            const li = btn.parentNode;
+
+            todoWrap.removeChild(li);
+
+            const chkTodo = todoList.filter(function(list) {
+               return list.id !== parseInt(li.id);
+            });
+
+            todoList = chkTodo;
+
+            localSetTodo();
+         }
+
+         function localGetTodo() {
+            const localTodo = localStorage.getItem("todo");
+
+            if (localTodo != null) {
+               const parseTodo = JSON.parse(localTodo);
+               parseTodo.map(todo => {
+                  upTodo(todo.content);
+               });
+            }
+         }
+
+         localGetTodo();
+
+         function submitTodo() {
+            const todoVal = todoInput.value;
+            upTodo(todoVal);
+            todoInput.value = "";
+         }
+      </script>
+   </body>
+</html>
