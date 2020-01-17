@@ -104,8 +104,8 @@
             <div class="form_txtwrap">
                <h1>javascript todo</h1>
             </div>
-            <div class="todo_list"></div>
-            <button type="submit" class="btn btn-primary show_todo">show todo</button>
+            <ul class="todo_list"></ul>
+            <button type="submit" class="btn btn-primary show_todo">write todo</button>
          </div>
       </div>
 
@@ -139,12 +139,34 @@
 
          submitBtn.addEventListener("click", todoUpdate);
 
+         function todoSet() {
+            localStorage.setItem("todo", JSON.stringify(myTodo));
+         }
+
          function todoUpdate() {
             const inputValue = input.value;
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            const delBtn = document.createElement("button");
 
-            myTodo.push(inputValue);
+            todoWrap.append(li);
 
-            console.log(myTodo);
+            li.appendChild(span);
+            li.appendChild(delBtn);
+            span.innerHTML = inputValue;
+            delBtn.innerHTML = "delete";
+
+            todoInput.value = "";
+            todoInput.focus();
+
+            const todos = {};
+
+            myTodo.push(todos);
+            todoSet();
+         }
+
+         function todoDelete(event) {
+            console.log(event);
          }
 
          function submitTodo() {}
