@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>vue.js</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <div id="vue">
+         {{ mg }}
+      </div>
+      <script>
+         var vue = new Vue({
+            el: "#vue",
+            data: {
+               mg: "Hello World!"
+            }
+         });
+      </script>
+      <br />
+      <div id="app-2">
+         <span v-bind:title="message">
+            내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!
+         </span>
+      </div>
+      <script>
+         var app2 = new Vue({
+            el: "#app-2",
+            data: {
+               message: "이 페이지는 " + new Date() + " 에 로드 되었습니다"
+            }
+         });
+      </script>
+      <br />
+      <div id="app-3">
+         <p v-if="seen">이제 나를 볼 수 있어요</p>
+      </div>
+      <script>
+         var app3 = new Vue({
+            el: "#app-3",
+            data: {
+               seen: true
+            }
+         });
+      </script>
+      <br />
+      <div id="app-4">
+         <ul>
+            <li v-for="todo in todos">
+               {{ todo.text }}
+               <a href="">
+                  {{ todo.text2 }}
+               </a>
+            </li>
+         </ul>
+      </div>
+      <script>
+         var app4 = new Vue({
+            el: "#app-4",
+            data: {
+               todos: [{ text: "javascript 배우기", text2: "하하" }, { text: "Vue 배우기" }, { text: "멋진거 만들기" }]
+            }
+         });
+      </script>
+      <br />
+      <div id="app-5">
+         <p>{{ message }}</p>
+         <button v-on:click="rm">메세지 뒤집기</button>
+      </div>
+      <script>
+         var app5 = new Vue({
+            el: "#app-5",
+            data: {
+               message: "안녕하세요! Vue.js!"
+            },
+            methods: {
+               rm: function() {
+                  this.message = this.message
+                     .split("")
+                     .reverse()
+                     .join("");
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="app-6">
+         <p>{{ message }}</p>
+         <input v-model="message" />
+      </div>
+      <script>
+         var app6 = new Vue({
+            el: "#app-6",
+            data: {
+               message: "안녕하세요 Vue!"
+            }
+         });
+      </script>
+      <br />
+      <div id="app-7">
+         <ul>
+            <todo-item v-for="item in list" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+         </ul>
+      </div>
+      <script>
+         Vue.component("todo-item", {
+            props: ["todo"],
+            template: "<li>{{ todo.text }}</li>"
+         });
+
+         var app7 = new Vue({
+            el: "#app-7",
+            data: {
+               list: [
+                  { id: 0, text: "Vegetables" },
+                  { id: 1, text: "Cheese" },
+                  { id: 2, text: "Whatever else humans are supposed to eat" }
+               ]
+            }
+         });
+      </script>
+      <br />
+      <div id="app-8">
+         <p>{{ foo }}</p>
+         <button v-on:click="foo='baz'">change btn</button>
+      </div>
+      <script>
+         var obj = {
+            foo: "bar"
+         };
+
+         Object.freeze(obj);
+
+         var app8 = new Vue({
+            el: "#app-8",
+            data: obj
+         });
+      </script>
+      <div id="root">
+         {{ a }}
+      </div>
+      <script>
+         new Vue({
+            el: "#root",
+            data: {
+               a: 1,
+               b: 2
+            },
+            created: function() {
+               console.log(this.b);
+            }
+         });
+      </script>
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <span>Using v-html directive: <span v-html="rawHtml"></span></span>
+      <br />
+      <br />
+      <div id="example">
+         <p>원본 메시지: "{{ message }}"</p>
+         <p>역순으로 표시한 메시지: "{{ reversedMessage }}"</p>
+         <p>제 나이는 {{ age }}살 입니다.</p>
+      </div>
+      <script>
+         var rm = new Vue({
+            el: "#example",
+            data: { message: "안녕하세요", age: "28" },
+            computed: {
+               reversedMessage: function() {
+                  return this.message
+                     .split("")
+                     .reverse()
+                     .join("");
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="demo">{{ fullName }}</div>
+      <script>
+         var vm = new Vue({
+            el: "#demo",
+            data: {
+               firstName: "Foo",
+               lastName: "Bar"
+            },
+            computed: {
+               fullName: {
+                  // getter
+                  get: function() {
+                     return this.firstName + " " + this.lastName;
+                  },
+                  // setter
+                  set: function(newValue) {
+                     var names = newValue.split(" ");
+                     this.firstName = names[0];
+                     this.lastName = names[names.length - 1];
+                  }
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="watch-example">
+         <p>
+            yes/no 질문을 물어보세요:
+            <input v-model="question" />
+         </p>
+         <p>{{ answer }}</p>
+      </div>
+      <!-- 이미 Ajax 라이브러리의 풍부한 생태계와 범용 유틸리티 메소드 컬렉션이 있기 때문에, -->
+      <!-- Vue 코어는 다시 만들지 않아 작게 유지됩니다. -->
+      <!-- 이것은 이미 익숙한 것을 선택할 수 있는 자유를 줍니다. -->
+      <script src="https://unpkg.com/axios@0.12.0/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+      <script>
+         var watchExampleVM = new Vue({
+            el: "#watch-example",
+            data: {
+               question: "",
+               answer: "질문을 하기 전까지는 대답할 수 없습니다."
+            },
+            watch: {
+               // 질문이 변경될 때 마다 이 기능이 실행됩니다.
+               question: function(newQuestion) {
+                  this.answer = "입력을 기다리는 중...";
+                  this.getAnswer();
+               }
+            },
+            methods: {
+               // _.debounce는 lodash가 제공하는 기능으로
+               // 특히 시간이 많이 소요되는 작업을 실행할 수 있는 빈도를 제한합니다.
+               // 이 경우, 우리는 yesno.wtf/api 에 액세스 하는 빈도를 제한하고,
+               // 사용자가 ajax요청을 하기 전에 타이핑을 완전히 마칠 때까지 기다리길 바랍니다.
+               // _.debounce 함수(또는 이와 유사한 _.throttle)에 대한
+               // 자세한 내용을 보려면 https://lodash.com/docs#debounce 를 방문하세요.
+               getAnswer: _.debounce(
+                  function() {
+                     if (this.question.indexOf("?") === -1) {
+                        this.answer = "질문에는 일반적으로 물음표가 포함 됩니다. ;-)";
+                        return;
+                     }
+                     this.answer = "생각중...";
+                     var vm = this;
+                     axios
+                        .get("https://yesno.wtf/api")
+                        .then(function(response) {
+                           vm.answer = _.capitalize(response.data.answer);
+                        })
+                        .catch(function(error) {
+                           vm.answer = "에러! API 요청에 오류가 있습니다. " + error;
+                        });
+                  },
+                  // 사용자가 입력을 기다리는 시간(밀리세컨드) 입니다.
+                  500
+               )
+            }
+         });
+      </script>
+      <div id="dl">
+         <div v-bind:class="classObject">안녕~</div>
+      </div>
+      <script>
+         var aa = new Vue({
+            el: "#dl",
+            data: {
+               classObject: {
+                  active: true,
+                  textdanger: false
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="as">
+         <div v-bind:class="[isActive ? activeClass : '', errorClass]">하이하이</div>
+      </div>
+      <script>
+         var ap = new Vue({
+            el: "#as",
+            data: {
+               isActive: false,
+               activeClass: "active",
+               errorClass: "text-danger"
+            }
+         });
+      </script>
+      <br />
+      <div id="com">
+         <my-component v-bind:class="{ active: isActive }" v-bind:style="[mgt, pdb]"></my-component>
+      </div>
+      <script>
+         Vue.component("my-component", {
+            template: '<p class="foo bar">hello baby</p>'
+         });
+         var dk = new Vue({
+            el: "#com",
+            data: {
+               isActive: false,
+               mgt: {
+                  marginTop: "20px"
+               },
+               pdb: {
+                  paddingBottom: "50px"
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="aks">
+         <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+         </template>
+         <template v-else>
+            <h1>hihi</h1>
+            <p>asdfasdf 1</p>
+            <p>asdfasdf 2</p>
+         </template>
+         <button v-on:click="showhide">show/hide</button>
+      </div>
+      <script>
+         var aks = new Vue({
+            el: "#aks",
+            data: {
+               ok: true // false
+            },
+            methods: {
+               showhide: function() {
+                  aks.ok ? (aks.ok = false) : (aks.ok = true);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="okok">
+         <template v-if="loginType === 'username'">
+            <label>사용자 이름</label>
+            <input placeholder="사용자 이름을 입력하세요" key="username-input" />
+         </template>
+         <template v-else>
+            <label>이메일</label>
+            <input placeholder="이메일 주소를 입력하세요" key="email-input" />
+         </template>
+         <button v-on:click="chin">로그인 유형 변경</button>
+      </div>
+      <script>
+         var okok = new Vue({
+            el: "#okok",
+            data: {
+               loginType: "username"
+            },
+            methods: {
+               chin: function() {
+                  okok.loginType == "username" ? (okok.loginType = "") : (okok.loginType = "username");
+               }
+            }
+         });
+      </script>
+   </body>
+</html>

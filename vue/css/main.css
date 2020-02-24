@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Exo:300,400,500,600,700&display=swap"); /* exo google font */
+
+/*********************************************************************************************************************
+                                                   common
+*********************************************************************************************************************/
+html,
+body {
+   width: 100%;
+}
+body {
+   min-width: 320px;
+   font-size: 14pt;
+   font-family: "Exo", sans-serif;
+   background-color: #fff;
+   line-height: 1;
+}
+select {
+   font-family: exo;
+}
