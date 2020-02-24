@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>vue.js</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <ul id="example-1">
+         <li>
+            <div v-for="item in mgs">{{ item.message }}</div>
+            <p v-for="item in mgm">{{ item.mes }}</p>
+         </li>
+      </ul>
+      <script>
+         var example1 = new Vue({
+            el: "#example-1",
+            data: {
+               mgs: [
+                  { message: "Foo" }, //
+                  { message: "Bar" },
+                  { message: "Haha" }
+               ],
+               mgm: [
+                  { mes: "hahso" }, //
+                  { mes: "cuhcu" },
+                  { mes: "lelelk" }
+               ]
+            }
+         })
+      </script>
+      <br />
+      <ul id="example-2">
+         <li v-for="(item, index) in items">
+            0{{ index + 1 }}. {{ parentMessage }} {{ item.message }} {{ item.ms }} {{ last.msg }}
+         </li>
+      </ul>
+      <script>
+         var example2 = new Vue({
+            el: "#example-2",
+            data: {
+               parentMessage: "안녕하세요, 제 이름은",
+               items: [
+                  { message: "박", ms: "정호" }, //
+                  { message: "박", ms: "지후" },
+                  { message: "하", ms: "동훈" },
+                  { message: "송", ms: "환음" },
+                  { message: "진", ms: "영환" }
+               ],
+               last: {
+                  msg: "입니다."
+               }
+            }
+         })
+      </script>
+      <br />
+      <ul id="v-for-object" class="demo">
+         <li v-for="value in object">
+            {{ value }}
+         </li>
+      </ul>
+      <script>
+         new Vue({
+            el: "#v-for-object",
+            data: {
+               object: {
+                  title: "How to do lists in Vue",
+                  author: "Jane Doe",
+                  publishedAt: "2016-04-10"
+               }
+            }
+         })
+      </script>
+   </body>
+</html>
