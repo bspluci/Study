@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>vue.js</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <script>
+         // 배열변경명령
+         var vm = new Vue({
+            data: {
+               items: ["a", "b", "c"]
+            }
+         });
+
+         // Vue.set
+         // Vue.set(vm.items, indexOfItem, newValue);
+         // Array.prototype.splice
+         // vm.items.splice(indexOfItem, 1, newValue);
+
+         // 객체변경명령
+         var vm = new Vue({
+            data: {
+               userProfile: {
+                  name: "Anika"
+               }
+            }
+         });
+
+         //age추가
+         Vue.set(vm.userProfile, "age", 27);
+         //새객체 만들기
+         Object.assign(vm.userProfile, {
+            age: 27,
+            favoriteColor: "Vue Green"
+         });
+         console.log(vm.userProfile);
+      </script>
+
+      <div id="num">
+         <li v-for="n in evenNumbers">{{ n }}</li>
+      </div>
+      <script>
+         var num = new Vue({
+            el: "#num",
+            data: {
+               numbers: [1, 2, 3, 4, 5]
+            },
+            computed: {
+               evenNumbers: function() {
+                  return this.numbers.filter(function(number) {
+                     return number % 2 === 0;
+                  });
+               }
+            }
+         });
+      </script>
+
+      <div id="nmm">
+         <li v-for="n in even(numbers)">{{ n }}</li>
+      </div>
+      <script>
+         var nmm = new Vue({
+            el: "#nmm",
+            data: {
+               numbers: [1, 2, 3, 4, 5]
+            },
+            methods: {
+               even: function(numbers) {
+                  return numbers.filter(function(number) {
+                     return number % 2 === 0;
+                  });
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="range">
+         <span v-for="n in 10">{{ n }} </span>
+      </div>
+      <script>
+         var range = new Vue({
+            el: "#range",
+            data: {
+               n: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+            },
+            computed: {
+               so: function() {
+                  return this.n.reverse(function(num) {
+                     return num;
+                  });
+               }
+            }
+         });
+      </script>
+      <br />
+      <ul class="fortemp">
+         <template v-for="item in items">
+            <li>{{ item.msg }}</li>
+            <li class="divider" role="presentation">-------</li>
+         </template>
+      </ul>
+      <script>
+         var fortemp = new Vue({
+            el: ".fortemp",
+            data: {
+               items: [
+                  { msg: "hahahaha" }, //
+                  { msg: "hohohoho" }
+               ]
+            }
+         });
+      </script>
+      <br />
+      <div class="ifor">
+         <ul v-if="todos.length">
+            <li v-for="todo in todos">
+               {{ todo.mmm }}
+            </li>
+         </ul>
+         <p v-else>No todos left!</p>
+      </div>
+      <script>
+         var ifor = new Vue({
+            el: ".ifor",
+            data: {
+               todos: [
+                  { mmm: "work today" }, //
+                  { mmm: "nothing" }
+               ]
+            }
+         });
+      </script>
+      <!-- <div class="comm">
+         <my-component v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id">
+            {{ index }} {{ item.mg }}
+         </my-component>
+      </div>
+      <script>
+         var comm = new Vue({
+            el: ".comm",
+            data: {
+               items: [
+                  { id: 0, mg: "hoho" },
+                  { id: 1, mg: "cuicu" },
+                  { id: 2, mg: "lkwk" }
+               ]
+            }
+         });
+      </script> -->
+      <br />
+      <div id="todo-list-example">
+         <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input v-model="newTodoText" id="new-todo" placeholder="E.g. Feed the cat" />
+            <button>Add</button>
+         </form>
+         <ul>
+            <li
+               is="todo-item"
+               v-for="(todo, index) in todos"
+               v-bind:key="todo.id"
+               v-bind:title="todo.title"
+               v-on:remove="todos.splice(index, 1)"
+            ></li>
+         </ul>
+      </div>
+      <script>
+         Vue.component("todo-item", {
+            template: "<li>{{ title }} <button v-on:click=\"$emit('remove')\">Remove</button></li>",
+            props: ["title"]
+         });
+
+         new Vue({
+            el: "#todo-list-example",
+            data: {
+               newTodoText: "",
+               todos: [
+                  {
+                     id: 1,
+                     title: "Do the dishes"
+                  },
+                  {
+                     id: 2,
+                     title: "Take out the trash"
+                  },
+                  {
+                     id: 3,
+                     title: "Mow the lawn"
+                  }
+               ],
+               nextTodoId: 4
+            },
+            methods: {
+               addNewTodo: function() {
+                  this.todos.push({
+                     id: this.nextTodoId++,
+                     title: this.newTodoText
+                  });
+                  this.newTodoText = "";
+               }
+            }
+         });
+      </script>
+   </body>
+</html>

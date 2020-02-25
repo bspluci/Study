@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>vue.js</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <div id="example-1">
+         <button v-on:click="counter += 1">Add 1</button>
+         <p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+      </div>
+      <script>
+         var example1 = new Vue({
+            el: "#example-1",
+            data: {
+               counter: 0
+               // },
+               // methods: {
+               //    plus: function() {
+               //       this.counter += 1;
+               //       this.counter == 15 ? (this.counter = 0) : true;
+               //    }
+            }
+         });
+      </script>
+   </body>
+</html>

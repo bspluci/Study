@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>vue.js</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <div id="aks">
+         <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+         </template>
+         <template v-else>
+            <h1>hihi</h1>
+            <p>asdfasdf 1</p>
+            <p>asdfasdf 2</p>
+         </template>
+         <button v-on:click="showhide">show/hide</button>
+      </div>
+      <script>
+         var aks = new Vue({
+            el: "#aks",
+            data: {
+               ok: true // false
+            },
+            methods: {
+               showhide: function() {
+                  aks.ok ? (aks.ok = false) : (aks.ok = true);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="okok">
+         <template v-if="loginType === 'username'">
+            <label>사용자 이름</label>
+            <input placeholder="사용자 이름을 입력하세요" key="username-input" />
+         </template>
+         <template v-else>
+            <label>이메일</label>
+            <input placeholder="이메일 주소를 입력하세요" key="email-input" />
+         </template>
+         <button v-on:click="chin">로그인 유형 변경</button>
+      </div>
+      <script>
+         var okok = new Vue({
+            el: "#okok",
+            data: {
+               loginType: "username"
+            },
+            methods: {
+               chin: function() {
+                  okok.loginType == "username" ? (okok.loginType = "") : (okok.loginType = "username");
+               }
+            }
+         });
+      </script>
+   </body>
+</html>

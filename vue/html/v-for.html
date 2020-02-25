@@ -34,7 +34,7 @@
                   { mes: "lelelk" }
                ]
             }
-         })
+         });
       </script>
       <br />
       <ul id="example-2">
@@ -58,12 +58,12 @@
                   msg: "입니다."
                }
             }
-         })
+         });
       </script>
       <br />
       <ul id="v-for-object" class="demo">
-         <li v-for="value in object">
-            {{ value }}
+         <li v-for="(value, name, index ) in object">
+            {{ index }}. {{ name }}: {{ value }}
          </li>
       </ul>
       <script>
@@ -76,7 +76,12 @@
                   publishedAt: "2016-04-10"
                }
             }
-         })
+         });
+
+         // 콘솔명령
+         example1.mgs = example1.mgs.filter(function(item) {
+            return item.message.match(/Foo/);
+         });
       </script>
    </body>
 </html>

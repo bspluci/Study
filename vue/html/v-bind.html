@@ -22,7 +22,7 @@
             data: {
                mg: "Hello World!"
             }
-         })
+         });
       </script>
       <br />
       <div id="app-2">
@@ -36,7 +36,7 @@
             data: {
                message: "이 페이지는 " + new Date() + " 에 로드 되었습니다"
             }
-         })
+         });
       </script>
       <br />
       <div id="app-3">
@@ -48,7 +48,7 @@
             data: {
                seen: true
             }
-         })
+         });
       </script>
       <br />
       <div id="app-4">
@@ -67,7 +67,7 @@
             data: {
                todos: [{ text: "javascript 배우기", text2: "하하" }, { text: "Vue 배우기" }, { text: "멋진거 만들기" }]
             }
-         })
+         });
       </script>
       <br />
       <div id="app-5">
@@ -85,10 +85,10 @@
                   this.message = this.message
                      .split("")
                      .reverse()
-                     .join("")
+                     .join("");
                }
             }
-         })
+         });
       </script>
       <br />
       <div id="app-6">
@@ -101,7 +101,7 @@
             data: {
                message: "안녕하세요 Vue!"
             }
-         })
+         });
       </script>
       <br />
       <div id="app-7">
@@ -113,7 +113,7 @@
          Vue.component("todo-item", {
             props: ["todo"],
             template: "<li>{{ todo.text }}</li>"
-         })
+         });
 
          var app7 = new Vue({
             el: "#app-7",
@@ -124,7 +124,7 @@
                   { id: 2, text: "Whatever else humans are supposed to eat" }
                ]
             }
-         })
+         });
       </script>
       <br />
       <div id="app-8">
@@ -134,14 +134,14 @@
       <script>
          var obj = {
             foo: "bar"
-         }
+         };
 
-         Object.freeze(obj)
+         Object.freeze(obj);
 
          var app8 = new Vue({
             el: "#app-8",
             data: obj
-         })
+         });
       </script>
       <div id="root">
          {{ a }}
@@ -154,9 +154,9 @@
                b: 2
             },
             created: function() {
-               console.log(this.b)
+               console.log(this.b);
             }
-         })
+         });
       </script>
       <p>Using mustaches: {{ rawHtml }}</p>
       <span>Using v-html directive: <span v-html="rawHtml"></span></span>
@@ -176,10 +176,10 @@
                   return this.message
                      .split("")
                      .reverse()
-                     .join("")
+                     .join("");
                }
             }
-         })
+         });
       </script>
       <br />
       <div id="demo">{{ fullName }}</div>
@@ -194,17 +194,17 @@
                fullName: {
                   // getter
                   get: function() {
-                     return this.firstName + " " + this.lastName
+                     return this.firstName + " " + this.lastName;
                   },
                   // setter
                   set: function(newValue) {
-                     var names = newValue.split(" ")
-                     this.firstName = names[0]
-                     this.lastName = names[names.length - 1]
+                     var names = newValue.split(" ");
+                     this.firstName = names[0];
+                     this.lastName = names[names.length - 1];
                   }
                }
             }
-         })
+         });
       </script>
       <br />
       <div id="watch-example">
@@ -229,8 +229,8 @@
             watch: {
                // 질문이 변경될 때 마다 이 기능이 실행됩니다.
                question: function(newQuestion) {
-                  this.answer = "입력을 기다리는 중..."
-                  this.getAnswer()
+                  this.answer = "입력을 기다리는 중...";
+                  this.getAnswer();
                }
             },
             methods: {
@@ -243,25 +243,25 @@
                getAnswer: _.debounce(
                   function() {
                      if (this.question.indexOf("?") === -1) {
-                        this.answer = "질문에는 일반적으로 물음표가 포함 됩니다. ;-)"
-                        return
+                        this.answer = "질문에는 일반적으로 물음표가 포함 됩니다. ;-)";
+                        return;
                      }
-                     this.answer = "생각중..."
-                     var vm = this
+                     this.answer = "생각중...";
+                     var vm = this;
                      axios
                         .get("https://yesno.wtf/api")
                         .then(function(response) {
-                           vm.answer = _.capitalize(response.data.answer)
+                           vm.answer = _.capitalize(response.data.answer);
                         })
                         .catch(function(error) {
-                           vm.answer = "에러! API 요청에 오류가 있습니다. " + error
-                        })
+                           vm.answer = "에러! API 요청에 오류가 있습니다. " + error;
+                        });
                   },
                   // 사용자가 입력을 기다리는 시간(밀리세컨드) 입니다.
                   500
                )
             }
-         })
+         });
       </script>
       <div id="dl">
          <div v-bind:class="classObject">안녕~</div>
@@ -275,7 +275,7 @@
                   textdanger: false
                }
             }
-         })
+         });
       </script>
       <br />
       <div id="as">
@@ -289,7 +289,7 @@
                activeClass: "active",
                errorClass: "text-danger"
             }
-         })
+         });
       </script>
       <br />
       <div id="com">
@@ -298,7 +298,7 @@
       <script>
          Vue.component("my-component", {
             template: '<p class="foo bar">hello baby</p>'
-         })
+         });
          var dk = new Vue({
             el: "#com",
             data: {
@@ -310,59 +310,8 @@
                   paddingBottom: "50px"
                }
             }
-         })
+         });
       </script>
       <br />
-      <div id="aks">
-         <template v-if="ok">
-            <h1>Title</h1>
-            <p>Paragraph 1</p>
-            <p>Paragraph 2</p>
-         </template>
-         <template v-else>
-            <h1>hihi</h1>
-            <p>asdfasdf 1</p>
-            <p>asdfasdf 2</p>
-         </template>
-         <button v-on:click="showhide">show/hide</button>
-      </div>
-      <script>
-         var aks = new Vue({
-            el: "#aks",
-            data: {
-               ok: true // false
-            },
-            methods: {
-               showhide: function() {
-                  aks.ok ? (aks.ok = false) : (aks.ok = true)
-               }
-            }
-         })
-      </script>
-      <br />
-      <div id="okok">
-         <template v-if="loginType === 'username'">
-            <label>사용자 이름</label>
-            <input placeholder="사용자 이름을 입력하세요" key="username-input" />
-         </template>
-         <template v-else>
-            <label>이메일</label>
-            <input placeholder="이메일 주소를 입력하세요" key="email-input" />
-         </template>
-         <button v-on:click="chin">로그인 유형 변경</button>
-      </div>
-      <script>
-         var okok = new Vue({
-            el: "#okok",
-            data: {
-               loginType: "username"
-            },
-            methods: {
-               chin: function() {
-                  okok.loginType == "username" ? (okok.loginType = "") : (okok.loginType = "username")
-               }
-            }
-         })
-      </script>
    </body>
 </html>
