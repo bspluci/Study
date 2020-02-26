@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>vue.js</title>
+      <title>V-object</title>
 
       <link rel="stylesheet" href="../css/reset.css" />
       <link rel="stylesheet" href="../css/main.css?ver=123" />
@@ -71,12 +71,12 @@
          var nmm = new Vue({
             el: "#nmm",
             data: {
-               numbers: [1, 2, 3, 4, 5]
+               numbers: [1, 2, 3, 4, 5, 6]
             },
             methods: {
                even: function(numbers) {
                   return numbers.filter(function(number) {
-                     return number % 2 === 0;
+                     return number % 3 === 0;
                   });
                }
             }
@@ -121,7 +121,7 @@
       </script>
       <br />
       <div class="ifor">
-         <ul v-if="todos.length">
+         <ul v-if="aaa == true">
             <li v-for="todo in todos">
                {{ todo.mmm }}
             </li>
@@ -135,7 +135,8 @@
                todos: [
                   { mmm: "work today" }, //
                   { mmm: "nothing" }
-               ]
+               ],
+               aaa: true
             }
          });
       </script>
@@ -201,10 +202,12 @@
             },
             methods: {
                addNewTodo: function() {
-                  this.todos.push({
-                     id: this.nextTodoId++,
-                     title: this.newTodoText
-                  });
+                  this.newTodoText == ""
+                     ? alert("메세지를 입력해 주세요")
+                     : this.todos.push({
+                          id: this.nextTodoId++,
+                          title: this.newTodoText
+                       });
                   this.newTodoText = "";
                }
             }

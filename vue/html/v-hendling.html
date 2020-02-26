@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>vue.js</title>
+      <title>V-hendling</title>
 
       <link rel="stylesheet" href="../css/reset.css" />
       <link rel="stylesheet" href="../css/main.css?ver=123" />
@@ -84,6 +84,24 @@
                   if (event) event.preventDefault();
                   alert(message);
                   console.log(message);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div class="keyboard">
+         <input v-on:keyup.space="submit" />
+         <p>{{ message }}</p>
+      </div>
+      <script>
+         var keyboard = new Vue({
+            el: ".keyboard",
+            data: {
+               message: ""
+            },
+            methods: {
+               submit: function() {
+                  this.message = "left click";
                }
             }
          });

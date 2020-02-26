@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>vue.js</title>
+      <title>V-bind</title>
 
       <link rel="stylesheet" href="../css/reset.css" />
       <link rel="stylesheet" href="../css/main.css?ver=123" />
@@ -65,7 +65,11 @@
          var app4 = new Vue({
             el: "#app-4",
             data: {
-               todos: [{ text: "javascript 배우기", text2: "하하" }, { text: "Vue 배우기" }, { text: "멋진거 만들기" }]
+               todos: [
+                  { text: "javascript 배우기", text2: "하하" }, //
+                  { text: "Vue 배우기" },
+                  { text: "멋진거 만들기" }
+               ]
             }
          });
       </script>
@@ -264,7 +268,7 @@
          });
       </script>
       <div id="dl">
-         <div v-bind:class="classObject">안녕~</div>
+         <div v-bind:class="classObject" v-on:click="click">안녕~</div>
       </div>
       <script>
          var aa = new Vue({
@@ -273,6 +277,13 @@
                classObject: {
                   active: true,
                   textdanger: false
+               }
+            },
+            methods: {
+               click: function(me) {
+                  this.classObject.textdanger == false
+                     ? ((this.classObject.textdanger = true), (me.target.innerHTML = "잘가~"))
+                     : ((this.classObject.textdanger = false), (me.target.innerHTML = "안녕~"));
                }
             }
          });
@@ -293,7 +304,7 @@
       </script>
       <br />
       <div id="com">
-         <my-component v-bind:class="{ active: isActive }" v-bind:style="[mgt, pdb]"></my-component>
+         <my-component v-bind:class="{ active: isActive }" v-bind:style="[mgt]"></my-component>
       </div>
       <script>
          Vue.component("my-component", {
@@ -304,9 +315,7 @@
             data: {
                isActive: false,
                mgt: {
-                  marginTop: "20px"
-               },
-               pdb: {
+                  marginTop: "20px",
                   paddingBottom: "50px"
                }
             }

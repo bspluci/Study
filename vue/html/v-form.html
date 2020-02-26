@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>V-if</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+      <link rel="stylesheet" href="../css/main.css?ver=123" />
+
+      <script type="text/javascript" src="../js/custom.js"></script>
+      <script type="text/javascript" src="../js/vue.js"></script>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+   </head>
+   <body>
+      <div id="vmodel">
+         <input v-model="message" placeholder="여기를 수정해보세요" />
+         <p>메시지: {{ message }}</p>
+      </div>
+      <script>
+         new Vue({
+            el: "#vmodel",
+            data: {
+               message: ""
+            }
+         });
+      </script>
+      <br />
+      <div id="line">
+         <span>여러 줄을 가지는 메시지</span>
+         <br />
+         <textarea v-model="message" placeholder="여러줄을 입력해보세요" v-bind:style="style"></textarea>
+         <p style="white-space: pre-line">message : {{ message }}</p>
+      </div>
+      <script>
+         new Vue({
+            el: "#line",
+            data: {
+               message: "",
+               style: {
+                  width: "300px",
+                  height: "150px"
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="checkbox">
+         <input type="checkbox" id="checkbox" v-model="checked" />
+         <label for="checkbox">{{ checked }}</label>
+      </div>
+      <script>
+         new Vue({
+            el: "#checkbox",
+            data: {
+               checked: false
+            }
+         });
+      </script>
+      <br />
+      <div id="example-3">
+         <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+         <label for="jack">Jack</label>
+         <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+         <label for="john">John</label>
+         <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+         <label for="mike">Mike</label>
+         <br />
+         <span>체크한 이름: {{ checkedNames }}</span>
+         <button v-on:click="namesort">정렬</button>
+      </div>
+      <script>
+         new Vue({
+            el: "#example-3",
+            data: {
+               checkedNames: []
+            },
+            methods: {
+               namesort: function(e) {
+                  this.checkedNames == "" ? alert("하나 이상의 대상을 체크해 주세요.") : this.checkedNames.sort();
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="radios">
+         <input type="radio" id="one" value="One" v-model="picked" v-on:change="val" />
+         <label for="one">One</label>
+         <br />
+         <input type="radio" id="two" value="Two" v-model="picked" v-on:change="val" />
+         <label for="two">Two</label>
+         <br />
+         <span>선택: {{ picked }}</span>
+      </div>
+      <script>
+         new Vue({
+            el: "#radios",
+            data: {
+               picked: "One"
+            },
+            methods: {
+               val: function() {
+                  console.log(this.picked);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="sel">
+         <select v-model="selected">
+            <option disabled value="">Please select one</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+         </select>
+         <span>선택함: {{ selected }}</span>
+      </div>
+      <script>
+         new Vue({
+            el: "#sel",
+            data: {
+               selected: ""
+            }
+         });
+      </script>
+      <br />
+      <div id="selmot">
+         <select v-model="selected">
+            <option disabled value="">선택해 주세요</option>
+            <option v-for="option in options" v-bind:value="option.value">
+               {{ option.text }}
+            </option>
+         </select>
+         <span>Selected: {{ selected }}</span>
+      </div>
+      <script>
+         new Vue({
+            el: "#selmot",
+            data: {
+               selected: "",
+               options: [
+                  { text: "one : a", value: "a" },
+                  { text: "two : b", value: "b" },
+                  { text: "three : c", value: "c" }
+               ]
+            }
+         });
+      </script>
+      <br />
+      <div id="checkbind">
+         <input type="checkbox" v-model="toggle" true-value="yes" false-value="no" v-on:change="con" />
+      </div>
+      <script>
+         new Vue({
+            el: "#checkbind",
+            data: {
+               toggle: ""
+            },
+            methods: {
+               con: function() {
+                  console.log(this.toggle);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="radiobind">
+         <input id="aa" type="radio" v-model="pick" v-bind:value="a" v-on:change="rdb" />
+         <label for="aa">aaa</label>
+         <input id="bb" type="radio" v-model="pick" v-bind:value="b" v-on:change="rdb" />
+         <label for="bb">bbb</label>
+      </div>
+      <script>
+         new Vue({
+            el: "#radiobind",
+            data: {
+               pick: "",
+               a: "a",
+               b: "b"
+            },
+            methods: {
+               rdb: function() {
+                  console.log(this.pick);
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="selbind">
+         <select v-model.trim="selected" v-on:change="sb">
+            <!-- inline object literal -->
+            <option disabled value="">선택하세요</option>
+            <option v-bind:value="{ number: 123 }">123</option>
+            <option v-bind:value="{ number: 333 }">333</option>
+            <option v-bind:value="{ number: 222 }">222</option>
+         </select>
+      </div>
+      <script>
+         new Vue({
+            el: "#selbind",
+            data: {
+               selected: "",
+               number: ""
+            },
+            methods: {
+               sb: function() {
+                  console.log(typeof this.selected);
+                  console.log(this.selected.number);
+               }
+            }
+         });
+      </script>
+   </body>
+</html>
