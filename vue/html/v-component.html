@@ -10,6 +10,7 @@
 
       <script type="text/javascript" src="../js/custom.js"></script>
       <script type="text/javascript" src="../js/vue.js"></script>
+      <script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/974aa47f8f9c5361c5233bd56be37db8ed765a09/currency-validator.js"></script>
       <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
    </head>
    <body>
@@ -27,6 +28,7 @@
             }
          });
       </script>
+      <br />
       <div id="example">
          <my-component></my-component>
       </div>
@@ -36,6 +38,273 @@
          });
          new Vue({
             el: "#example"
+         });
+      </script>
+      <br />
+      <div id="local">
+         <is-component></is-component>
+      </div>
+      <script>
+         var child = {
+            template: "<div>지역 컴포넌트 예제입니다.</div>"
+         };
+         new Vue({
+            el: "#local",
+            components: {
+               "is-component": child
+            }
+         });
+      </script>
+      <br />
+      <div id="isis">
+         <isis-component></isis-component>
+      </div>
+      <script>
+         var message = {
+            mm: "gkgk",
+            tt: "aaa",
+            sasa: {
+               zz: "aa",
+               pp: "pupu"
+            }
+         };
+
+         Vue.component("isis-component", {
+            template: "<div>{{ sasa.zz }}</div>",
+            data: function() {
+               return message;
+            }
+         });
+
+         new Vue({
+            el: "#isis"
+         });
+      </script>
+      <br />
+      <div id="count_box">
+         <count-component></count-component>
+         <count-component></count-component>
+         <count-component></count-component>
+      </div>
+      <script>
+         var data = {
+            count: 0
+         };
+
+         Vue.component("count-component", {
+            template: '<button v-on:click="count += 1">{{ count }}번 클릭</button>',
+            data: function() {
+               return {
+                  count: 0
+               };
+            }
+         });
+
+         new Vue({
+            el: "#count_box"
+         });
+      </script>
+      <br />
+      <div id="props">
+         <child-component message="안녕?" hehe="저런?" pup="http://www.naver.com"></child-component>
+         <child-component message="클릭하면" hehe="다음으로간다" pup="http://www.daum.net"></child-component>
+      </div>
+      <script>
+         Vue.component("child-component", {
+            props: ["message", "hehe", "pup"],
+            template: "<a v-bind:href='pup'><div>{{ message }}</div><p>{{ hehe }}</p><h2>ㅋㅋㅋㅋ?</h2></a>"
+         });
+
+         new Vue({
+            el: "#props"
+         });
+      </script>
+      <br />
+      <div id="parent">
+         <input v-model="parentMsg" placeholder="부모로부터 전달받은 메세지" />
+         <br />
+         <child v-bind:mymessage="parentMsg"></child>
+      </div>
+      <script>
+         Vue.component("child", {
+            props: ["mymessage"],
+            template: "<div>{{ mymessage }}</div>"
+         });
+         new Vue({
+            el: "#parent",
+            data: {
+               parentMsg: ""
+            }
+         });
+      </script>
+      <br />
+      <div id="todopro">
+         <todo-item v-bind="todo"></todo-item>
+      </div>
+      <script>
+         Vue.component("todo-item", {
+            props: ["text"],
+            template: "<div>{{ text }}</div>"
+         });
+         new Vue({
+            el: "#todopro",
+            data: {
+               todo: {
+                  text: "aaaaaa",
+                  iscom: true
+               }
+            }
+         });
+      </script>
+      <br />
+      <div class="plus">
+         <p>{{ total }}</p>
+         <count-child v-on:aa="incrementTotal"></count-child>
+         <count-child v-on:aa="incrementTotal"></count-child>
+      </div>
+      <script>
+         Vue.component("count-child", {
+            data: function() {
+               return {
+                  count: 0
+               };
+            },
+            template: '<div>\
+                  <button v-on:click="upup">{{ count }}</button>\
+                  <p>하이</p>\
+               </div>',
+            methods: {
+               upup: function() {
+                  this.count += 1;
+                  this.$emit("aa");
+               }
+            }
+         });
+         new Vue({
+            el: ".plus",
+            data: {
+               total: 0
+            },
+            methods: {
+               incrementTotal: function() {
+                  this.total += 1;
+               }
+            }
+         });
+      </script>
+      <br />
+      <div id="numnum">
+         <currency-input v-model="price"></currency-input>
+      </div>
+      <script>
+         Vue.component("currency-input", {
+            props: ["value"],
+            template:
+               '<span>\
+                   $\
+                   <input\
+                     ref="input"\
+                     v-bind:value="value"\
+                     v-on:input="updateValue($event.target.value)">\
+                     <span></span>\
+                 </span>',
+            methods: {
+               // 값을 직접 업데이트하는 대신 이 메소드를 사용하여
+               // 입력 값에 대한 서식을 지정하고 배치 할 수 있습니다
+               updateValue: function(value) {
+                  var formattedValue = value
+                     // 공백을 제거합니다.
+                     .trim()
+                     // 소수 자릿수 2자리로 줄입니다
+                     .slice(0, value.indexOf(".") === -1 ? value.length : value.indexOf(".") + 3);
+                  // 값이 아직 정규화 되지 않은 경우
+                  // 이를 수동으로 재정의하여 조건을 충족시킵니다.
+                  if (formattedValue !== value) {
+                     this.$refs.input.value = formattedValue;
+                  }
+                  // 입력 이벤트를 통해 숫자 값을 내보냅니다.
+                  this.$emit("input", Number(formattedValue));
+                  console.log(String(formattedValue));
+               }
+            }
+         });
+         new Vue({
+            el: "#numnum",
+            data: {
+               price: "0.00"
+            }
+         });
+      </script>
+      <br />
+      <div id="app">
+         <currency-input label="Price" v-model="price"></currency-input>
+         <currency-input label="Shipping" v-model="shipping"></currency-input>
+         <currency-input label="Handling" v-model="handling"></currency-input>
+         <currency-input label="Discount" v-model="discount"></currency-input>
+
+         <p>Total: ${{ total }}</p>
+      </div>
+      <script>
+         Vue.component("currency-input", {
+            template:
+               '<div>\
+                   <label v-if="label">{{ label }}</label>\
+                   $\
+                   <input\
+                     ref="input"\
+                     v-bind:value="value"\
+                     v-on:input="updateValue($event.target.value)"\
+                     v-on:focus="selectAll"\
+                     v-on:blur="formatValue"\
+                   >\
+                 </div>',
+            props: {
+               value: {
+                  type: Number,
+                  default: 0
+               },
+               label: {
+                  type: String,
+                  default: ""
+               }
+            },
+            mounted: function() {
+               this.formatValue();
+            },
+            methods: {
+               updateValue: function(value) {
+                  var result = currencyValidator.parse(value, this.value);
+                  if (result.warning) {
+                     this.$refs.input.value = result.value;
+                  }
+                  this.$emit("input", result.value);
+               },
+               formatValue: function() {
+                  this.$refs.input.value = currencyValidator.format(this.value);
+               },
+               selectAll: function(event) {
+                  // Workaround for Safari bug
+                  // http://stackoverflow.com/questions/1269722/selecting-text-on-focus-using-jquery-not-working-in-safari-and-chrome
+                  setTimeout(function() {
+                     event.target.select();
+                  }, 0);
+               }
+            }
+         });
+
+         new Vue({
+            el: "#app",
+            data: {
+               price: 0,
+               shipping: 0,
+               handling: 0,
+               discount: 0
+            },
+            computed: {
+               total: function() {
+                  return ((this.price * 100 + this.shipping * 100 + this.handling * 100 - this.discount * 100) / 100).toFixed(2);
+               }
+            }
          });
       </script>
    </body>
