@@ -11,6 +11,7 @@
       <script type="text/javascript" src="../js/custom.js"></script>
       <script type="text/javascript" src="../js/vue.js"></script>
       <script src="https://cdn.rawgit.com/chrisvfritz/5f0a639590d6e648933416f90ba7ae4e/raw/974aa47f8f9c5361c5233bd56be37db8ed765a09/currency-validator.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
    </head>
    <body>
@@ -139,7 +140,7 @@
       </script>
       <br />
       <div id="todopro">
-         <todo-item v-bind="todo"></todo-item>
+         <todo-item v-bind="todo" v-for="item in todo"></todo-item>
       </div>
       <script>
          Vue.component("todo-item", {
@@ -149,10 +150,16 @@
          new Vue({
             el: "#todopro",
             data: {
-               todo: {
-                  text: "aaaaaa",
-                  iscom: true
-               }
+               todo: [
+                  {
+                     text: "aaaaaa",
+                     iscom: true
+                  },
+                  {
+                     text: "bbbbb",
+                     iscom: true
+                  }
+               ]
             }
          });
       </script>
