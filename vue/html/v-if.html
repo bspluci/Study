@@ -27,14 +27,14 @@
          <button v-on:click="showhide">show/hide</button>
       </div>
       <script>
-         var aks = new Vue({
+         new Vue({
             el: "#aks",
             data: {
                ok: true // false
             },
             methods: {
                showhide: function() {
-                  aks.ok ? (aks.ok = false) : (aks.ok = true);
+                  this.ok ? (this.ok = false) : (this.ok = true);
                }
             }
          });
