@@ -8,7 +8,16 @@ class TOC extends Component {
       for (let i = 0; i < data.length; i++) {
          var content = (
             <li key={data[i].id}>
-               <a href={"content" + data[i].id + ".html"}>{data[i].title}</a>
+               <a
+                  href={"content" + data[i].id + ".html"}
+                  data-id={data[i].id}
+                  onClick={function(e) {
+                     e.preventDefault();
+                     this.props.onChangePage(e.target.dataset.id);
+                  }.bind(this)}
+               >
+                  {data[i].title}
+               </a>
                <p>{data[i].desc}</p>
             </li>
          );

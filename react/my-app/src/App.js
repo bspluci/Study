@@ -9,6 +9,7 @@ class App extends Component {
       super(props);
       this.state = {
          mode: "welecom",
+         selected_content_id: 2,
          subject: { title: "WEB", sub: "world wide web!" },
          welecom: { title: "Welecom", desc: "Hello, React!!" },
          contents: [
@@ -24,33 +25,33 @@ class App extends Component {
       if (this.state.mode == "welecom") {
          _title = this.state.welecom.title;
          _desc = this.state.welecom.desc;
-      } else {
-         _title = this.state.contents[0].title;
-         _desc = this.state.contents[0].desc;
+      } else if (this.state.mode == "read") {
+         for (let i = 0; i < this.state.contents.length; i++) {
+            var data = this.state.contents[i];
+            if (data.id == this.state.selected_content_id) {
+               _title = data.title;
+               _desc = data.desc;
+               break;
+            }
+         }
       }
       var subject = this.state.subject;
       return (
          <div className="App">
-            {/* <Subject
+            <Subject
                var
                title={subject.title} //
                sub={subject.sub}
-            ></Subject> */}
-            <header>
-               <h1>
-                  <a
-                     href="/"
-                     onClick={function(e) {
-                        e.preventDefault();
-                        alert("hi");
-                     }}
-                  >
-                     {subject.title}
-                  </a>
-               </h1>
-               {subject.sub}
-            </header>
-            <TOC content={this.state.contents}></TOC>
+               onChangePage={function() {
+                  this.setState({ mode: "welecom" });
+               }.bind(this)}
+            ></Subject>
+            <TOC
+               onChangePage={function(id) {
+                  this.setState({ mode: "read", selected_content_id: Number(id) });
+               }.bind(this)}
+               content={this.state.contents}
+            ></TOC>
             <Content title={_title} desc={_desc}></Content>
          </div>
       );
