@@ -21,16 +21,44 @@
                <img src="./images/logo_js.png" />
                <h1>로그인</h1>
             </div>
-            <form name="flogin" action="" onsubmit="return flogin_submit(this);" method="post">
+            <form
+               name="flogin"
+               action=""
+               onsubmit="return flogin_submit(this);"
+               method="post"
+            >
                <fieldset id="login_fs">
                   <label for="login_id" class="login_id"></label>
-                  <input type="text" name="mb_id" id="login_id" placeholder="ID" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                  <input
+                     type="text"
+                     name="mb_id"
+                     id="login_id"
+                     placeholder="ID"
+                     class="frm_input"
+                     size="20"
+                     maxlength="20"
+                     focus="placeholder=''"
+                  />
                   <label for="login_pw" class="login_pw"></label>
-                  <input type="password" name="mb_password" id="login_pw" placeholder="Password" class="frm_input" size="20" maxlength="20" focus="placeholder=''" />
+                  <input
+                     type="password"
+                     name="mb_password"
+                     id="login_pw"
+                     placeholder="Password"
+                     class="frm_input"
+                     size="20"
+                     maxlength="20"
+                     focus="placeholder=''"
+                  />
                </fieldset>
             </form>
             <div class="button_box">
-               <button type="submit" value="로그인" class="login_btn" onclick="init()">
+               <button
+                  type="submit"
+                  value="로그인"
+                  class="login_btn"
+                  onclick="init()"
+               >
                   로그인
                </button>
                <button class="signup_btn" onclick="cancel()">
@@ -44,7 +72,12 @@
                <h1>회원가입</h1>
             </div>
             <div class="form_signup">
-               <form name="signup" action="./singup.html/" onsubmit="return validate();" method="post">
+               <form
+                  name="signup"
+                  action="./singup.html/"
+                  onsubmit="return validate();"
+                  method="post"
+               >
                   <table>
                      <tbody>
                         <tr>
@@ -92,7 +125,12 @@
                </form>
             </div>
             <div class="button_box">
-               <button type="submit" value="회원가입" class="login_btn" onclick="formChk()">
+               <button
+                  type="submit"
+                  value="회원가입"
+                  class="login_btn"
+                  onclick="formChk()"
+               >
                   회원가입
                </button>
                <button class="signup_btn" onclick="cancel()">
@@ -104,7 +142,11 @@
       <nav>
          <div class="main nav">
             <div class="main_wrap nav_wrap">
-               <a href="javascript:void(0)" onclick="logoHref()" class="nav_logo">
+               <a
+                  href="javascript:void(0)"
+                  onclick="logoHref()"
+                  class="nav_logo"
+               >
                   <img src="images/logo_nav_js.png" class="nav_logo_img" />
                   <h1>JS study</h1>
                </a>
@@ -130,7 +172,9 @@
                      </ul>
                   </li>
                   <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS회원목록</a>
+                     <a href="javascript:void(0)" class="nav_lista"
+                        >JS회원목록</a
+                     >
                      <ul class="nav_drop_liwrap">
                         <li class="nav_drop_list">
                            <a href="javascript:void(0)">JS정호</a>
@@ -159,7 +203,9 @@
                      </ul>
                   </li>
                   <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS회원안내</a>
+                     <a href="javascript:void(0)" class="nav_lista"
+                        >JS회원안내</a
+                     >
                      <ul class="nav_drop_liwrap">
                         <li class="nav_drop_list">
                            <a href="javascript:void(0)">JS가입하기</a>
@@ -179,7 +225,9 @@
                      </ul>
                   </li>
                   <li class="nav_list">
-                     <a href="javascript:void(0)" class="nav_lista">JS고객센터</a>
+                     <a href="javascript:void(0)" class="nav_lista"
+                        >JS고객센터</a
+                     >
                      <ul class="nav_drop_liwrap">
                         <li class="nav_drop_list">
                            <a href="javascript:void(0)">JS공지</a>
@@ -200,7 +248,10 @@
                   <button class="signup_btn main_btn" onclick="signSubmit()">
                      회원가입
                   </button>
-                  <button class="logout_btn main_btn" onclick="location.href='./index.html'">
+                  <button
+                     class="logout_btn main_btn"
+                     onclick="location.href='./index.html'"
+                  >
                      로그아웃
                   </button>
                </div>
@@ -220,13 +271,17 @@
                      </div>
                      <div class="slider_imgwrap">
                         <div class="main_txtwrap slide_up">
-                           <h2 class="main_txt" style="color: #c24d51;">자바스크립트 어렵지 않아요~</h2>
+                           <h2 class="main_txt" style="color: #c24d51;">
+                              자바스크립트 어렵지 않아요~
+                           </h2>
                         </div>
                         <img src="./images/main_slide02.jpg" />
                      </div>
                      <div class="slider_imgwrap">
                         <div class="main_txtwrap slide_up">
-                           <h2 class="main_txt" style="color: #fff;">자바스크립트의 세계에 빠져보아요!!</h2>
+                           <h2 class="main_txt" style="color: #fff;">
+                              자바스크립트의 세계에 빠져보아요!!
+                           </h2>
                         </div>
                         <img src="./images/main_slide03.jpg" />
                      </div>
@@ -237,8 +292,16 @@
                      <span class="slider_dot"></span>
                   </div>
                   <div class="slider_np">
-                     <a class="slider_nextbtn" href="javascript:void(0)" onclick="slideNext()"></a>
-                     <a class="slider_prevbtn" href="javascript:void(0)" onclick="slidePrev()"></a>
+                     <a
+                        class="slider_nextbtn"
+                        href="javascript:void(0)"
+                        onclick="slideNext()"
+                     ></a>
+                     <a
+                        class="slider_prevbtn"
+                        href="javascript:void(0)"
+                        onclick="slidePrev()"
+                     ></a>
                   </div>
                </div>
             </div>
@@ -278,8 +341,11 @@
                         <p><span>gender :</span> male</p>
                         <p><span>place :</span> eunpyeong gu</p>
                         <p class="mb_intro">
-                           <span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus rem! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde placeat voluptatibus
-                           rem!
+                           <span>intro :</span> Lorem ipsum dolor sit amet
+                           consectetur adipisicing elit. Unde placeat
+                           voluptatibus rem! Lorem ipsum dolor sit amet
+                           consectetur adipisicing elit. Unde placeat
+                           voluptatibus rem!
                         </p>
                      </div>
                   </li>
@@ -292,12 +358,22 @@
                         <p><span>age :</span> 24</p>
                         <p><span>gender :</span> male</p>
                         <p><span>place :</span> eunpyeong gu</p>
-                        <p class="mb_intro"><span>intro :</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo.</p>
+                        <p class="mb_intro">
+                           <span>intro :</span> Lorem ipsum dolor sit amet
+                           consectetur adipisicing elit. Nemo.
+                        </p>
                      </div>
                   </li>
                </ul>
                <div class="button_box">
-                  <button type="submit" value="로그인" class="login_btn more_btn" onclick="">더보기</button>
+                  <button
+                     type="submit"
+                     value="로그인"
+                     class="login_btn more_btn"
+                     onclick=""
+                  >
+                     더보기
+                  </button>
                </div>
             </div>
          </div>
@@ -671,11 +747,19 @@
                phone2 = document.querySelector(".phone2"),
                phone3 = document.querySelector(".phone3");
 
-            if (!check(idchk, id, "아이디를 확인해 주세요\n4~12자 / 영문 / 숫자")) {
+            if (
+               !check(idchk, id, "아이디를 확인해 주세요\n4~12자 / 영문 / 숫자")
+            ) {
                return false;
             }
 
-            if (!check(pwchk, pw, "비밀번호를 확인해 주세요\n8~24자 / 영문 / 숫자")) {
+            if (
+               !check(
+                  pwchk,
+                  pw,
+                  "비밀번호를 확인해 주세요\n8~24자 / 영문 / 숫자"
+               )
+            ) {
                return false;
             }
 
@@ -691,13 +775,17 @@
                return false;
             }
 
-            if (!check(phonechk, phone2, "잘못된 전화번호 입니다.\n4자리 / 숫자")) {
+            if (
+               !check(phonechk, phone2, "잘못된 전화번호 입니다.\n4자리 / 숫자")
+            ) {
                phone2.value = "";
                phone2.focus();
                return false;
             }
 
-            if (!check(phonechk, phone3, "잘못된 전화번호 입니다.\n4자리 / 숫자")) {
+            if (
+               !check(phonechk, phone3, "잘못된 전화번호 입니다.\n4자리 / 숫자")
+            ) {
                phone3.value = "";
                phone3.focus();
                return false;
@@ -775,9 +863,14 @@
                      temp += "<div class='mb_txtbox'>";
                      temp += "<p><span>name :</span> " + data[i].name + "</p>";
                      temp += "<p><span>age :</span> " + data[i].age + "</p>";
-                     temp += "<p><span>gender :</span> " + data[i].gender + "</p>";
-                     temp += "<p><span>place :</span> " + data[i].place + "</p>";
-                     temp += "<p class='mb_intro'><span>intro :</span> " + data[i].intro + "</p>";
+                     temp +=
+                        "<p><span>gender :</span> " + data[i].gender + "</p>";
+                     temp +=
+                        "<p><span>place :</span> " + data[i].place + "</p>";
+                     temp +=
+                        "<p class='mb_intro'><span>intro :</span> " +
+                        data[i].intro +
+                        "</p>";
                      temp += "</div>";
                      temp += "</li>";
                      $(".mb_wrap").append(temp);
