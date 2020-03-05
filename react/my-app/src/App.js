@@ -5,6 +5,7 @@ import ReadContent from "./components/ReadContent";
 import CreateContent from "./components/CreateContent";
 import UpdateContent from "./components/UpdateContent";
 import Control from "./components/Control";
+import Footer from "./components/Footer";
 import "./App.css";
 
 class App extends Component {
@@ -12,19 +13,39 @@ class App extends Component {
       super(props);
       this.max_content_id = 3;
       this.state = {
-         mode: "create",
+         mode: "welecom",
          selected_content_id: 2,
          subject: { title: "WEB", sub: "world wide web!" },
          welecom: { title: "Welecom", desc: "Hello, React!!" },
          contents: [
             { id: 1, title: "HTML", desc: "HTML is HyperText..." },
             { id: 2, title: "CSS", desc: "CSS is for design..." },
-            { id: 3, title: "JavaScript", desc: "JavaScript..." },
+            { id: 3, title: "JavaScript", desc: "JavaScript is..." },
+         ],
+         ftmode: "park",
+         footer: [
+            {
+               id: 1,
+               message: "Copyright © 2019 PARK JEONGHO All Rights Reserved.",
+            },
+            {
+               id: 2,
+               message: "Copyright © 2019 GIL DAJEONG All Rights Reserved.",
+            },
          ],
       };
    }
 
-   gerReadContent() {
+   footerName() {
+      if (this.state.ftmode === "park") {
+         var message = this.state.footer[1].message;
+      } else if (this.state.ftmode === "gil") {
+         var message = this.state.footer[0].message;
+      }
+      return message;
+   }
+
+   getReadContent() {
       for (let i = 0; i < this.state.contents.length; i++) {
          var data = this.state.contents[i];
          if (data.id === this.state.selected_content_id) {
@@ -42,7 +63,7 @@ class App extends Component {
          _desc = this.state.welecom.desc;
          _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
       } else if (this.state.mode === "read") {
-         var _content = this.gerReadContent();
+         var _content = this.getReadContent();
          _article = (
             <ReadContent
                title={_content.title}
@@ -55,32 +76,37 @@ class App extends Component {
                onSubmit={function(_title, _desc) {
                   this.max_content_id = this.max_content_id + 1;
 
-                  var _contents = this.state.contents.concat({
+                  var _contents = Array.from(this.state.contents);
+                  _contents.push({
                      id: this.max_content_id,
                      title: _title,
                      desc: _desc,
                   });
+
                   this.setState({
                      contents: _contents,
+                     mode: "read",
+                     selected_content_id: this.max_content_id,
                   });
-                  console.log(_title, _desc);
                }.bind(this)}
             ></CreateContent>
          );
       } else if (this.state.mode === "update") {
-         var _content = this.gerReadContent();
+         var _content = this.getReadContent();
          _article = (
             <UpdateContent
                data={_content}
-               onSubmit={function(_title, _desc) {
-                  this.max_content_id = this.max_content_id + 1;
-                  var _contents = this.state.contents.concat({
-                     id: this.max_content_id,
-                     title: _title,
-                     desc: _desc,
-                  });
+               onSubmit={function(_title, _desc, _id) {
+                  var _contents = Array.from(this.state.contents);
+                  for (let i = 0; i < _contents.length; i++) {
+                     if (_contents[i].id === _id) {
+                        _contents[i] = { title: _title, desc: _desc, id: _id };
+                        break;
+                     }
+                  }
                   this.setState({
                      contents: _contents,
+                     mode: "read",
                   });
                   console.log(_title, _desc);
                }.bind(this)}
@@ -113,10 +139,36 @@ class App extends Component {
             ></TOC>
             <Control
                onChangeMode={function(_mode) {
-                  this.setState({ mode: _mode });
+                  if (_mode === "delete") {
+                     if (window.confirm("really??")) {
+                        var _contents = Array.from(this.state.contents);
+                        for (let i = 0; i < _contents.length; i++) {
+                           if (
+                              _contents[i].id == this.state.selected_content_id
+                           ) {
+                              _contents.splice(i, 1);
+                              break;
+                           }
+                        }
+                        this.setState({
+                           contents: _contents,
+                           mode: "welwcom",
+                        });
+                        alert("delete!!");
+                     }
+                  } else {
+                     this.setState({ mode: _mode });
+                  }
                }.bind(this)}
             ></Control>
             {this.getContent()}
+            <Footer
+               ftmode={this.state.ftmode}
+               name={this.footerName()}
+               onChangeName={function(_ftmode) {
+                  this.setState({ ftmode: _ftmode });
+               }.bind(this)}
+            ></Footer>
          </div>
       );
    }

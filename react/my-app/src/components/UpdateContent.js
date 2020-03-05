@@ -4,45 +4,37 @@ class UpdateContent extends Component {
    constructor(props) {
       super(props);
       this.state = {
+         id: this.props.data.id,
          title: this.props.data.title,
          desc: this.props.data.desc,
       };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleText = this.handleText.bind(this);
    }
 
    handleChange(e) {
-      this.setState({ title: e.target.value });
+      this.setState({ [e.target.name]: e.target.value });
    }
+
    handleSubmit(e) {
       e.preventDefault();
-      var _title = e.target.title.value;
-      var _desc = e.target.desc.value;
-      this.props.handleSubmit(_title, _desc);
-   }
-   handleText(e) {
-      this.setState({ desc: e.target.value });
+      var _id = this.state.id;
+      var _title = this.state.title;
+      var _desc = this.state.desc;
+      this.props.onSubmit(_title, _desc, _id);
    }
 
    render() {
-      console.log(this.props.data);
-      console.log("Update Content render");
       return (
          <article>
             <h2>Update</h2>
             <form
                action="/create_process"
                method="post"
-               // onSubmit={function(e) {
-               //    e.preventDefault();
-               //    var _title = e.target.title.value;
-               //    var _desc = e.target.desc.value;
-               //    this.props.onSubmit(_title, _desc);
-               // }.bind(this)}
                onSubmit={this.handleSubmit}
             >
+               <input type="hidden" name="id" value={this.state.id}></input>
                <p>
                   <input
                      type="text"
@@ -57,8 +49,8 @@ class UpdateContent extends Component {
                      name="desc"
                      placeholder="description"
                      value={this.state.desc}
-                     onChange={this.handleText}
-                  />
+                     onChange={this.handleChange}
+                  ></textarea>
                </p>
                <p>
                   <input type="submit"></input>
