@@ -6,6 +6,7 @@ import CreateContent from "./components/CreateContent";
 import UpdateContent from "./components/UpdateContent";
 import Control from "./components/Control";
 import Footer from "./components/Footer";
+import Text from "./components/Text";
 import "./App.css";
 
 class App extends Component {
@@ -23,26 +24,11 @@ class App extends Component {
             { id: 3, title: "JavaScript", desc: "JavaScript is..." },
          ],
          ftmode: "park",
-         footer: [
-            {
-               id: 1,
-               message: "Copyright © 2019 PARK JEONGHO All Rights Reserved.",
-            },
-            {
-               id: 2,
-               message: "Copyright © 2019 GIL DAJEONG All Rights Reserved.",
-            },
-         ],
+         name: "PARK JEONG HO",
       };
-   }
 
-   footerName() {
-      if (this.state.ftmode === "park") {
-         var message = this.state.footer[1].message;
-      } else if (this.state.ftmode === "gil") {
-         var message = this.state.footer[0].message;
-      }
-      return message;
+      this.onChangePage = this.onChangePage.bind(this);
+      this.onChangeName = this.onChangeName.bind(this);
    }
 
    getReadContent() {
@@ -116,25 +102,27 @@ class App extends Component {
       return _article;
    }
 
+   onChangePage(mode, id) {
+      this.setState({ mode: mode });
+      this.setState({ selected_content_id: Number(id) });
+   }
+
+   onChangeName(mode, name) {
+      this.setState({ ftmode: mode });
+      this.setState({ name: name });
+   }
+
    render() {
       var subject = this.state.subject;
       return (
          <div className="App">
             <Subject
-               var
                title={subject.title}
                sub={subject.sub}
-               onChangePage={function() {
-                  this.setState({ mode: "welecom" });
-               }.bind(this)}
+               onChangePage={this.onChangePage}
             ></Subject>
             <TOC
-               onChangePage={function(id) {
-                  this.setState({
-                     mode: "read",
-                     selected_content_id: Number(id),
-                  });
-               }.bind(this)}
+               onChangePage={this.onChangePage}
                content={this.state.contents}
             ></TOC>
             <Control
@@ -144,7 +132,7 @@ class App extends Component {
                         var _contents = Array.from(this.state.contents);
                         for (let i = 0; i < _contents.length; i++) {
                            if (
-                              _contents[i].id == this.state.selected_content_id
+                              _contents[i].id === this.state.selected_content_id
                            ) {
                               _contents.splice(i, 1);
                               break;
@@ -164,11 +152,10 @@ class App extends Component {
             {this.getContent()}
             <Footer
                ftmode={this.state.ftmode}
-               name={this.footerName()}
-               onChangeName={function(_ftmode) {
-                  this.setState({ ftmode: _ftmode });
-               }.bind(this)}
+               onChangeName={this.onChangeName}
+               name={this.state.name}
             ></Footer>
+            <Text></Text>
          </div>
       );
    }

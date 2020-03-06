@@ -9,7 +9,8 @@ class Subject extends Component {
                   href="/"
                   onClick={function(e) {
                      e.preventDefault();
-                     this.props.onChangePage();
+                     var mode = "welecom";
+                     this.props.onChangePage(mode);
                   }.bind(this)}
                >
                   {this.props.title}
