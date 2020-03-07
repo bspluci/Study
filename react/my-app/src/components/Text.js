@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Textsub from "./components/Textsub;";
+// import Textsub from "./components/Textsub;";
 
 class Text extends Component {
    constructor(props) {
@@ -11,9 +11,7 @@ class Text extends Component {
 
    render() {
       return (
-         <div>
-            <Textsub changeText={this.changeText}></Textsub>
-         </div>
+         <div>{/* <Textsub changeText={this.changeText}></Textsub> */}</div>
       );
    }
 }

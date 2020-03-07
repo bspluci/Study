@@ -29,6 +29,7 @@ class App extends Component {
 
       this.onChangePage = this.onChangePage.bind(this);
       this.onChangeName = this.onChangeName.bind(this);
+      this.onChangeMode = this.onChangeMode.bind(this);
    }
 
    getReadContent() {
@@ -102,6 +103,27 @@ class App extends Component {
       return _article;
    }
 
+   onChangeMode(_mode) {
+      if (_mode === "delete") {
+         if (window.confirm("really??")) {
+            var _contents = Array.from(this.state.contents);
+            for (let i = 0; i < _contents.length; i++) {
+               if (_contents[i].id === this.state.selected_content_id) {
+                  _contents.splice(i, 1);
+                  break;
+               }
+            }
+            this.setState({
+               contents: _contents,
+               mode: "welwcom",
+            });
+            alert("delete!!");
+         }
+      } else {
+         this.setState({ mode: _mode });
+      }
+   }
+
    onChangePage(mode, id) {
       this.setState({ mode: mode });
       this.setState({ selected_content_id: Number(id) });
@@ -125,30 +147,7 @@ class App extends Component {
                onChangePage={this.onChangePage}
                content={this.state.contents}
             ></TOC>
-            <Control
-               onChangeMode={function(_mode) {
-                  if (_mode === "delete") {
-                     if (window.confirm("really??")) {
-                        var _contents = Array.from(this.state.contents);
-                        for (let i = 0; i < _contents.length; i++) {
-                           if (
-                              _contents[i].id === this.state.selected_content_id
-                           ) {
-                              _contents.splice(i, 1);
-                              break;
-                           }
-                        }
-                        this.setState({
-                           contents: _contents,
-                           mode: "welwcom",
-                        });
-                        alert("delete!!");
-                     }
-                  } else {
-                     this.setState({ mode: _mode });
-                  }
-               }.bind(this)}
-            ></Control>
+            <Control onChangeMode={this.onChangeMode}></Control>
             {this.getContent()}
             <Footer
                ftmode={this.state.ftmode}

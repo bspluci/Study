@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 
 class Control extends Component {
+   constructor(props) {
+      super(props);
+
+      this.onChangeMode = this.onChangeMode.bind(this);
+   }
+
+   onChangeMode(e) {
+      e.preventDefault();
+      var _mode = e.target.innerHTML;
+      this.props.onChangeMode(_mode);
+   }
+
    render() {
       return (
          <ul>
             <li>
-               <a
-                  href="/create"
-                  onClick={function(e) {
-                     e.preventDefault();
-                     this.props.onChangeMode("create");
-                  }.bind(this)}
-               >
+               <a href="/create" onClick={this.onChangeMode}>
                   create
                </a>
             </li>
             <li>
-               <a
-                  href="/update"
-                  onClick={function(e) {
-                     e.preventDefault();
-                     this.props.onChangeMode("update");
-                  }.bind(this)}
-               >
+               <a href="/update" onClick={this.onChangeMode}>
                   update
                </a>
             </li>
