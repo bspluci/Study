@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-class App extends Component {
-   id = 1;
-   state = {
-      username: "",
-      password: "",
-      list: [],
-   };
 
-   usernameInput = React.createRef();
+class App extends Component {
+   state = {
+      userid: "",
+      password: "",
+      email: "",
+      disabled: true,
+   };
 
    handleChange = e => {
       const { value, name } = e.target;
@@ -17,53 +16,37 @@ class App extends Component {
       });
    };
 
-   handleInsert = e => {
-      e.preventDefault();
+   isSafe = () => {
+      const { userid, password, email, disabled } = this.state;
+      const passwordMatch = password.indexOf(userid);
 
       this.setState({
-         username: "",
-         password: "",
-         list: this.state.list.concat({
-            username: this.state.username,
-            password: this.state.password,
-            id: this.id,
-         }),
+         disabled: !passwordMatch ? true : false,
       });
-      this.id++;
-      this.usernameInput.current.focus();
-   };
 
-   handleRemove = id => {
-      this.setState({
-         list: this.state.list.filter(item => item.id !== id),
-      });
+      // const passwordMatch = this.state.password.indexOf(this.state.userid);
+      // const emailMatch = this.state.email.indexOf("@");
+      // const alphabet = /(?=.*[a-z])(?=.*[A-Z])/;
+
+      // (this.state.password.length > 5,
+      // alphabet.test(this.state.password),
+      // passwordMatch,
+      // emailMatch)
+      //    ? this.setState({ disabled: false })
+      //    : this.setState({ disabled: true });
    };
 
    render() {
-      const { username, password } = this.state;
+      const { userid, password, email, disabled } = this.state;
       return (
-         <div>
-            <form onSubmit={this.handleInsert}>
-               <input
-                  name="username"
-                  value={username}
-                  onChange={this.handleChange}
-                  ref={this.usernameInput}
-               />
-               <input name="password" value={password} onChange={this.handleChange} />
-               <button type="submit">추가하기</button>
-            </form>
-            <ul>
-               {this.state.list.map(item => {
-                  return (
-                     <li key={item.id}>
-                        {item.username} - {item.password}
-                        <button onClick={() => this.handleRemove(item.id)}>삭제하기</button>
-                     </li>
-                  );
-               })}
-            </ul>
-         </div>
+         <form onChange={this.isSafe}>
+            <input name="userid" value={userid} onChange={this.handleChange}></input>
+            <input name="password" value={password} onChange={this.handleChange}></input>
+            <input name="email" value={email} onChange={this.handleChange}></input>
+            <button type="button" disabled={disabled}>
+               Submit
+            </button>
+         </form>
       );
    }
 }
