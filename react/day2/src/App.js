@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
+
 class App extends Component {
    id = 1;
    state = {
       todos: [],
    };
+
    handleInsert = text => {
       this.setState({
          todos: this.state.todos.concat({
@@ -17,6 +19,7 @@ class App extends Component {
       });
       this.id++;
    };
+
    handleToggle = id => {
       this.setState({
          todos: this.state.todos.map(todo => {
@@ -35,6 +38,7 @@ class App extends Component {
          todos: this.state.todos.filter(todo => todo.id !== id),
       });
    };
+
    render() {
       return (
          <div className="App">
@@ -49,4 +53,5 @@ class App extends Component {
       );
    }
 }
+
 export default App;

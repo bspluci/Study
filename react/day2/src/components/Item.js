@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Item.css";
+
 class Item extends Component {
    shouldComponentUpdate(nextProps, nextState) {
       if (this.props.todo !== nextProps.todo) {
@@ -12,7 +13,10 @@ class Item extends Component {
    render() {
       const { todo, onToggle, onRemove } = this.props;
       return (
-         <div className={`Item ${todo.done && "active"}`} onClick={() => onToggle(todo.id)}>
+         <div
+            className={`Item ${todo.done && "active"}`} //
+            onClick={() => onToggle(todo.id)}
+         >
             <div className="check">&#10004;</div>
             <div
                className="remove"
@@ -28,4 +32,5 @@ class Item extends Component {
       );
    }
 }
+
 export default Item;

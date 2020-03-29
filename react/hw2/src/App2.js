@@ -3,7 +3,7 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 
-class App extends Component {
+class App2 extends Component {
    id = 1;
    state = {
       todos: [],
@@ -15,8 +15,7 @@ class App extends Component {
             text: text,
             id: this.id,
             done: false,
-            rating: ["☆", "☆", "☆", "☆", "☆"],
-            num: 0,
+            rating: [],
          }),
       });
       this.id++;
@@ -44,41 +43,34 @@ class App extends Component {
    };
 
    handleRating = (id, name) => {
-      const fullStar = "★";
-      const emptyStar = "☆";
-
       this.setState({
          todos: this.state.todos.map(todo => {
-            const maxRating = todo.rating.length - 1;
-
             if (todo.id === id) {
                if (name === "plus") {
-                  if (todo.num > maxRating) todo.num = maxRating;
-                  todo.num++;
-                  return {
-                     ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num - 1, 1, fullStar)),
-                  };
+                  if (todo.rating.length < 5) {
+                     return {
+                        ...todo,
+                        rating: todo.rating.concat("★"),
+                     };
+                  } else {
+                     return todo;
+                  }
                }
                if (name === "minus") {
-                  todo.num--;
-                  if (todo.num < 1) todo.num = 0;
                   return {
                      ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num, 1, emptyStar)),
+                     rating: todo.rating.splice(1, todo.rating.length - 1),
                   };
                }
             } else {
                return todo;
             }
-            return todo;
          }),
       });
    };
 
    render() {
       const TYPE = "SONGS";
-
       return (
          <div className="App">
             <h3>LIST OF {TYPE}</h3>
@@ -97,4 +89,4 @@ class App extends Component {
    }
 }
 
-export default App;
+export default App2;

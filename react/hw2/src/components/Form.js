@@ -21,6 +21,9 @@ class Form extends Component {
    };
 
    render() {
+      let regex = /^[AEIOU]/;
+      regex = regex.test(this.props.type[0]);
+
       return (
          <div className="Form">
             <form
@@ -28,10 +31,10 @@ class Form extends Component {
                onSubmit={this.handleSubmit}
             >
                <input
-                  placeholder="something to do?" //
+                  placeholder={`add ${regex ? "a" : "an"} ` + this.props.type} //
                   value={this.state.input}
                   onChange={this.handleChange}
-               />
+               ></input>
                <button type="submit">추가</button>
             </form>
          </div>
