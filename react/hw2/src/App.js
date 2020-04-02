@@ -55,17 +55,21 @@ class App extends Component {
                if (name === "plus") {
                   if (todo.num > maxRating) todo.num = maxRating;
                   todo.num++;
+                  todo.rating.splice(todo.num - 1, 1, fullStar);
+
                   return {
                      ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num - 1, 1, fullStar)),
+                     rating: todo.rating,
                   };
                }
                if (name === "minus") {
                   todo.num--;
+                  todo.rating.splice(todo.num, 1, emptyStar);
+
                   if (todo.num < 1) todo.num = 0;
                   return {
                      ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num, 1, emptyStar)),
+                     rating: todo.rating,
                   };
                }
             } else {

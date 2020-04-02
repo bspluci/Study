@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Item.css";
 
-class Item extends Component {
+class Item2 extends Component {
    shouldComponentUpdate(nextProps, nextState) {
       if (this.props.todo != nextProps.todo) {
          return true;
@@ -50,4 +50,4 @@ class Item extends Component {
    }
 }
 
-export default Item;
+export default Item2;

@@ -15,7 +15,7 @@ class App2 extends Component {
             text: text,
             id: this.id,
             done: false,
-            rating: [],
+            rating: 0,
          }),
       });
       this.id++;
@@ -45,21 +45,23 @@ class App2 extends Component {
    handleRating = (id, name) => {
       this.setState({
          todos: this.state.todos.map(todo => {
+            const maxRating = 10;
+
             if (todo.id === id) {
                if (name === "plus") {
-                  if (todo.rating.length < 5) {
-                     return {
-                        ...todo,
-                        rating: todo.rating.concat("★"),
-                     };
-                  } else {
-                     return todo;
-                  }
-               }
-               if (name === "minus") {
+                  if (todo.rating < maxRating) todo.rating = todo.rating + 1;
+
                   return {
                      ...todo,
-                     rating: todo.rating.splice(1, todo.rating.length - 1),
+                     rating: todo.rating,
+                  };
+               }
+               if (name === "minus") {
+                  if (todo.rating <= 0) todo.rating = 0;
+
+                  return {
+                     ...todo,
+                     rating: todo.rating - 1,
                   };
                }
             } else {
@@ -70,7 +72,8 @@ class App2 extends Component {
    };
 
    render() {
-      const TYPE = "SONGS";
+      const TYPE = "E-MOVIES";
+
       return (
          <div className="App">
             <h3>LIST OF {TYPE}</h3>
