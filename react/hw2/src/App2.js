@@ -3,7 +3,7 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 
-class App2 extends Component {
+class App extends Component {
    id = 1;
    state = {
       todos: [],
@@ -15,7 +15,8 @@ class App2 extends Component {
             text: text,
             id: this.id,
             done: false,
-            rating: [],
+            rating: 0,
+            num: 0,
          }),
       });
       this.id++;
@@ -43,34 +44,44 @@ class App2 extends Component {
    };
 
    handleRating = (id, name) => {
+      const fullStar = "★";
+      const emptyStar = "☆";
+      const increase = 0.1;
+
       this.setState({
          todos: this.state.todos.map(todo => {
+            const maxRating = 10;
+
             if (todo.id === id) {
                if (name === "plus") {
-                  if (todo.rating.length < 5) {
-                     return {
-                        ...todo,
-                        rating: todo.rating.concat("★"),
-                     };
-                  } else {
-                     return todo;
-                  }
-               }
-               if (name === "minus") {
+                  todo.num = todo.num + increase;
+                  if (todo.num > maxRating) todo.num = maxRating;
+
                   return {
                      ...todo,
-                     rating: todo.rating.splice(1, todo.rating.length - 1),
+                     rating: todo.num.toFixed(1),
+                  };
+               }
+               if (name === "minus") {
+                  todo.num = todo.num - increase;
+                  if (todo.num < 0) todo.num = 0;
+
+                  return {
+                     ...todo,
+                     rating: todo.num.toFixed(1),
                   };
                }
             } else {
                return todo;
             }
+            return todo;
          }),
       });
    };
 
    render() {
-      const TYPE = "SONGS";
+      const TYPE = "E_MOVIE";
+
       return (
          <div className="App">
             <h3>LIST OF {TYPE}</h3>
@@ -89,4 +100,4 @@ class App2 extends Component {
    }
 }
 
-export default App2;
+export default App;

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./Item.css";
 
-class Item extends Component {
+class Item2 extends Component {
    shouldComponentUpdate(nextProps, nextState) {
-      if (this.props.todo != nextProps.todo) {
+      if (this.props.todo !== nextProps.todo) {
          return true;
       } else {
          return false;
@@ -11,10 +11,13 @@ class Item extends Component {
    }
 
    render() {
-      const { todo, onRemove, numRatign } = this.props;
+      const { todo, onRemove, numRatign, onToggle } = this.props;
 
       return (
-         <div className="Item">
+         <div
+            className={`Item ${todo.done && "active"}`} //
+            onClick={() => onToggle(todo.id)}
+         >
             <div className="check">&#10004;</div>
             <div
                className="remove" //
@@ -50,4 +53,4 @@ class Item extends Component {
    }
 }
 
-export default Item;
+export default Item2;

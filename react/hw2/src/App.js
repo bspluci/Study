@@ -46,6 +46,7 @@ class App extends Component {
    handleRating = (id, name) => {
       const fullStar = "★";
       const emptyStar = "☆";
+      const increase = 1;
 
       this.setState({
          todos: this.state.todos.map(todo => {
@@ -54,18 +55,22 @@ class App extends Component {
             if (todo.id === id) {
                if (name === "plus") {
                   if (todo.num > maxRating) todo.num = maxRating;
-                  todo.num++;
+                  todo.num = todo.num + increase;
+                  todo.rating.splice(todo.num - 1, 1, fullStar);
+
                   return {
                      ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num - 1, 1, fullStar)),
+                     rating: todo.rating,
                   };
                }
                if (name === "minus") {
-                  todo.num--;
+                  todo.num = todo.num - increase;
                   if (todo.num < 1) todo.num = 0;
+                  todo.rating.splice(todo.num, 1, emptyStar);
+
                   return {
                      ...todo,
-                     rating: todo.rating.splice(todo.rating.splice(todo.num, 1, emptyStar)),
+                     rating: todo.rating,
                   };
                }
             } else {

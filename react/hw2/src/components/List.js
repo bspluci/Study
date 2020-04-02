@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./List.css";
 import Item from "./Item";
+import Item2 from "./Item2";
 
 class List extends Component {
    render() {
@@ -10,7 +11,7 @@ class List extends Component {
          <div className="List">
             {todos.map(todo => {
                return (
-                  <Item
+                  <Item2
                      key={todo.id}
                      todo={todo}
                      onToggle={onToggle}

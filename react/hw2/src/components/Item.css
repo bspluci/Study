@@ -22,10 +22,10 @@
    margin-bottom: 0;
 }
 
-.Item.active {
+/* .Item.active {
    text-decoration: line-through;
    color: #dda0dd;
-}
+} */
 
 .Item.active .check {
    opacity: 0.8;
