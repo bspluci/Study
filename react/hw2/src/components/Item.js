@@ -11,8 +11,10 @@ class Item extends Component {
    }
 
    render() {
-      const { todo, onRemove, numRatign } = this.props;
-
+      const { todo, onRemove, numRatign, editScore } = this.props;
+      let rating = ["☆", "☆", "☆", "☆", "☆"];
+      rating.splice(todo.score, 1, "★");
+      console.log(rating);
       return (
          <div className="Item">
             <div className="check">&#10004;</div>
@@ -27,23 +29,17 @@ class Item extends Component {
             </div>
             <div
                className="plus" //
-               onClick={e => {
-                  e.stopPropagation();
-                  numRatign(todo.id, e.target.className);
-               }}
+               onClick={editScore(todo.id, 1)}
             >
                [+]
             </div>
             <div
                className="minus" //
-               onClick={e => {
-                  e.stopPropagation();
-                  numRatign(todo.id, e.target.className);
-               }}
+               onClick={editScore(todo.id, -1)}
             >
                [-]
             </div>
-            <div className="star">{todo.rating}</div>
+            <div className="star">{rating}</div>
             <div className="text">{todo.text}</div>
          </div>
       );

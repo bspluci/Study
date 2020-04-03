@@ -15,8 +15,7 @@ class App extends Component {
             text: text,
             id: this.id,
             done: false,
-            rating: ["☆", "☆", "☆", "☆", "☆"],
-            num: 0,
+            score: 0,
          }),
       });
       this.id++;
@@ -43,43 +42,64 @@ class App extends Component {
       });
    };
 
-   handleRating = (id, name) => {
-      const fullStar = "★";
-      const emptyStar = "☆";
-      const increase = 1;
-
+   editScore = (id, sign) => e => {
+      e.stopPropagation();
       this.setState({
-         todos: this.state.todos.map(todo => {
-            const maxRating = todo.rating.length - 1;
+         todos: this.state.todos.map(item => {
+            if (item.id === id) {
+               const scoreStep = 1;
+               const minScore = 0;
+               const maxScore = 5;
+               let newScore = item.score + sign * scoreStep;
 
-            if (todo.id === id) {
-               if (name === "plus") {
-                  if (todo.num > maxRating) todo.num = maxRating;
-                  todo.num = todo.num + increase;
-                  todo.rating.splice(todo.num - 1, 1, fullStar);
-
+               if (minScore <= newScore && newScore <= maxScore)
                   return {
-                     ...todo,
-                     rating: todo.rating,
+                     ...item,
+                     score: newScore,
                   };
-               }
-               if (name === "minus") {
-                  todo.num = todo.num - increase;
-                  if (todo.num < 1) todo.num = 0;
-                  todo.rating.splice(todo.num, 1, emptyStar);
-
-                  return {
-                     ...todo,
-                     rating: todo.rating,
-                  };
-               }
-            } else {
-               return todo;
             }
-            return todo;
+            return item;
          }),
       });
    };
+
+   // handleRating = (id, name) => {
+   //    const fullStar = "★";
+   //    const emptyStar = "☆";
+   //    const increase = 1;
+
+   //    this.setState({
+   //       todos: this.state.todos.map(todo => {
+   //          const maxRating = todo.rating.length - 1;
+
+   //          if (todo.id === id) {
+   //             if (name === "plus") {
+   //                if (todo.num > maxRating) todo.num = maxRating;
+   //                todo.num = todo.num + increase;
+   //                todo.rating.splice(todo.num - 1, 1, fullStar);
+
+   //                return {
+   //                   ...todo,
+   //                   rating: todo.rating,
+   //                };
+   //             }
+   //             if (name === "minus") {
+   //                todo.num = todo.num - increase;
+   //                if (todo.num < 1) todo.num = 0;
+   //                todo.rating.splice(todo.num, 1, emptyStar);
+
+   //                return {
+   //                   ...todo,
+   //                   rating: todo.rating,
+   //                };
+   //             }
+   //          } else {
+   //             return todo;
+   //          }
+   //          return todo;
+   //       }),
+   //    });
+   // };
 
    render() {
       const TYPE = "SONGS";
@@ -95,7 +115,8 @@ class App extends Component {
                todos={this.state.todos} //
                onToggle={this.handleToggle}
                onRemove={this.handleRemove}
-               numRatign={this.handleRating}
+               // numRatign={this.handleRating}
+               editScore={this.editScore}
             />
          </div>
       );
