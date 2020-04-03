@@ -3,7 +3,7 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 
-class App2 extends Component {
+class App extends Component {
    id = 1;
    state = {
       todos: [],
@@ -100,4 +100,4 @@ class App2 extends Component {
    }
 }
 
-export default App2;
+export default App;
