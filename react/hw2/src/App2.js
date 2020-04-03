@@ -16,6 +16,7 @@ class App2 extends Component {
             id: this.id,
             done: false,
             rating: 0,
+            num: 0,
          }),
       });
       this.id++;
@@ -43,36 +44,43 @@ class App2 extends Component {
    };
 
    handleRating = (id, name) => {
+      const fullStar = "★";
+      const emptyStar = "☆";
+      const increase = 0.1;
+
       this.setState({
          todos: this.state.todos.map(todo => {
             const maxRating = 10;
 
             if (todo.id === id) {
                if (name === "plus") {
-                  if (todo.rating < maxRating) todo.rating = todo.rating + 1;
+                  todo.num = todo.num + increase;
+                  if (todo.num > maxRating) todo.num = maxRating;
 
                   return {
                      ...todo,
-                     rating: todo.rating,
+                     rating: todo.num.toFixed(1),
                   };
                }
                if (name === "minus") {
-                  if (todo.rating <= 0) todo.rating = 0;
+                  todo.num = todo.num - increase;
+                  if (todo.num < 0) todo.num = 0;
 
                   return {
                      ...todo,
-                     rating: todo.rating - 1,
+                     rating: todo.num.toFixed(1),
                   };
                }
             } else {
                return todo;
             }
+            return todo;
          }),
       });
    };
 
    render() {
-      const TYPE = "E-MOVIES";
+      const TYPE = "E_MOVIE";
 
       return (
          <div className="App">
