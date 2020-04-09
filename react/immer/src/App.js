@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import produce from "immer";
-// import "./styles.css";
 
 class App extends Component {
    id = 2;
