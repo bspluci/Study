@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import SassComponent from "./SassComponent";
+import Button from "./components/Button/Button";
 
 class App extends Component {
    render() {
-      return <SassComponent />;
+      return (
+         <div>
+            <Button />
+         </div>
+      );
    }
 }
 
