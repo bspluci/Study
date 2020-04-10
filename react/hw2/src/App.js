@@ -9,7 +9,7 @@ class App extends Component {
       todos: [],
    };
 
-   handleInsert = text => {
+   handleInsert = (text) => {
       this.setState({
          todos: this.state.todos.concat({
             text: text,
@@ -21,9 +21,9 @@ class App extends Component {
       this.id++;
    };
 
-   handleToggle = id => {
+   handleToggle = (id) => {
       this.setState({
-         todos: this.state.todos.map(todo => {
+         todos: this.state.todos.map((todo) => {
             if (todo.id === id) {
                return {
                   ...todo,
@@ -36,20 +36,20 @@ class App extends Component {
       });
    };
 
-   handleRemove = id => {
+   handleRemove = (id) => {
       this.setState({
-         todos: this.state.todos.filter(todo => todo.id !== id),
+         todos: this.state.todos.filter((todo) => todo.id !== id),
       });
    };
 
-   editScore = (id, sign) => e => {
+   editScore = (id, sign) => (e) => {
       e.stopPropagation();
       this.setState({
-         todos: this.state.todos.map(item => {
+         todos: this.state.todos.map((item) => {
             if (item.id === id) {
                const scoreStep = 1;
                const minScore = 0;
-               const maxScore = 5;
+               const maxScore = 4;
                let newScore = item.score + sign * scoreStep;
 
                if (minScore <= newScore && newScore <= maxScore)

@@ -6,13 +6,13 @@ class Form extends Component {
       input: "",
    };
 
-   handleChange = e => {
+   handleChange = (e) => {
       this.setState({
          input: e.target.value,
       });
    };
 
-   handleSubmit = e => {
+   handleSubmit = (e) => {
       e.preventDefault();
       this.props.onInsert(this.state.input);
       this.setState({

@@ -14,13 +14,13 @@ class Item extends Component {
       const { todo, onRemove, numRatign, editScore } = this.props;
       let rating = ["☆", "☆", "☆", "☆", "☆"];
       rating.splice(todo.score, 1, "★");
-      console.log(rating);
+
       return (
          <div className="Item">
             <div className="check">&#10004;</div>
             <div
                className="remove" //
-               onClick={e => {
+               onClick={(e) => {
                   e.stopPropagation();
                   onRemove(todo.id);
                }}
