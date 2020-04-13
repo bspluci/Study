@@ -32,7 +32,7 @@ class App extends Component {
    };
 
    render() {
-      const { range } = this.state;
+      const { range, leagueId } = this.state;
 
       return (
          <div>
