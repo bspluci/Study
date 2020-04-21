@@ -20,7 +20,7 @@ export default handleActions(
    {
       [INCREMENT]: (state, action) => ({
          ...state,
-         number: state.number + action.payload,
+         number: state.number + 1,
       }),
       [DECREMENT]: (state, action) => ({
          ...state,
