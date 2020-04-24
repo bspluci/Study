@@ -4,6 +4,7 @@ import "./Counter.css";
 class Counter extends Component {
    render() {
       const { color, number, increment, decrement } = this.props;
+
       return (
          <div className="Counter">
             <h1 style={{ color: color }}>{number}</h1>
