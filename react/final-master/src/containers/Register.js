@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AuthModal from "../components/auth/AuthModal";
 import { connect } from "react-redux";
-import { changeInput, resetForm } from "../store/modules/auth";
+import { changeInput, resetForm, registerThunk } from "../store/modules/auth";
 
 class Register extends Component {
    handleChange = (e) => {
@@ -11,8 +11,11 @@ class Register extends Component {
 
    handleSubmit = (e) => {
       e.preventDefault();
+      const { username, password } = this.props.form;
+      this.props.registerThunk({ username, password });
       this.props.resetForm("register");
    };
+
    render() {
       return (
          <AuthModal
@@ -29,9 +32,10 @@ const mapStateToProps = (state) => ({
    register: state.auth.register,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = {
    changeInput,
    resetForm,
-});
+   registerThunk,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

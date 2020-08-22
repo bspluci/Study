@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import AuthModal from '../components/auth/AuthModal';
+import React, { Component } from "react";
+import Login from "../containers/Login";
 
 class LoginPage extends Component {
-	render() {
-		return <AuthModal type="login" />;
-	}
+   render() {
+      return <Login />;
+   }
 }
 
 export default LoginPage;
