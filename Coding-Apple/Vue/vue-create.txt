@@ -1,0 +1,4 @@
+vue create test 
+yarn global add @vue/cli
+yarn sever
+yarn add bootstrap-vue
