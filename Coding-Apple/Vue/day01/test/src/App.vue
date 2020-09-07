@@ -9,7 +9,14 @@
                <div class="col-md-6 mt-5">
                   <h4>{{ rooms[clickNum].title }}</h4>
                   <p>상품가격 : {{ rooms[clickNum].price }}</p>
-                  <input type="range" class="form-control-range" min="1" max="12" v-modal="month" />
+                  <input
+                     type="range"
+                     class="form-control-range"
+                     min="1"
+                     max="12"
+                     v-modal="month"
+                     v-on:change="rangeMonth"
+                  />
                   <p>선택한 개월 수 : {{ month }}</p>
                   <p>총액 : {{}}</p>
 
@@ -24,9 +31,9 @@
          <div class="row">
             <div class="col-md-2">
                <ul>
-                  <li v-on:click="clickSortHandler()">가격순 정렬</li>
-                  <li>가나다순정렬</li>
-                  <li v-on:click="sortBack()">다시원래대로</li>
+                  <li v-on:click="clickSortHandler">가격순 정렬</li>
+                  <li v-on:click="clickSortSpelling">가나다순정렬</li>
+                  <li v-on:click="clickSortBack">다시원래대로</li>
                </ul>
             </div>
             <div class="col-md-10">
@@ -63,7 +70,7 @@ export default {
          openModal: false,
          hi: "안녕",
          rooms: Data,
-         roomsCopy: Data,
+         roomsCopy: [...Data],
          //  블로그글: "강남역 추천 맛집",
          //  블로그글2: "남자옷 추천",
          //  블로그글들: ["글1", "글2", "글3"],
@@ -93,12 +100,20 @@ export default {
             return a.price - b.price;
          });
       },
-      sortBack() {
+      clickSortSpelling() {
+         this.rooms.sort(function(a, b) {
+            return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+         });
+      },
+      clickSortBack() {
          this.rooms = [...this.roomsCopy]; // 자바스크립트 레퍼런스 데이터타입
       },
       showModal(i) {
          this.openModal = !this.openModal;
          this.clickNum = i;
+      },
+      rangeMonth() {
+         console.log(this.month);
       },
    },
 };
@@ -134,12 +149,13 @@ export default {
 
 /* 퇴장animation */
 .fade-leave {
-   transform: rotate(0);
+   transform: translateY(0);
 }
 .fade-leave-to {
-   transform: rotate(360deg);
+   transform: translateY(300px);
 }
 .fade-leave-active {
+   opacity: 0;
    transition: all 0.5s;
 }
 </style>
