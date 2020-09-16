@@ -10,7 +10,7 @@
                <nav>
                   <router-link to="/">Home</router-link>
                   <router-link to="/Project">Project</router-link>
-                  <router-link to="/Detail/2">Detail</router-link>
+                  <router-link to="/Detail/1">Detail</router-link>
                </nav>
 
                <!-- Right aligned nav items -->
@@ -41,6 +41,7 @@
       </div>
       <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
       <button v-on:click="$router.push('/Detail/1')">버튼</button>
+      <button v-on:click="$router.push('/Detail/2')">버튼</button>
       <Router-view :posts="posts" />
    </div>
 </template>

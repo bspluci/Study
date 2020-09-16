@@ -11,14 +11,14 @@
                   <p>상품가격 : {{ rooms[clickNum].price }}</p>
                   <input
                      type="range"
-                     class="form-control-range"
+                     class="form-control-range range_bar"
                      min="1"
                      max="12"
-                     v-modal="month"
+                     v-model="month"
                      v-on:change="rangeMonth"
                   />
-                  <p>선택한 개월 수 : {{ month }}</p>
-                  <p>총액 : {{}}</p>
+                  <p>선택한 개월 수 : {{ month }}개월</p>
+                  <p>총액 : {{ allPrice }}원</p>
 
                   <button>주문하기</button>
                   <button v-on:click="openModal = false">닫기</button>
@@ -65,7 +65,8 @@ export default {
    name: "App",
    data() {
       return {
-         month: 0,
+         month: 1,
+         allPrice: 0,
          clickNum: 1,
          openModal: false,
          hi: "안녕",
@@ -111,9 +112,13 @@ export default {
       showModal(i) {
          this.openModal = !this.openModal;
          this.clickNum = i;
+         this.allPrice = this.rooms[this.clickNum].price;
       },
       rangeMonth() {
-         console.log(this.month);
+         var allPrice = this.month * this.rooms[this.clickNum].price;
+         allPrice = allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+         this.allPrice = allPrice;
       },
    },
 };
