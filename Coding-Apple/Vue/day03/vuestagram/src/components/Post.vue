@@ -21,7 +21,7 @@
 <script>
 export default {
    props: {
-      Postings: Array,
+      Postings: Object,
    },
    data() {
       return {};

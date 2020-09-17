@@ -30,6 +30,7 @@ export default {
    name: "App",
    data() {
       return {
+         Tab: 0,
          Postings: Postdata,
       };
    },
