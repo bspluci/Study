@@ -1,22 +1,25 @@
 <template>
    <div id="app">
       <div class="header">
-         <ul class="header-button-left">
-            <li>Cancel</li>
+         <ul v-if="step > 0" class="header-button-left">
+            <li v-on:click="step--">Cancel</li>
          </ul>
-
-         <ul class="header-button-right">
-            <li>Next</li>
+         <ul v-if="step == 1" class="header-button-right">
+            <li v-on:click="step++">Next</li>
+         </ul>
+         <ul v-if="step == 2" class="header-button-right">
+            <li v-on:click="publish">Publish</li>
          </ul>
 
          <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <Body :Postings="Postings" />
+      <Body v-on:textwrite="textWrite = $event" :Postings="Postings" :step="step" :imgsrc="imgsrc" />
 
       <div class="footer">
          <ul class="footer-button-plus">
-            <li>+</li>
+            <input v-on:change="upload" type="file" id="file" class="inputfile" />
+            <label for="file" class="input-plus">+</label>
          </ul>
       </div>
    </div>
@@ -30,14 +33,45 @@ export default {
    name: "App",
    data() {
       return {
-         Tab: 0,
+         step: 0,
+         imgsrc: "",
          Postings: Postdata,
+         textData: "",
+         textWrite: "",
       };
    },
    components: {
       Body: Body,
    },
-   methods: {},
+   methods: {
+      upload(e) {
+         this.step = this.step + 1;
+
+         let file = e.target.files;
+         let reader = new FileReader();
+         reader.readAsDataURL(file[0]);
+         reader.onload = (e) => {
+            this.imgsrc = e.target.result;
+         };
+      },
+      publish() {
+         this.step = 0;
+
+         var objectData = {
+            name: "myName",
+            userImage: "https://placeimg.com/100/100/arch",
+            postImage: this.imgsrc,
+            likes: 0,
+            date: "May 15",
+            liked: false,
+            caption: this.textWrite,
+            filter: "perpetua",
+         };
+         // this.Postings.push(); 배열 뒤에 추가
+         this.Postings.unshift(objectData); //배열 앞에 추가
+         this.textWrite = "";
+      },
+   },
 };
 </script>
 
