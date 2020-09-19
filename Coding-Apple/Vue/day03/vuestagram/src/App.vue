@@ -14,14 +14,20 @@
          <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <Body :newFilter="newFilter" v-on:textwrite="textWrite = $event" :Postings="Postings" :step="step" :imgsrc="imgsrc" />
+      <Body
+         :newFilter="newFilter"
+         v-on:textwrite="textWrite = $event"
+         :Postings="Postings"
+         :step="step"
+         :imgsrc="imgsrc"
+      />
 
       <button v-on:click="showMore">더보기</button>
       <p>{{ $store.state.이름 }}</p>
       <p>{{ $store.getters.getAge }}</p>
       <!-- <button v-on:click=" $store.state.이름 = 'park' ">버튼</button> -->
-      <button v-on:click=" $store.commit('changeName', '김씨') ">버튼</button>
-      <button v-on:click=" $store.commit('agePlus') ">나이++</button>
+      <button v-on:click="$store.commit('changeName', '김씨')">버튼</button>
+      <button v-on:click="$store.commit('agePlus')">나이++</button>
 
       <div class="footer">
          <ul class="footer-button-plus">
@@ -34,30 +40,35 @@
 
 <script>
 import Body from "./components/Body.vue";
-import Postdata from "./assets/postdata.js"; 
-import EventBus from "./bus.js"; 
-import axios from 'axios'; 
-   
-export default {  
-   name: "App",   
-   data() { 
-      return { 
-         step: 0, 
-         imgsrc: "", 
-         Postings: Postdata,  
-         textData: "",  
-         textWrite: "", 
-         newFilter: "", 
-      }; 
-   }, 
-   components: {  
-      Body: Body, 
-   }, 
-   methods: {  
-      showMore(){
-         axios.get('https://yogoho210.github.io/postdata2.json')
-         .then( (a) => {this.Postings.push(a.data)})
-         .catch( ()=>{console.log('에러났어요')} );
+import Postdata from "./assets/postdata.js";
+import EventBus from "./bus.js";
+import axios from "axios";
+
+export default {
+   name: "App",
+   data() {
+      return {
+         step: 0,
+         imgsrc: "",
+         Postings: Postdata,
+         textData: "",
+         textWrite: "",
+         newFilter: "",
+      };
+   },
+   components: {
+      Body: Body,
+   },
+   methods: {
+      showMore() {
+         axios
+            .get("https://yogoho210.github.io/postdata2.json")
+            .then((a) => {
+               this.Postings.push(a.data);
+            })
+            .catch(() => {
+               console.log("에러났어요");
+            });
       },
       upload(e) {
          this.step = this.step + 1;
@@ -80,15 +91,15 @@ export default {
             date: "May 15",
             liked: false,
             caption: this.textWrite,
-            filter: 'normal',
+            filter: "normal",
          };
          // this.Postings.push(); 배열 뒤에 추가
          this.Postings.unshift(objectData); //배열 앞에 추가
          this.textWrite = "";
       },
    },
-   mounted(){
-      EventBus.$on('sa', (data)=>{
+   mounted() {
+      EventBus.$on("sa", (data) => {
          this.newFilter = data;
       });
    },
