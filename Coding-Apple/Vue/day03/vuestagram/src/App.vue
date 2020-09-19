@@ -17,6 +17,11 @@
       <Body :newFilter="newFilter" v-on:textwrite="textWrite = $event" :Postings="Postings" :step="step" :imgsrc="imgsrc" />
 
       <button v-on:click="showMore">더보기</button>
+      <p>{{ $store.state.이름 }}</p>
+      <p>{{ $store.getters.getAge }}</p>
+      <!-- <button v-on:click=" $store.state.이름 = 'park' ">버튼</button> -->
+      <button v-on:click=" $store.commit('changeName', '김씨') ">버튼</button>
+      <button v-on:click=" $store.commit('agePlus') ">나이++</button>
 
       <div class="footer">
          <ul class="footer-button-plus">
@@ -29,26 +34,26 @@
 
 <script>
 import Body from "./components/Body.vue";
-import Postdata from "./assets/postdata.js";
-import EventBus from "./bus.js";
-import axios from 'axios';
-
-export default {
-   name: "App",
-   data() {
-      return {
-         step: 0,
-         imgsrc: "",
-         Postings: Postdata,
-         textData: "",
-         textWrite: "",
-         newFilter: "",
-      };
-   },
-   components: {
-      Body: Body,
-   },
-   methods: {
+import Postdata from "./assets/postdata.js"; 
+import EventBus from "./bus.js"; 
+import axios from 'axios'; 
+   
+export default {  
+   name: "App",   
+   data() { 
+      return { 
+         step: 0, 
+         imgsrc: "", 
+         Postings: Postdata,  
+         textData: "",  
+         textWrite: "", 
+         newFilter: "", 
+      }; 
+   }, 
+   components: {  
+      Body: Body, 
+   }, 
+   methods: {  
       showMore(){
          axios.get('https://yogoho210.github.io/postdata2.json')
          .then( (a) => {this.Postings.push(a.data)})

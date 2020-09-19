@@ -1,5 +1,7 @@
 <template>
-   <div v-on:click="filterClick" :class="`filter-item ${filterName}`" :style="`background-image:url(${imgsrc})`"></div>
+   <div v-on:click="filterClick" :class="`filter-item ${filterName}`" :style="`background-image:url(${imgsrc})`">
+      <slot></slot>
+   </div>
 </template>
 
 <script>
