@@ -14,7 +14,9 @@
          <img src="./assets/logo.png" class="logo" />
       </div>
 
-      <Body v-on:textwrite="textWrite = $event" :Postings="Postings" :step="step" :imgsrc="imgsrc" />
+      <Body :newFilter="newFilter" v-on:textwrite="textWrite = $event" :Postings="Postings" :step="step" :imgsrc="imgsrc" />
+
+      <button v-on:click="showMore">더보기</button>
 
       <div class="footer">
          <ul class="footer-button-plus">
@@ -28,6 +30,8 @@
 <script>
 import Body from "./components/Body.vue";
 import Postdata from "./assets/postdata.js";
+import EventBus from "./bus.js";
+import axios from 'axios';
 
 export default {
    name: "App",
@@ -38,12 +42,18 @@ export default {
          Postings: Postdata,
          textData: "",
          textWrite: "",
+         newFilter: "",
       };
    },
    components: {
       Body: Body,
    },
    methods: {
+      showMore(){
+         axios.get('https://yogoho210.github.io/postdata2.json')
+         .then( (a) => {this.Postings.push(a.data)})
+         .catch( ()=>{console.log('에러났어요')} );
+      },
       upload(e) {
          this.step = this.step + 1;
 
@@ -65,12 +75,17 @@ export default {
             date: "May 15",
             liked: false,
             caption: this.textWrite,
-            filter: "perpetua",
+            filter: 'normal',
          };
          // this.Postings.push(); 배열 뒤에 추가
          this.Postings.unshift(objectData); //배열 앞에 추가
          this.textWrite = "";
       },
+   },
+   mounted(){
+      EventBus.$on('sa', (data)=>{
+         this.newFilter = data;
+      });
    },
 };
 </script>
