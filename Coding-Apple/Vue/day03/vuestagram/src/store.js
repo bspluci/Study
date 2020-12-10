@@ -6,20 +6,20 @@ Vue.use(Vuex);
 
 export let store = new Vuex.Store({
    state: {
-      이름: "John",
-      나이: 30,
+      name: "John",
+      age: 30,
    },
    getters: {
       getAge(state) {
-         return state.나이;
+         return state.age;
       },
    }, // 데이터 꺼내는 법 (함수)
    mutations: {
       changeName(state, data) {
-         state.이름 = data;
+         state.name = data;
       },
       agePlus(state) {
-         state.나이++;
+         state.age++;
       },
    }, // 데이터 수정하는 (함수)
    actions: {

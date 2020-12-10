@@ -5,10 +5,10 @@
          <span class="profile-name">{{ Postings.name }}</span>
       </div>
 
-      <div class="post-body" :style="`background-image:url(${Postings.postImage})`"></div>
+      <div :class="`post-body ${Postings.filter}`" :style="`background-image:url(${Postings.postImage})`"></div>
 
       <div class="post-content">
-         <p>43 Likes</p>
+         <button v-on:click="likeCounter">{{ Postings.likes }} Likes</button>
          <p>
             <strong>{{ Postings.name }}</strong>
             {{ Postings.caption }}
@@ -19,12 +19,21 @@
 </template>
 
 <script>
+import EventBus from "./../bus.js";
+
 export default {
    props: {
       Postings: Object,
+      newFilter: String,
+      num: Number,
    },
    data() {
       return {};
+   },
+   methods: {
+      likeCounter() {
+         EventBus.$emit("cont", 1, this.num);
+      },
    },
 };
 </script>

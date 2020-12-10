@@ -23,11 +23,11 @@
       />
 
       <button v-on:click="showMore">더보기</button>
-      <p>{{ $store.state.이름 }}</p>
-      <p>{{ $store.getters.getAge }}</p>
+      <p>{{ $store.state.name }}</p>
+      <p>{{ $store.state.age }}</p>
       <!-- <button v-on:click=" $store.state.이름 = 'park' ">버튼</button> -->
       <button v-on:click="$store.commit('changeName', '김씨')">버튼</button>
-      <button v-on:click="$store.commit('agePlus')">나이++</button>
+      <button v-on:click="$store.commit('agePlus')">나이+</button>
 
       <div class="footer">
          <ul class="footer-button-plus">
@@ -35,6 +35,7 @@
             <label for="file" class="input-plus">+</label>
          </ul>
       </div>
+      <p>{{ trans }}</p>
    </div>
 </template>
 
@@ -54,6 +55,7 @@ export default {
          textData: "",
          textWrite: "",
          newFilter: "",
+         trans: "",
       };
    },
    components: {
@@ -91,7 +93,7 @@ export default {
             date: "May 15",
             liked: false,
             caption: this.textWrite,
-            filter: "normal",
+            filter: this.newFilter,
          };
          // this.Postings.push(); 배열 뒤에 추가
          this.Postings.unshift(objectData); //배열 앞에 추가
@@ -101,6 +103,12 @@ export default {
    mounted() {
       EventBus.$on("sa", (data) => {
          this.newFilter = data;
+      });
+      EventBus.$on("tran", (data) => {
+         this.trans = data;
+      });
+      EventBus.$on("cont", (data, num) => {
+         this.Postings[num].likes = this.Postings[num].likes + data;
       });
    },
 };

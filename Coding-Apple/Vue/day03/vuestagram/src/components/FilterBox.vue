@@ -1,6 +1,8 @@
 <template>
-   <div v-on:click="filterClick" :class="`filter-item ${filterName}`" :style="`background-image:url(${imgsrc})`">
-      <slot></slot>
+   <div>
+      <div v-on:click="filterClick" :class="`filter-item ${filterName}`" :style="`background-image:url(${imgsrc})`">
+         <slot></slot>
+      </div>
    </div>
 </template>
 
@@ -30,5 +32,6 @@ export default {
    color: white;
    background-size: cover;
    background-position: center;
+   border: 1px solid #000;
 }
 </style>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta charset="UTF-8" />
+      <title>Document</title>
+
+      <link rel="stylesheet" href="../css/reset.css" />
+
+      <script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript" src="../js/jquery.ui.touch-punch.min.js"></script>
+
+      <style>
+         .drop_zone {
+            position: relative;
+         }
+         .drop_zone > .snap {
+            display: block;
+            position: absolute;
+            z-index: -1;
+         }
+         .drop_zone > .snap.snap0 {
+            top: 34%;
+            left: 53.7%;
+            background: #ddd;
+         }
+         .drop_zone > .snap.snap1 {
+            top: 23.3%;
+            left: 0.7%;
+            background: #cdcd;
+         }
+         .drop_zone > .snap.snap2 {
+            top: 23.2%;
+            left: 40.7%;
+            background: #ecdd;
+         }
+         .drag_wrap {
+            max-width: 658px;
+            height: 600px;
+            margin: 0 auto;
+         }
+         .drop_zone > img {
+            width: 100%;
+         }
+         @media screen and (max-width: 658px) {
+            .drag_zone > img.drag_img1 {
+               width: calc((211vw / 658) * 100);
+            }
+            .drag_zone > img.drag_img2 {
+               width: calc((127vw / 658) * 100);
+            }
+            .drag_zone > img.drag_img3 {
+               width: calc((127vw / 658) * 100);
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="drag_wrap">
+         <div class="drop_zone">
+            <img src="../images/bg.png" class="drop_img" />
+            <span class="snap snap0"></span>
+            <span class="snap snap1"></span>
+            <span class="snap snap2"></span>
+         </div>
+         <div class="drag_zone">
+            <img src="../images/p1.png" class="drag_img drag_img1" />
+            <img src="../images/p2.png" class="drag_img drag_img2" />
+            <img src="../images/p3.png" class="drag_img drag_img3" />
+         </div>
+      </div>
+      <button class="submit">제출하기</button>
+
+      <script>
+         $(function () {
+            // 스냅의 넓이와 높이를 퍼즐 이미지의 넓이와 높이로 맞춤
+            function snapSize() {
+               for (i = 0; i < $(".snap").length; i++) {
+                  var dragImg = $(".drag_img").eq(i);
+
+                  $(".snap").eq(i).css({
+                     width: dragImg.width(),
+                     height: dragImg.height(),
+                  });
+               }
+            }
+
+            snapSize();
+
+            var currentPuzzle = [false, false, false]; // 퍼즐이 맞춰졌는지 확인되는 배열
+
+            function puzzleDragEvent(target, snap) {
+               target.draggable({
+                  containment: ".drag_wrap",
+                  scroll: false,
+                  snapMode: "inner",
+                  snap: snap,
+                  drag: function (event, ui) {
+                     var draggable = $(this).data("ui-draggable");
+                     var i = $(this).index();
+                     var targetTop = target.context.offsetTop; // 이미지 탑 위치값
+                     var targetLeft = target.context.offsetLeft; // 이미지 레프트 위치값
+                     var snapTop = $(".snap").eq(i)[0].offsetTop + $(".drop_zone")[0].offsetTop; // 스냅 탑 위치값(전체 높이만큼 위쪽 여백을 더한값)
+                     var snapLeft = $(".snap").eq(i)[0].offsetLeft + $(".drop_zone")[0].offsetLeft; // 스냅 레프트 위치값(전체 넓이만큼 왼쪽 여백을 더한값)
+
+                     $.each(draggable, function () {
+                        // 이미지 탑 과 스냅 탑 비교(오차범위 5)
+                        if (targetTop === snapTop || (targetTop - snapTop < 5 && targetTop - snapTop > -5)) {
+                           // 이미지 레프트 와 스냅 레프트 비교(오차범위 5)
+                           if (targetLeft === snapLeft || (targetLeft - snapLeft < 5 && targetLeft - snapLeft > -5)) {
+                              currentPuzzle[i] = true;
+                           } else {
+                              currentPuzzle[i] = false;
+                           }
+                        } else {
+                           currentPuzzle[i] = false;
+                        }
+                     });
+                  },
+                  // snapped: function (event, ui) {},
+               });
+            }
+
+            // 퍼즐 이미지 드래그함수 실행
+            function puzzle() {
+               $(".drag_img").each(function () {
+                  var i = $(this).index();
+
+                  puzzleDragEvent($(this), ".snap" + i + "");
+               });
+            }
+
+            puzzle();
+
+            // 완료버튼 클릭 이벤트
+            $(".submit").click(function () {
+               for (i in currentPuzzle) {
+                  if (!currentPuzzle[i]) {
+                     alert("퍼즐을 확인해 주세요.");
+                     return false;
+                  }
+               }
+
+               alert("제출을 완료했습니다.");
+            });
+
+            $(window).resize(function () {
+               currentPuzzle = [false, false, false];
+               puzzle();
+               snapSize();
+            });
+         });
+      </script>
+   </body>
+</html>

@@ -1,20 +1,21 @@
 <template>
    <div class="body">
       <div v-if="step == 0">
-         <Post :Postings="Postings[i]" v-for="(as, i) in Postings" v-bind:key="i" />
+         <Post :Postings="Postings[i]" v-for="(as, i) in Postings" v-bind:key="i" :newFilter="newFilter" :num="i" />
       </div>
 
       <div v-if="step == 1">
          <div :class="`upload-image ${newFilter}`" :style="`background-image:url( ${imgsrc} )`"></div>
          <div class="filters">
             <FilterBox :filterName="filterName[i]" v-for="(as, i) in filterName" :key="i" :imgsrc="imgsrc">
-               <p>{{ filterName[i] }}</p>
+               <p class="filterTitle">{{ filterName[i] }}</p>
             </FilterBox>
          </div>
+         <button v-on:click="translate" value="넘어가쪄">aaaaaaaaaaaaaaaaaa</button>
       </div>
 
       <div v-if="step == 2">
-         <div class="upload-image"></div>
+         <div :class="`upload-image ${newFilter}`" :style="`background-image:url( ${imgsrc} )`"></div>
          <div class="write">
             <textarea v-on:input="$emit('textwrite', $event.target.value)" class="write-box">write!</textarea>
          </div>
@@ -24,6 +25,7 @@
 
 <script>
 import Post from "./Post.vue";
+import EventBus from "./../bus.js";
 import FilterBox from "./FilterBox.vue";
 
 export default {
@@ -62,6 +64,11 @@ export default {
          ],
       };
    },
+   methods: {
+      translate(e) {
+         EventBus.$emit("tran", e.target.value);
+      },
+   },
 };
 </script>
 
@@ -73,6 +80,7 @@ export default {
    background-size: cover;
 }
 .filters {
+   display: flex;
    overflow-x: scroll;
    white-space: nowrap;
 }
@@ -107,5 +115,8 @@ export default {
    margin: auto;
    display: block;
    outline: none;
+}
+.filterTitle {
+   background: rgba(0, 0, 0, 0.5);
 }
 </style>
