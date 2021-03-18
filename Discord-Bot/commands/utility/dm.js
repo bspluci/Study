@@ -1,6 +1,6 @@
 module.exports = {
    name: "dm",
-   description: "개인 메세지 보내기",
+   description: "개인메세지 보내기",
    aliases: ["메세지", "귓"],
    args: true,
    usage: "@아이디 메세지",
