@@ -1,4 +1,3 @@
-// const { resolve } = require("node:path");
 const { prefix } = require("../../config.json");
 
 module.exports = {
@@ -11,9 +10,6 @@ module.exports = {
    num: undefined,
    team: undefined,
    maxMember: 4,
-   embed: false,
-   diviTeam: [],
-   moveTime: 1500,
    baseChannel: "이벤트대기방",
    childChannel: ["custom1", "custom2", "custom3"],
    execute(message, args) {
@@ -27,7 +23,6 @@ module.exports = {
       let childChannel = []; // 채널명을 채널id값으로 바꿈
 
       if (cmd === "showchannels" || cmd === "채널목록" || cmd === "채널보기") {
-         this.embed = !this.embed;
          MCH.send(`baseChannel: ${thisBC} \nchildChannel: ${thisCC}`);
          return;
       }
@@ -43,7 +38,7 @@ module.exports = {
          });
 
          this.baseChannel = baseName.join("");
-         MCH.send(`${message.author} 이벤트 베이스 채널을 "${baseName.join("")}" (으)로 설정했습니다.`);
+         MCH.send(`${message.author} 이벤트 베이스 채널을 "${this.baseChannel}" (으)로 설정했습니다.`);
          return;
       }
 
@@ -54,7 +49,7 @@ module.exports = {
 
          this.childChannel = childName;
          childChannel = [];
-         MCH.send(`${message.author} 이벤트 팀 채널을 "${childName}" (으)로 설정했습니다.`);
+         MCH.send(`${message.author} 이벤트 팀 채널을 "${this.childChannel}" (으)로 설정했습니다.`);
          return;
       }
 
@@ -62,6 +57,7 @@ module.exports = {
          MCH.send(
             `${message.author} 이벤트 채널 설정이 필요합니다. \n${prefix}${this.name} showchannels 명령으로 채널 목록을 확인해주세요.`
          );
+
          return;
       } else {
          for (let i = 0; i < thisCC.length; i++) {
@@ -69,6 +65,7 @@ module.exports = {
                MCH.send(
                   `${message.author} ${thisCC[i]} 은 중복된 채널입니다. \n${prefix}${this.name} showchannels 명령으로 채널 목록을 확인해주세요.`
                );
+
                return;
             }
          }
@@ -96,18 +93,20 @@ module.exports = {
       if (cmd === "home" || cmd === "모임" || cmd === "홈") {
          if (!this.team) {
             MCH.send(`${message.author} 팀 분배 후 실행해주세요.`);
-         } else {
-            for (i = 0; i < this.team.length; i++) {
-               for (s = 0; s < this.team[i].length; s++) {
-                  const voiceUser = MGMC.get(message.client.users.cache.get(this.team[i][s].user.id).id);
-                  if (voiceUser.voice.channelID) {
-                     MGMC.get(this.team[i][s].user.id).voice.setChannel(MGCC.get(baseChannel));
-                  } else {
-                     return;
-                  }
+            return;
+         }
+
+         for (i = 0; i < this.team.length; i++) {
+            for (s = 0; s < this.team[i].length; s++) {
+               const voiceUser = MGMC.get(message.client.users.cache.get(this.team[i][s].user.id).id);
+               if (voiceUser.voice.channelID) {
+                  MGMC.get(this.team[i][s].user.id).voice.setChannel(MGCC.get(baseChannel));
+               } else {
+                  return;
                }
             }
          }
+
          return;
       }
 
@@ -138,6 +137,7 @@ module.exports = {
             const len = arr.length;
             const cnt = Math.floor(len / n) + (Math.floor(len % n) > 0 ? 1 : 0);
             let temp = [];
+
             this.num = n;
 
             for (let i = 0; i < cnt; i++) {
@@ -160,8 +160,6 @@ module.exports = {
          MCH.send(
             divisionTeams.map((name) => {
                num++;
-               this.diviTeam.push(`${num}팀: ${name}`);
-
                return `${num}팀 : ${name}`;
             })
          );
@@ -193,9 +191,19 @@ module.exports = {
                      });
                      resolve(setChannelUser);
                   }
-               }, this.moveTime);
+               }, 1500);
             });
          }
+
+         // function moveChannel(team, child) {
+         //    for (const item of team) {
+         //       MGCC.get(baseChannel).members.map((user) => {
+         //          if (user.user.username === item.user.username) {
+         //             MGMC.get(user.user.id).voice.setChannel(MGCC.get(child));
+         //          }
+         //       });
+         //    }
+         // }
 
          findTeam();
 

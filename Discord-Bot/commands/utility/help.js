@@ -3,7 +3,7 @@ const { prefix } = require("../../config.json");
 
 module.exports = {
    name: "help",
-   description: "List all of my commands or info about a specific command.",
+   description: "사용할 수 있는 명령어 리스트를 보여줍니다.",
    aliases: ["commands"],
    usage: "[command name]",
    cooldown: 5,
@@ -12,19 +12,19 @@ module.exports = {
       const { commands } = message.client;
 
       if (!args.length) {
-         data.push("Here's a list of all my commands:");
+         data.push("명령어 목록:");
          data.push(commands.map((command) => command.name).join(", "));
-         data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
+         data.push(`\n특정 명령어에 대한 정보를 얻으려면 다음과 같이 입력하세요. \`${prefix}help 명령어\``);
 
          return message.author
             .send(data, { split: true })
             .then(() => {
                if (message.channel.type === "dm") return;
-               message.reply("I've sent you a DM with all my commands!");
+               message.reply("명령어 리스트를 메세지로 보냈습니다.");
             })
             .catch((error) => {
                console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-               message.reply("it seems like I can't DM you!");
+               message.reply("메세지를 보낼 수 없습니다.");
             });
       }
 
@@ -32,7 +32,7 @@ module.exports = {
       const command = commands.get(name) || commands.find((c) => c.aliases && c.aliases.includes(name));
 
       if (!command) {
-         return message.reply("that's not a valid command!");
+         return message.reply("유효한 명령이 아닙니다.");
       }
 
       data.push(`**Name:** ${command.name}`);

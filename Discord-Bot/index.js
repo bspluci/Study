@@ -1,7 +1,7 @@
 const fs = require("fs");
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
-const exampleEmbed = new Discord.MessageEmbed()
+const helpEmbed = new Discord.MessageEmbed()
    .setColor("GREEN")
    .setTitle("OUBG BOT")
    // .setURL("https://discord.js.org/")
@@ -83,7 +83,7 @@ client.on("message", (message) => {
    }
 
    if (command.name === "event" && args[0] === `${command.help}`) {
-      message.channel.send(exampleEmbed);
+      message.channel.send(helpEmbed);
    }
 
    // 명령 사용법 체크
