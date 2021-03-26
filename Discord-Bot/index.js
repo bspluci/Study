@@ -1,6 +1,41 @@
 const fs = require("fs");
 const Discord = require("discord.js");
 const { prefix, token } = require("./config.json");
+const exampleEmbed = new Discord.MessageEmbed()
+   .setColor("GREEN")
+   .setTitle("OUBG BOT")
+   // .setURL("https://discord.js.org/")
+   // .setAuthor("Some name", "https://i.imgur.com/wSTFkRM.png", "https://discord.js.org")
+   // .setDescription("Some description here")
+   .setThumbnail("https://i.imgur.com/wSTFkRM.png")
+   .addFields(
+      { name: "showchannels / 채널목록 / 채널보기", value: "등록된 채널목록을 보여줍니다. \n 예) !event showchannels" },
+      {
+         name: "base / 대기실 / 베이스",
+         value: "베이스 채널을 설정합니다(공백불가, 중복불가) \n 예) !event base 채널이름",
+      },
+      {
+         name: "child / 팀채널 / 팀설정",
+         value: "팀채널을 설정합니다(공백불가) \n 예) !event child 채널이름0 채널이름1 채널이름2",
+      },
+      {
+         name: "team / 팀 / 팀나누기",
+         value: "베이스 채널의 인원을 두번째 인수값으로 나누어 팀을 분배합니다. \n 예) !event team 3",
+      },
+      {
+         name: "move / 이동",
+         value: "나누어진 팀원을 채널에 맞게 이동시킵니다. \n 예) !event move",
+      },
+      {
+         name: "home / 모임 / 홈",
+         value: "팀채널에 이동시킨 인원을 베이스채널로 이동시킵니다. \n 예) !event home",
+      }
+      // { name: "\u200B", value: "\u200B" },
+   )
+   // .addField("Inline field title", "Some value here", true)
+   // .setImage("https://i.imgur.com/wSTFkRM.png")
+   .setTimestamp();
+// .setFooter("Some footer text here", "https://i.imgur.com/wSTFkRM.png");
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -47,6 +82,10 @@ client.on("message", (message) => {
       }
    }
 
+   if (command.name === "event" && args[0] === `${command.help}`) {
+      message.channel.send(exampleEmbed);
+   }
+
    // 명령 사용법 체크
    if (command.args && !args.length) {
       let reply = "";
@@ -54,7 +93,7 @@ client.on("message", (message) => {
       if (command.name === "channel") {
          reply = `${message.author} 채널명을 입력하세요!`;
       } else if (command.name === "event") {
-         reply = `${message.author} 인원수를 입력하세요!`;
+         reply = `${message.author} ${prefix}${command.name} ${command.help} 를 통해 사용법을 확인하세요.`;
       } else {
          reply = `${message.author} 사용자를 입력하세요!`;
       }

@@ -1,123 +1,140 @@
+// const { resolve } = require("node:path");
+const { prefix } = require("../../config.json");
+
 module.exports = {
    name: "event",
    description: "이벤트 매치를 생성합니다.",
    aliases: ["이벤트", "ev"],
    args: true,
-   usage: "인원수(숫자)",
+   help: "help",
    cooldown: 1,
    num: undefined,
    team: undefined,
+   maxMember: 4,
+   embed: false,
+   diviTeam: [],
+   moveTime: 1500,
    baseChannel: "이벤트대기방",
    childChannel: ["custom1", "custom2", "custom3"],
    execute(message, args) {
-      const command = args[0].toLowerCase();
-      let baseChannel = "";
-      let childChannel = [];
+      const cmd = args[0].toLowerCase(); // 내부명령어
+      const MGCC = message.guild.channels.cache;
+      const MGMC = message.guild.members.cache;
+      const MCH = message.channel;
+      const thisBC = this.baseChannel;
+      const thisCC = this.childChannel;
+      let baseChannel = ""; // 채널명을 채널id값으로 바꿈
+      let childChannel = []; // 채널명을 채널id값으로 바꿈
 
-      if (command === "showchannel" || command === "채널" || command === "채널설정") {
-         message.channel.send(`baseChannel = ${this.baseChannel} \nchildChannel = ${this.childChannel}`);
+      if (cmd === "showchannels" || cmd === "채널목록" || cmd === "채널보기") {
+         this.embed = !this.embed;
+         MCH.send(`baseChannel: ${thisBC} \nchildChannel: ${thisCC}`);
          return;
       }
 
-      if (command === "base" || command === "대기실" || command === "베이스") {
+      if (cmd === "base" || cmd === "대기실" || cmd === "베이스") {
+         if (args.length > 2) {
+            MCH.send(`${message.author} 복수의 베이스 채널은 설정할 수 없습니다.`);
+            return;
+         }
+
          const baseName = args.filter((com) => {
-            return com != command;
+            return com != cmd;
          });
 
          this.baseChannel = baseName.join("");
-         message.channel.send(`${message.author} 이벤트 베이스 채널을 "${baseName.join("")}" (으)로 설정했습니다.`);
+         MCH.send(`${message.author} 이벤트 베이스 채널을 "${baseName.join("")}" (으)로 설정했습니다.`);
          return;
       }
 
-      if (command === "child" || command === "팀채널" || command === "팀") {
+      if (cmd === "child" || cmd === "팀채널" || cmd === "팀설정") {
          const childName = args.filter((com) => {
-            return com != command;
+            return com != cmd;
          });
 
          this.childChannel = childName;
          childChannel = [];
-         message.channel.send(`${message.author} 이벤트 팀 채널을 "${childName}" (으)로 설정했습니다.`);
+         MCH.send(`${message.author} 이벤트 팀 채널을 "${childName}" (으)로 설정했습니다.`);
          return;
       }
 
-      if (!this.baseChannel || !this.childChannel) {
-         message.channel.send(`${message.author} 이벤트 채널 설정이 필요합니다.`);
+      if (!thisBC || !thisCC) {
+         MCH.send(
+            `${message.author} 이벤트 채널 설정이 필요합니다. \n${prefix}${this.name} showchannels 명령으로 채널 목록을 확인해주세요.`
+         );
          return;
+      } else {
+         for (let i = 0; i < thisCC.length; i++) {
+            if (thisCC[i] === thisBC) {
+               MCH.send(
+                  `${message.author} ${thisCC[i]} 은 중복된 채널입니다. \n${prefix}${this.name} showchannels 명령으로 채널 목록을 확인해주세요.`
+               );
+               return;
+            }
+         }
       }
 
-      const baseCh = message.guild.channels.cache.map((channel) => {
-         if (channel.name.replace(/(\s*)/g, "") === this.baseChannel.replace(/(\s*)/g, "")) {
+      const baseCh = MGCC.map((channel) => {
+         if (channel.name.replace(/(\s*)/g, "") === thisBC.replace(/(\s*)/g, "")) {
             baseChannel = channel.id;
          }
       });
 
-      const childCh = message.guild.channels.cache.filter((channel) => {
-         for (let i = 0; i < this.childChannel.length; i++) {
-            if (channel.name.replace(/(\s*)/g, "") === this.childChannel[i].replace(/(\s*)/g, "")) {
+      const childCh = MGCC.filter((channel) => {
+         for (let i = 0; i < thisCC.length; i++) {
+            if (channel.name.replace(/(\s*)/g, "") === thisCC[i].replace(/(\s*)/g, "")) {
                childChannel.push(channel.id);
             }
          }
       });
 
-      if (!message.guild.channels.cache.get(baseChannel)) {
-         message.channel.send(`${message.author} 이벤트 채널 설정이 필요합니다.`);
-
+      if (!MGCC.get(baseChannel)) {
+         MCH.send(`${message.author} 이벤트 채널 설정이 필요합니다.`);
          return;
       }
 
-      if (command === "meet" || command === "모임" || command === "홈") {
+      if (cmd === "home" || cmd === "모임" || cmd === "홈") {
          if (!this.team) {
-            message.channel.send(`${message.author} 팀 분배 후 실행해주세요.`);
+            MCH.send(`${message.author} 팀 분배 후 실행해주세요.`);
          } else {
             for (i = 0; i < this.team.length; i++) {
                for (s = 0; s < this.team[i].length; s++) {
-                  message.guild.members.cache
-                     .get(this.team[i][s].user.id)
-                     .voice.setChannel(message.guild.channels.cache.get(baseChannel));
+                  const voiceUser = MGMC.get(message.client.users.cache.get(this.team[i][s].user.id).id);
+                  if (voiceUser.voice.channelID) {
+                     MGMC.get(this.team[i][s].user.id).voice.setChannel(MGCC.get(baseChannel));
+                  } else {
+                     return;
+                  }
                }
             }
          }
-
          return;
       }
 
-      const channelMembers = message.guild.channels.cache.get(baseChannel).members.map((user) => {
+      const eventMembers = MGCC.get(baseChannel).members.sort(() => Math.random() - 0.5);
+      const eventThis = eventMembers.map((user) => {
          return user;
       });
+      const eventText = eventMembers.map((user) => {
+         return `  ${user}  `;
+      });
 
-      if (!channelMembers.length && !this.team) {
-         message.channel.send(`${message.author} 이벤트 베이스 채널이 비어있습니다. 채널 참여 후 다시 실행해주세요.`);
+      if (!eventThis.length && !this.team) {
+         MCH.send(`${message.author} 이벤트 베이스 채널이 비어있습니다. 채널 참여 후 다시 실행해주세요.`);
          return;
       }
 
-      if (command === "이동" || command === "move") {
-         if (this.num === undefined) {
-            message.channel.send(`${message.author} 인원에 맞게 팀을 나눠주세요.`);
+      if (cmd === "team" || cmd === "팀" || cmd === "팀나누기") {
+         if (!args[1]) {
+            this.team = undefined;
+            MCH.send(`${message.author} 팀 인원이 초기화 됐습니다`);
+
             return;
          }
 
-         for (let i = 0; i < this.team.length; i++) {
-            for (let s = 0; s < this.team[i].length; s++) {
-               message.guild.members.cache.map((user) => {
-                  if (user.user.username === this.team[i][s].user.username) {
-                     message.guild.members.cache
-                        .get(user.user.id)
-                        .voice.setChannel(message.guild.channels.cache.get(childChannel[i]));
-                  }
-               });
-            }
-         }
-
-         return;
-      }
-
-      if (command === "team" || command === "팀나누기" || command === "분배") {
-         const eventMembers = channelMembers.sort(() => Math.random() - 0.5);
-
-         Array.prototype.division = (n) => {
-            const arr = eventMembers.map((user) => {
-               return user;
-            });
+         division = (n, text) => {
+            let arr = "";
+            text ? (arr = eventText) : (arr = eventThis);
             const len = arr.length;
             const cnt = Math.floor(len / n) + (Math.floor(len % n) > 0 ? 1 : 0);
             let temp = [];
@@ -126,13 +143,9 @@ module.exports = {
             for (let i = 0; i < cnt; i++) {
                temp.push(arr.splice(0, n));
 
-               if (i + 2 === cnt) {
-                  if (arr.length > 0 && arr.length < n) {
-                     const num = arr.length;
-
-                     for (let s = 0; s < num; s++) {
-                        temp[s].push(arr.splice(0, n));
-                     }
+               if (i + 1 === cnt && !len % cnt && n < this.maxMember) {
+                  for (let s = 0; s < len % cnt; s++) {
+                     temp[s].push(arr[arr.length - s + 1]);
                   }
                }
             }
@@ -140,16 +153,53 @@ module.exports = {
             return temp;
          };
 
-         const divisionTeams = eventMembers.division(args[1]);
-         this.team = divisionTeams;
+         const divisionTeams = division(args[1], true);
+         this.team = division(args[1], false);
          let num = 0;
 
-         message.channel.send(
+         MCH.send(
             divisionTeams.map((name) => {
                num++;
+               this.diviTeam.push(`${num}팀: ${name}`);
+
                return `${num}팀 : ${name}`;
             })
          );
+      }
+
+      if (cmd === "move" || cmd === "이동") {
+         if (this.num === undefined || this.team === undefined) {
+            MCH.send(`${message.author} 인원에 맞게 팀을 나눠주세요.`);
+
+            return;
+         }
+
+         const thisTeam = this.team;
+
+         async function findTeam() {
+            for (let i = 0; i < thisTeam.length; i++) {
+               await moveChannel(thisTeam[i], childChannel[i]);
+            }
+         }
+
+         function moveChannel(team, child) {
+            return new Promise((resolve) => {
+               setTimeout(() => {
+                  for (let s = 0; s < team.length; s++) {
+                     const setChannelUser = MGCC.get(baseChannel).members.map((user) => {
+                        if (user.user.username === team[s].user.username) {
+                           MGMC.get(user.user.id).voice.setChannel(MGCC.get(child));
+                        }
+                     });
+                     resolve(setChannelUser);
+                  }
+               }, this.moveTime);
+            });
+         }
+
+         findTeam();
+
+         return;
       }
    },
 };
