@@ -11,7 +11,7 @@ module.exports = {
    team: undefined,
    maxMember: 4,
    baseChannel: "이벤트대기방",
-   childChannel: ["custom1", "custom2", "custom3"],
+   childChannel: ["custom1", "custom2", "custom3", "custom4", "custom5"],
    execute(message, args) {
       const cmd = args[0].toLowerCase(); // 내부명령어
       const MGCC = message.guild.channels.cache;
@@ -142,12 +142,17 @@ module.exports = {
 
             for (let i = 0; i < cnt; i++) {
                temp.push(arr.splice(0, n));
+            }
 
-               if (i + 1 === cnt && !len % cnt && n < this.maxMember) {
-                  for (let s = 0; s < len % cnt; s++) {
-                     temp[s].push(arr[arr.length - s + 1]);
-                  }
+            if (len % cnt > 0 && n < this.maxMember && temp.length > 2) {
+               const tempLastLen = temp[temp.length - 1];
+
+               for (let s = 0; s < tempLastLen.length; s++) {
+                  temp[s].push(tempLastLen[s]);
+                  tempLastLen.splice(temp[temp.length - 1], 1);
                }
+
+               return temp;
             }
 
             return temp;
@@ -160,6 +165,7 @@ module.exports = {
          MCH.send(
             divisionTeams.map((name) => {
                num++;
+               if (name.length === 0) return;
                return `${num}팀 : ${name}`;
             })
          );
@@ -174,36 +180,29 @@ module.exports = {
 
          const thisTeam = this.team;
 
-         async function findTeam() {
+         const findTeam = async () => {
+            await myTeam();
+         };
+
+         const myTeam = async () => {
             for (let i = 0; i < thisTeam.length; i++) {
                await moveChannel(thisTeam[i], childChannel[i]);
             }
-         }
+         };
 
-         function moveChannel(team, child) {
+         const moveChannel = (team, child) => {
             return new Promise((resolve) => {
                setTimeout(() => {
-                  for (let s = 0; s < team.length; s++) {
-                     const setChannelUser = MGCC.get(baseChannel).members.map((user) => {
-                        if (user.user.username === team[s].user.username) {
-                           MGMC.get(user.user.id).voice.setChannel(MGCC.get(child));
-                        }
-                     });
-                     resolve(setChannelUser);
-                  }
+                  const setChannelUser = () => {
+                     for (let s = 0; s < team.length; s++) {
+                        MGMC.get(team[s].user.id).voice.setChannel(MGCC.get(child));
+                     }
+                  };
+
+                  resolve(setChannelUser());
                }, 1500);
             });
-         }
-
-         // function moveChannel(team, child) {
-         //    for (const item of team) {
-         //       MGCC.get(baseChannel).members.map((user) => {
-         //          if (user.user.username === item.user.username) {
-         //             MGMC.get(user.user.id).voice.setChannel(MGCC.get(child));
-         //          }
-         //       });
-         //    }
-         // }
+         };
 
          findTeam();
 
