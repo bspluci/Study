@@ -5,7 +5,7 @@ const Attachment = require("discord.js");
 const { prefix, token, googleID, googleToken } = require("./config.json");
 const helpEmbed = new Discord.MessageEmbed()
    .setColor("GREEN")
-   .setTitle("OUBG BOT")
+   .setTitle("MY BOT")
    // .setURL("https://discord.js.org/")
    // .setAuthor("Some name", "https://i.imgur.com/wSTFkRM.png", "https://discord.js.org")
    // .setDescription("Some description here")
@@ -77,16 +77,17 @@ client.on("message", (message) => {
       return message.reply("I can't execute that command inside DMs!");
    }
 
-   // 명령 권한 체크(kick.js)
+   // 명령 권한 체크
    if (command.permissions) {
       const authorPerms = message.channel.permissionsFor(message.author);
+
       if (!authorPerms || !authorPerms.has(command.permissions)) {
-         return message.reply("You can not do this!");
+         return message.reply("해당 명령을 사용할 권한이 없습니다.");
       }
    }
 
+   // 이벤트 사용설명서 임베드 출력
    if (command.name === "event" && args[0] === `${command.help}`) {
-      onMessage();
       message.channel.send(helpEmbed);
    }
 
@@ -136,19 +137,25 @@ client.on("message", (message) => {
    // 이미지 검색 시작
    const onMessage = async (message) => {
       try {
-         const results = await googleImages.search(args[0]);
-         console.log(results);
+         const results = await googleImages.search(args[0], { size: "medium", safe: "high" });
          const reply = !results.length
             ? "검색 결과가 없습니다."
             : results[Math.floor(Math.random() * results.length)].url;
+         //    : results[Math.floor(Math.random() * results.length)].thumbnail.url
          message.channel.send(reply);
       } catch (e) {
          console.error(e);
-         message.channel.send("Error happened, see the console");
+         if (e.statusCode === 429) {
+            message.channel.send("이미지 사용횟수가 초과하였습니다. 잠시후 다시 시도해 주세요.");
+         } else {
+            message.channel.send("Error happened, see the console");
+         }
       }
    };
 
-   onMessage(message);
+   if (command.name === "img-search") {
+      onMessage(message);
+   }
    // 이미지 검색 끝
 
    try {

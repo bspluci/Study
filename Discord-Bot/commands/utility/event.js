@@ -2,6 +2,7 @@ const { prefix } = require("../../config.json");
 
 module.exports = {
    name: "event",
+   permissions: "MANAGE_ROLES",
    description: "이벤트 매치를 생성합니다.",
    aliases: ["이벤트", "ev"],
    args: true,
