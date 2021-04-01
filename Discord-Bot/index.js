@@ -1,8 +1,7 @@
 const fs = require("fs");
-const GoogleImages = require("google-images");
 const Discord = require("discord.js");
-const Attachment = require("discord.js");
-const { prefix, token, googleID, googleToken } = require("./config.json");
+const { token, prefix } = require("./config.json");
+
 const helpEmbed = new Discord.MessageEmbed()
    .setColor("GREEN")
    .setTitle("MY BOT")
@@ -43,10 +42,9 @@ const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 
-const commandFolders = fs.readdirSync("./commands");
-const googleImages = new GoogleImages(googleID, googleToken);
-
 // command폴더 파일 자동 찾기
+const commandFolders = fs.readdirSync("./commands");
+
 for (const folder of commandFolders) {
    const commandFiles = fs.readdirSync(`./commands/${folder}`).filter((file) => file.endsWith(".js"));
    for (const file of commandFiles) {
@@ -133,30 +131,6 @@ client.on("message", (message) => {
    timestamps.set(message.author.id, now);
    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
    // 쿨다운 끝
-
-   // 이미지 검색 시작
-   const onMessage = async (message) => {
-      try {
-         const results = await googleImages.search(args[0], { size: "medium", safe: "high" });
-         const reply = !results.length
-            ? "검색 결과가 없습니다."
-            : results[Math.floor(Math.random() * results.length)].url;
-         //    : results[Math.floor(Math.random() * results.length)].thumbnail.url
-         message.channel.send(reply);
-      } catch (e) {
-         console.error(e);
-         if (e.statusCode === 429) {
-            message.channel.send("이미지 사용횟수가 초과하였습니다. 잠시후 다시 시도해 주세요.");
-         } else {
-            message.channel.send("Error happened, see the console");
-         }
-      }
-   };
-
-   if (command.name === "img-search") {
-      onMessage(message);
-   }
-   // 이미지 검색 끝
 
    try {
       command.execute(message, args);
