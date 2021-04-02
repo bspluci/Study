@@ -2,42 +2,6 @@ const fs = require("fs");
 const Discord = require("discord.js");
 const { token, prefix } = require("./config.json");
 
-const helpEmbed = new Discord.MessageEmbed()
-   .setColor("GREEN")
-   .setTitle("MY BOT")
-   // .setURL("https://discord.js.org/")
-   // .setAuthor("Some name", "https://i.imgur.com/wSTFkRM.png", "https://discord.js.org")
-   // .setDescription("Some description here")
-   .setThumbnail("https://i.imgur.com/wSTFkRM.png")
-   .addFields(
-      { name: "showchannels / 채널목록 / 채널보기", value: "등록된 채널목록을 보여줍니다. \n 예) !event showchannels" },
-      {
-         name: "base / 대기실 / 베이스",
-         value: "베이스 채널을 설정합니다(공백불가, 중복불가) \n 예) !event base 채널이름",
-      },
-      {
-         name: "child / 팀채널 / 팀설정",
-         value: "팀채널을 설정합니다(공백불가) \n 예) !event child 채널이름0 채널이름1 채널이름2",
-      },
-      {
-         name: "team / 팀 / 팀나누기",
-         value: "베이스 채널의 인원을 두번째 인수값으로 나누어 팀을 분배합니다. \n 예) !event team 3",
-      },
-      {
-         name: "move / 이동",
-         value: "나누어진 팀원을 채널에 맞게 이동시킵니다. \n 예) !event move",
-      },
-      {
-         name: "home / 모임 / 홈",
-         value: "팀채널에 이동시킨 인원을 베이스채널로 이동시킵니다. \n 예) !event home",
-      }
-      // { name: "\u200B", value: "\u200B" },
-   )
-   // .addField("Inline field title", "Some value here", true)
-   // .setImage("https://i.imgur.com/wSTFkRM.png")
-   .setTimestamp();
-// .setFooter("Some footer text here", "https://i.imgur.com/wSTFkRM.png");
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -82,11 +46,6 @@ client.on("message", (message) => {
       if (!authorPerms || !authorPerms.has(command.permissions)) {
          return message.reply("해당 명령을 사용할 권한이 없습니다.");
       }
-   }
-
-   // 이벤트 사용설명서 임베드 출력
-   if (command.name === "event" && args[0] === `${command.help}`) {
-      message.channel.send(helpEmbed);
    }
 
    // 명령 사용법 체크
