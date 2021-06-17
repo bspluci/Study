@@ -19,7 +19,7 @@ class MatchList extends Component {
          const extraQuery = `&from=${startDate}&to=${endDate}&league_id=${leagueId}`;
 
          const response = await axios.get(
-            `https://apiv2.apifootball.com/?action=get_events${extraQuery}&APIkey=83407abdf2c88a3b221747309a2b9a2191f2cbfc90390451890aee48bb15eef9`
+            `https://apiv3.apifootball.com/?action=get_events${extraQuery}&APIkey=aa47b5ff94ecdf71268e9d00a41a235d933f78b96791ba77d24b1338666fb31d`
          );
 
          this.setState({
@@ -50,10 +50,7 @@ class MatchList extends Component {
       return (
          <div>
             {loading && <h3 style={{ textAlign: "center" }}>데이터를 불러오는중입니다...</h3>}
-            {!loading &&
-               data &&
-               !data.error &&
-               data.map((data) => <Match key={data.match_id} data={data} />)}
+            {!loading && data && !data.error && data.map((data) => <Match key={data.match_id} data={data} />)}
          </div>
       );
    }
