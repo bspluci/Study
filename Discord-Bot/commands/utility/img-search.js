@@ -21,7 +21,7 @@ module.exports = {
          } catch (e) {
             console.error(e);
             if (e.statusCode === 429) {
-               message.channel.send("이미지 사용횟수가 초과하였습니다. 잠시후 다시 시도해 주세요.");
+               message.channel.send("이미지 사용횟수를 초과하였습니다. 잠시후 다시 시도해 주세요.");
             } else {
                message.channel.send("Error happened, see the console");
             }

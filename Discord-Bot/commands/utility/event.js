@@ -13,7 +13,21 @@ module.exports = {
    team: undefined,
    maxMember: 4,
    baseChannel: "이벤트대기방",
-   childChannel: ["custom1", "custom2", "custom3", "custom4", "custom5"],
+   childChannel: [
+      "[1]커스텀",
+      "[2]커스텀",
+      "[3]커스텀",
+      "[4]커스텀",
+      "[5]커스텀",
+      "[6]커스텀",
+      "[7]커스텀",
+      "[8]커스텀",
+      "[9]커스텀",
+      "[10]커스텀",
+      "[11]커스텀",
+      "[12]커스텀",
+      "[13]커스텀",
+   ],
    execute(message, args) {
       const cmd = args[0].toLowerCase(); // 내부명령어
       const MGCC = message.guild.channels.cache;
@@ -171,6 +185,8 @@ module.exports = {
             return;
          }
 
+         console.log(childChannel);
+
          division = (n, text) => {
             let arr = "";
             text ? (arr = eventText) : (arr = eventThis);
@@ -226,6 +242,7 @@ module.exports = {
 
          const myTeam = async () => {
             for (let i = 0; i < thisTeam.length; i++) {
+               console.log(childChannel[i]);
                await moveChannel(thisTeam[i], childChannel[i]);
             }
          };
